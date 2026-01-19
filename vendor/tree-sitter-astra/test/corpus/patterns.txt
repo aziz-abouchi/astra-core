@@ -1,0 +1,13 @@
+=== Constructor & record patterns ===
+head : Maybe a -> a
+head m = case m of Just x -> x; Nothing -> 0
+
+proj : { x: I64; y: I64 } -> I64
+proj { x = a; y = b } = a + b
+
+---
+(source_file
+  (type_signature (identifier) (type (type_arrow (type_application (type_base (type_constructor)) (type_base (type_var))) (type_arrow (type_application (type_base (type_var)))))))
+  (value_definition (identifier) (pattern (identifier)) (case_expr (expression (identifier)) (case_branch (pattern (pattern_app (type_constructor) (pattern_atom (identifier)))) (expression (identifier))) (case_branch (pattern (identifier)) (expression (literal (number))))))
+  (type_signature (identifier) (type (type_arrow (type_application (type_base (type_record (record_field (identifier) (type (type_application (type_base (type_constructor)))) (record_field (identifier) (type (type_application (type_base (type_constructor)))))))) (type_arrow (type_application (type_base (type_constructor)))))))
+  (value_definition (identifier) (pattern (pattern_record (pattern_binding (identifier) (pattern (identifier))) (pattern_binding (identifier) (pattern (identifier))))) (expression (infix_expr (app_expr (term (identifier))) (infix_op) (app_expr (term (identifier)))))))

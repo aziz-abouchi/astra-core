@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Astra — Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; margin: 20px; }
+    .row { display: flex; gap: 24px; flex-wrap: wrap; }
+    .card { border: 1px solid #ddd; border-radius: 8px; padding: 16px; min-width: 320px; }
+    table { border-collapse: collapse; width: 100%; }
+    th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+    th { background: #fafafa; }
+    canvas { width: 560px; height: 240px; }
+  </style>
+</head>
+<body>
+  <h1>Astra — Dashboard</h1>
+  <div class="row">
+    <div class="card">
+      <h3>Flush dt_ns — p50/p95/p99 (rolling)</h3>
+      <canvas id="chartFlush"></canvas>
+    </div>
+    <div class="card">
+      <h3>Métriques Acteurs</h3>
+      <table id="actors"><thead><tr><th>Actor</th><th>p50</th><th>p95</th><th>p99</th><th>Consumed</th><th>Backpressure</th><th>Dropped</th></tr></thead><tbody></tbody></table>
+    </div>
+  </div>
+  <div class="row">
+    <div class="card">
+      <h3>Top Topics (bar)</h3>
+      <canvas id="chartTopics"></canvas>
+    </div>
+    <div class="card">
+      <h3>Fenêtres (rolling CSV)</h3>
+      <pre id="windows">Loading...</pre>
+    </div>
+  </div>
+<script>
+const chartFlush = new Chart(document.getElementById('chartFlush'), { type:'line',
+  data:{ labels:[], datasets:[ {label:'p50', data:[], borderColor:'#4e79a7'},
+                               {label:'p95', data:[], borderColor:'#f28e2b'},
+                               {label:'p99', data:[], borderColor:'#e15759'} ] },
+  options:{ responsive:true, animation:false } });
+const chartTopics = new Chart(document.getElementById('chartTopics'), { type:'bar',
+  data:{ labels:[], datasets:[ {label:'count', data:[], backgroundColor:'#59a14f'} ] },
+  options:{ responsive:true, animation:false } });
+
+async function fetchJSON(path){ const r=await fetch(path+"?"+Date.now()); if(!r.ok) throw new Error(path); return r.json(); }
+async function fetchText(path){ const r=await fetch(path+"?"+Date.now()); if(!r.ok) throw new Error(path); return r.text(); }
+
+function renderActors(data){
+  const tb=document.querySelector("#actors tbody"); tb.innerHTML="";
+  const act=(data.actors && data.actors.actors)? data.actors.actors: (data.actors||[]);
+  act.forEach(a=>{
+    const tr=document.createElement("tr");
+    tr.innerHTML=`<td>${a.name||""}</td><td>${a.p50_ns||0}</td><td>${a.p95_ns||0}</td><td>${a.p99_ns||0}</td><td>${a.consumed||0}</td><td>${a.backpressure||0}</td><td>${a.dropped||0}</td>`;
+    tb.appendChild(tr);
+  });
+}
+function renderWindows(text){ const lines=text.trim().split(/\n/).slice(-20).join("\n"); document.getElementById("windows").textContent=lines; }
+function pushFlush(p50,p95,p99){
+  const L=chartFlush.data.labels; const ds=chartFlush.data.datasets; const t=new Date().toLocaleTimeString();
+  L.push(t); ds[0].data.push(p50); ds[1].data.push(p95); ds[2].data.push(p99);
+  if(L.length>50){ L.shift(); ds.forEach(d=>d.data.shift()); } chartFlush.update();
+}
+function renderTopics(topics){
+  const labels=[], vals=[]; const arr=(topics.topics||[]).sort((a,b)=>b.count-a.count).slice(0,10);
+  arr.forEach(t=>{ labels.push(t.topic); vals.push(t.count||0); });
+  chartTopics.data.labels=labels; chartTopics.data.datasets[0].data=vals; chartTopics.update();
+}
+
+async function refresh(){
+  try{
+    const flush = await fetchJSON("../metrics/flush_metrics.json").catch(()=>({p50_ns:0,p95_ns:0,p99_ns:0}));
+    pushFlush(flush.p50_ns||0, flush.p95_ns||0, flush.p99_ns||0);
+    const topics = await fetchJSON("../metrics/topics_volume.json").catch(()=>({topics:[]}));
+    renderTopics(topics);
+    const actors = await fetchJSON("../metrics/actors_metrics.json").catch(()=>({actors:[]}));
+    renderActors(actors);
+    const windows = await fetchText("../metrics/window_metrics_rolling.csv").catch(()=>"no data");
+    renderWindows(windows);
+  }catch(e){ console.warn(e); }
+}
+setInterval(refresh, 1500); refresh();
+</script>
+</body>
+</html>

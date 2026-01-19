@@ -1,0 +1,7 @@
+-- record types (struct-like) and functions
+
+Point2 : Type
+Point2 = { x: I64; y: I64 }
+
+mk : Point2 -> I64
+mk p = p.x + p.y

@@ -1,0 +1,7 @@
+-- try/catch examples
+
+run : Error ! I64
+run = try risky catch 0
+
+combo : Error ! I64
+combo = try (try risky catch 1) catch 2

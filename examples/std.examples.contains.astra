@@ -1,0 +1,9 @@
+module std.examples.poly
+
+contains : forall a . [Eq a] => a -> List a -> Bool fn contains x xs = match xs with | Nil -> False | Cons y ys -> if eq x y then True else contains x ys EOF
+
+cat > "$ROOT/examples/std.io.buffer.astra" <<'EOF' module std.io.buffer
+
+type Buffer = BufferImpl deriving (Show)
+
+newBuffer : IO Buffer appendLog : Buffer ⊸ String -> IO Buffer flushLog : Buffer ⊸ IO Unit show : Nat -> String

@@ -1,0 +1,13 @@
+{
+  "scopeName": "source.astra",
+  "patterns": [
+    {
+      "name": "keyword.control.astra",
+      "match": "\\b(data|case|of|let|in|if|then|else|try|catch|comptime|fun)\\b"
+    },
+    {
+      "name": "comment.line.double-dash.astra",
+      "match": "--.*$"
+    }
+  ]
+}
