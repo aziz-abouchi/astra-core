@@ -1,0 +1,14 @@
+- name: map_map_fusion
+  lhs: "(map ?f (map ?g ?s))"
+  rhs: "(map (compose ?f ?g) ?s)"
+  when: ["pure ?f", "pure ?g", "stateless ?f", "stateless ?g"]
+
+- name: filter_map_pushdown
+  lhs: "(filter ?p (map ?f ?s))"
+  rhs: "(map ?f (filter (compose ?p ?f) ?s))"
+  when: ["pure ?p", "pure ?f", "stateless ?p", "stateless ?f"]
+
+- name: filter_filter_fusion
+  lhs: "(filter ?p1 (filter ?p2 ?s))"
+  rhs: "(filter (and ?p1 ?p2) ?s)"
+  when: ["pure ?p1", "pure ?p2", "stateless ?p1", "stateless ?p2"]

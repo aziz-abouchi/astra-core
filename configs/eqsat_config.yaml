@@ -1,0 +1,3 @@
+profile: default
+max_fixpoint_iters: 8
+max_saturation_passes: 64

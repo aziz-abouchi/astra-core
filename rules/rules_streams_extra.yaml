@@ -1,0 +1,35 @@
+# Règles Streams additionnelles
+- name: window_map_pushdown
+  lhs: "(map ?f (window ?w ?s))"
+  rhs: "(window ?w (map ?f ?s))"
+  when: ["pure ?f", "stateless ?f", "time_inv ?f"]
+
+- name: map_over_zip_to_map2
+  lhs: "(map ?f (zip ?s1 ?s2))"
+  rhs: "(map2 ?f ?s1 ?s2)"
+  when: ["pure ?f", "stateless ?f"]
+
+- name: map2_fusion_with_maps
+  lhs: "(map2 ?f (map ?g ?s1) (map ?h ?s2))"
+  rhs: "(map2 (compose (compose ?f ?g) ?h) ?s1 ?s2)"
+  when: ["pure ?f", "pure ?g", "pure ?h", "stateless ?f", "stateless ?g", "stateless ?h"]
+
+- name: fold_map_fusion
+  lhs: "(fold ?r ?z (map ?f ?s))"
+  rhs: "(fold (compose ?r ?f) ?z ?s)"
+  when: ["pure ?f", "pure ?r", "stateless ?r"]
+
+- name: filter_window_pushdown
+  lhs: "(filter ?p (window ?w ?s))"
+  rhs: "(window ?w (filter ?p ?s))"
+  when: ["pure ?p", "stateless ?p", "time_inv ?p"]
+
+- name: zip_map_fusion_left
+  lhs: "(zip (map ?f ?s1) ?s2)"
+  rhs: "(map2 (compose ?f fst) ?s1 ?s2)"
+  when: ["pure ?f", "stateless ?f"]
+
+- name: zip_map_fusion_right
+  lhs: "(zip ?s1 (map ?g ?s2))"
+  rhs: "(map2 (compose ?g snd) ?s1 ?s2)"
+  when: ["pure ?g", "stateless ?g"]
