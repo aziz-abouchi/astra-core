@@ -20,9 +20,5 @@ pub fn symFromStr(s: []const u8) !Sym {
     return error.UnknownSymbol;
 }
 
-pub const ENode = struct {
-    sym: Sym,
-    children: []u32,
-};
-
+pub const ENode = struct { sym: Sym, children: []u32 };
 pub const Node = ENode;

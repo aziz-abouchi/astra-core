@@ -16,10 +16,7 @@ pub fn fromSExpr(gpa: std.mem.Allocator, sx: SExpr) !Pattern {
             if (ls.len == 0) return error.InvalidPattern;
             const head = ls[0];
             var sym: []const u8 = undefined;
-            switch (head) {
-                .Atom => |a| sym = a,
-                else => return error.InvalidPattern,
-            }
+            switch (head) { .Atom => |a| sym = a, else => return error.InvalidPattern }
             var args = try gpa.alloc(Pattern, ls.len - 1);
             var i: usize = 1;
             while (i < ls.len) : (i += 1) args[i-1] = try fromSExpr(gpa, ls[i]);

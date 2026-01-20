@@ -14,7 +14,6 @@ pub const EGraph = struct {
     pub fn init(gpa: std.mem.Allocator) !EGraph {
         return .{ .gpa = gpa, .uf = try UnionFind.init(gpa), .classes = std.ArrayList(?*EClass).init(gpa), .cons = std.HashMap(Key, u32, KeyCtx, 80).init(gpa) };
     }
-
     pub fn deinit(self: *EGraph) void {
         var i: usize = 0;
         while (i < self.classes.items.len) : (i += 1) {

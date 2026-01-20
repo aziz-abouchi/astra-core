@@ -6,7 +6,6 @@ pub const UnionFind = struct {
     pub fn init(gpa: std.mem.Allocator) !UnionFind {
         return .{ .parents = try std.ArrayList(u32).initCapacity(gpa, 16) };
     }
-
     pub fn deinit(self: *UnionFind) void { self.parents.deinit(); }
 
     pub fn make(self: *UnionFind) !u32 {

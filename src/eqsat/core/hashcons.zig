@@ -10,7 +10,6 @@ pub const Key = struct {
         for (self.children) |c| h = std.hash.Wyhash.hash(h, std.mem.asBytes(&c));
         return h;
     }
-
     pub fn eql(a: Key, b: Key) bool {
         if (a.sym != b.sym) return false;
         return std.mem.eql(u32, a.children, b.children);
