@@ -3,7 +3,6 @@ const Token = @import("lexer.zig").Token;
 const Tok = @import("lexer.zig").Tok;
 
 pub const SExpr = union(enum) { Atom: []const u8, List: []SExpr };
-
 pub const ParseError = error{UnexpectedEOF, UnexpectedToken};
 
 pub fn parse(gpa: std.mem.Allocator, toks: []const Token) !SExpr {

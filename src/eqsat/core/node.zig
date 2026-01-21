@@ -1,8 +1,6 @@
 const std = @import("std");
 
-pub const Sym = enum {
-    Map, Filter, Fold, Window, Compose, And, Add, Mul, Const, Var, Zip, Map2,
-};
+pub const Sym = enum { Map, Filter, Fold, Window, Compose, And, Add, Mul, Const, Var, Zip, Map2 };
 
 pub fn symFromStr(s: []const u8) !Sym {
     if (std.ascii.eqlIgnoreCase(s, "map")) return .Map;

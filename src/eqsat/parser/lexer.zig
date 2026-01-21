@@ -1,8 +1,6 @@
 const std = @import("std");
-
 pub const Tok = enum { LParen, RParen, Symbol };
 pub const Token = struct { kind: Tok, text: []const u8 };
-
 pub fn lex(gpa: std.mem.Allocator, input: []const u8) ![]Token {
     var list = std.ArrayList(Token).init(gpa);
     var i: usize = 0;
