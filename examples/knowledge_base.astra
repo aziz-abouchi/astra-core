@@ -1,0 +1,409 @@
+-- examples/04-logic-programming/knowledge_base.astra
+-- Programmation logique avec Prolog et miniKanren
+-- Relations, unification, et recherche relationnelle
+
+module KnowledgeBase
+
+import Logic.Prolog
+import Logic.MiniKanren
+import Logic.Unification
+
+-- =============================================================================
+-- PARTIE 1: Style Prolog - Relations et faits
+-- =============================================================================
+
+-- Déclaration de prédicats (relations)
+data Relation : Type -> Type where
+  -- Relations familiales
+  Parent : Person -> Person -> Relation Bool
+  Male : Person -> Relation Bool
+  Female : Person -> Relation Bool
+  
+  -- Relations dérivées
+  Father : Person -> Person -> Relation Bool
+  Mother : Person -> Person -> Relation Bool
+  Sibling : Person -> Person -> Relation Bool
+  Ancestor : Person -> Person -> Relation Bool
+
+-- Types de base
+data Person = MkPerson String
+
+-- Base de connaissances (faits)
+facts : List Fact
+facts = 
+  -- Parents
+  [ fact $ Parent (MkPerson "John") (MkPerson "Mary")
+  , fact $ Parent (MkPerson "John") (MkPerson "Tom")
+  , fact $ Parent (MkPerson "Alice") (MkPerson "Mary")
+  , fact $ Parent (MkPerson "Alice") (MkPerson "Tom")
+  , fact $ Parent (MkPerson "Mary") (MkPerson "Sue")
+  , fact $ Parent (MkPerson "Bob") (MkPerson "Sue")
+  
+  -- Genres
+  , fact $ Male (MkPerson "John")
+  , fact $ Male (MkPerson "Tom")
+  , fact $ Male (MkPerson "Bob")
+  , fact $ Female (MkPerson "Alice")
+  , fact $ Female (MkPerson "Mary")
+  , fact $ Female (MkPerson "Sue")
+  ]
+
+-- Règles logiques (style Prolog)
+rules : List Rule
+rules =
+  [ -- Père: parent ET mâle
+    rule $ \x, y => 
+      Father x y :- Parent x y /\ Male x
+  
+  , -- Mère: parent ET femelle
+    rule $ \x, y =>
+      Mother x y :- Parent x y /\ Female x
+  
+  , -- Frère/sœur: mêmes parents, différent
+    rule $ \x, y =>
+      Sibling x y :- 
+        fresh $ \p =>
+          Parent p x /\ Parent p y /\ x =/= y
+  
+  , -- Grand-parent: parent du parent
+    rule $ \x, y =>
+      Grandparent x y :-
+        fresh $ \z =>
+          Parent x z /\ Parent z y
+  
+  , -- Ancêtre: parent OU parent d'un ancêtre (récursif)
+    rule $ \x, y =>
+      Ancestor x y :- Parent x y
+    
+  , rule $ \x, y =>
+      Ancestor x y :-
+        fresh $ \z =>
+          Parent x z /\ Ancestor z y
+  ]
+
+-- Requêtes Prolog-style
+queryExamples : IO ()
+queryExamples = do
+  putStrLn "=== Requêtes Prolog ==="
+  
+  -- Qui sont les pères ?
+  fathers <- query $ \x, y => Father x y
+  putStrLn "Pères: \{show fathers}"
+  
+  -- Qui sont les enfants de John ?
+  johnsChildren <- query $ \y => Parent (MkPerson "John") y
+  putStrLn "Enfants de John: \{show johnsChildren}"
+  
+  -- Mary est-elle l'ancêtre de Sue ?
+  isAncestor <- query $ Ancestor (MkPerson "Mary") (MkPerson "Sue")
+  putStrLn "Mary ancêtre de Sue ? \{show isAncestor}"
+  
+  -- Qui sont les frères et sœurs de Mary ?
+  marySiblings <- query $ \x => Sibling (MkPerson "Mary") x
+  putStrLn "Frères/sœurs de Mary: \{show marySiblings}"
+
+-- =============================================================================
+-- PARTIE 2: miniKanren - Logique relationnelle
+-- =============================================================================
+
+-- Opérateurs miniKanren
+data Goal : Type where
+  Fresh : (LVar a -> Goal) -> Goal          -- Variable logique
+  Unify : a -> a -> Goal                     -- Unification
+  Conj : Goal -> Goal -> Goal                -- ET logique (conjonction)
+  Disj : Goal -> Goal -> Goal                -- OU logique (disjonction)
+  Conde : List Goal -> Goal                  -- Branches multiples
+
+-- Syntaxe plus naturelle
+infixr 7 /\
+(/\) : Goal -> Goal -> Goal
+(/\) = Conj
+
+infixr 6 \/
+(\/) : Goal -> Goal -> Goal
+(\/) = Disj
+
+(===) : a -> a -> Goal
+(===) = Unify
+
+-- Relation append avec miniKanren (plus général que la fonction)
+appendo : List a -> List a -> List a -> Goal
+appendo xs ys zs = conde
+  [ -- Cas de base: [] + ys = ys
+    do xs === []
+       ys === zs
+  
+  , -- Cas récursif: (h:t) + ys = (h:r) où t + ys = r
+    fresh $ \h, t, r =>
+      do xs === (h :: t)
+         zs === (h :: r)
+         appendo t ys r
+  ]
+
+-- Utilisation: trouver toutes les décompositions
+findDecompositions : List a -> IO (List (List a, List a))
+findDecompositions list = 
+  run $ fresh $ \xs, ys =>
+    appendo xs ys list
+
+-- Relation member (appartenance)
+membero : a -> List a -> Goal
+membero x list = conde
+  [ -- x est la tête
+    fresh $ \tail =>
+      list === (x :: tail)
+  
+  , -- x est dans la queue
+    fresh $ \head, tail =>
+      do list === (head :: tail)
+         membero x tail
+  ]
+
+-- Relation reverse
+reverseo : List a -> List a -> Goal
+reverseo xs ys = conde
+  [ -- Cas de base
+    do xs === []
+       ys === []
+  
+  , -- Cas récursif
+    fresh $ \h, t, revT =>
+      do xs === (h :: t)
+         reverseo t revT
+         appendo revT [h] ys
+  ]
+
+-- Exemple complexe: palindrome
+palindromeo : List a -> Goal
+palindromeo xs = 
+  fresh $ \rev =>
+    do reverseo xs rev
+       xs === rev
+
+-- Arithmétique de Peano avec miniKanren
+data Peano = Zero | Succ Peano
+
+-- Addition en logique relationnelle
+pluso : Peano -> Peano -> Peano -> Goal
+pluso x y z = conde
+  [ -- 0 + y = y
+    do x === Zero
+       y === z
+  
+  , -- (S x') + y = S (x' + y)
+    fresh $ \x', z' =>
+      do x === Succ x'
+         z === Succ z'
+         pluso x' y z'
+  ]
+
+-- Multiplication relationnelle
+multo : Peano -> Peano -> Peano -> Goal
+multo x y z = conde
+  [ -- 0 * y = 0
+    do x === Zero
+       z === Zero
+  
+  , -- (S x') * y = y + (x' * y)
+    fresh $ \x', yz =>
+      do x === Succ x'
+         multo x' y yz
+         pluso y yz z
+  ]
+
+-- Exemple: générer tous les facteurs de n
+factors : Nat -> IO (List (Nat, Nat))
+factors n = do
+  let pn = natToPeano n
+  run $ fresh $ \x, y =>
+    multo x y pn
+
+-- =============================================================================
+-- PARTIE 3: Recherche et contraintes
+-- =============================================================================
+
+-- Résolveur de puzzles logiques (Sudoku simplifié 4x4)
+data Cell = Empty | Filled Nat
+
+type Grid = Vect 4 (Vect 4 Cell)
+
+-- Contraintes pour Sudoku
+sudokuConstraints : Grid -> Goal
+sudokuConstraints grid = conj
+  [ allDifferent (rows grid)
+  , allDifferent (cols grid)
+  , allDifferent (boxes grid)
+  , allInRange 1 4 (flatten grid)
+  ]
+  where
+    allDifferent : List (List Cell) -> Goal
+    allDifferent groups = conjMany (map differentValues groups)
+    
+    differentValues : List Cell -> Goal
+    differentValues cells = 
+      let values = filter isFilledCell cells
+      in allUnique values
+    
+    allInRange : Nat -> Nat -> List Cell -> Goal
+    allInRange low high cells = 
+      conjMany $ map (\c => inRange low high c) cells
+
+-- Résoudre le Sudoku avec search
+solveSudoku : Grid -> IO (Maybe Grid)
+solveSudoku puzzle = do
+  solutions <- run $ fresh $ \solution =>
+    do unifyGrids puzzle solution
+       sudokuConstraints solution
+  
+  pure $ head solutions
+
+-- Problème des N-reines avec miniKanren
+nQueens : Nat -> Goal
+nQueens n = fresh $ \positions =>
+  do length positions === n
+     allInRange 1 n positions
+     allDifferent positions
+     noDiagonalAttacks positions
+
+noDiagonalAttacks : List Nat -> Goal
+noDiagonalAttacks positions = 
+  conjMany $ 
+    [ fresh $ \i, j, pi, pj =>
+        do membero (i, pi) (zip [1..] positions)
+           membero (j, pj) (zip [1..] positions)
+           i =/= j
+           abs (pi - pj) =/= abs (i - j)
+    ]
+
+-- =============================================================================
+-- PARTIE 4: Type-level logic (Prolog au niveau des types)
+-- =============================================================================
+
+-- Relations au niveau des types
+data family TypeRel : k -> k -> Type
+
+-- Addition au niveau des types (Peano)
+data Nat : Type where
+  Z : Nat
+  S : Nat -> Nat
+
+-- Plus au niveau des types
+data instance TypeRel (Plus x y z) : Type where
+  PlusZ : TypeRel (Plus Z y y)
+  PlusS : TypeRel (Plus x y z) -> TypeRel (Plus (S x) y (S z))
+
+-- Preuve que 2 + 2 = 4
+two_plus_two : TypeRel (Plus (S (S Z)) (S (S Z)) (S (S (S (S Z)))))
+two_plus_two = PlusS (PlusS PlusZ)
+
+-- Append au niveau des types
+data instance TypeRel (Append xs ys zs) : Type where
+  AppendNil : TypeRel (Append [] ys ys)
+  AppendCons : TypeRel (Append xs ys zs) -> 
+               TypeRel (Append (x :: xs) ys (x :: zs))
+
+-- =============================================================================
+-- PARTIE 5: Exemples pratiques
+-- =============================================================================
+
+-- Analyseur de dépendances avec logique
+data Package = MkPackage String Version
+
+data Dependency = MkDep Package (List Package)
+
+-- Relation: package dépend de
+dependsOn : Package -> Package -> Goal
+dependsOn pkg dep = 
+  fresh $ \deps =>
+    do lookupDeps pkg deps
+       membero dep deps
+
+-- Résolution de dépendances (topological sort logique)
+resolveDeps : Package -> IO (List Package)
+resolveDeps root = run $ fresh $ \order =>
+  do validInstallOrder order root
+     noDuplicates order
+
+-- Système de types avec inférence (Hindley-Milner en logique)
+data Type 
+  = TVar String
+  | TInt
+  | TBool
+  | TFun Type Type
+  | TList Type
+
+-- Relation de typage
+typeOf : Expr -> Type -> Goal
+typeOf expr ty = case expr of
+  Var x => lookupType x ty
+  
+  Lit (LInt _) => ty === TInt
+  
+  Lit (LBool _) => ty === TBool
+  
+  App f arg => fresh $ \tArg, tRes =>
+    do typeOf f (TFun tArg tRes)
+       typeOf arg tArg
+       ty === tRes
+  
+  Lam x body => fresh $ \tArg, tRes =>
+    do ty === TFun tArg tRes
+       withBinding x tArg (typeOf body tRes)
+  
+  If cond then_ else_ => fresh $ \tBranch =>
+    do typeOf cond TBool
+       typeOf then_ tBranch
+       typeOf else_ tBranch
+       ty === tBranch
+
+-- Inférence de type
+inferType : Expr -> IO (Maybe Type)
+inferType expr = do
+  results <- run $ fresh $ \ty => typeOf expr ty
+  pure $ head results
+
+-- Unification (algorithme de Robinson)
+unify : Type -> Type -> IO (Maybe Substitution)
+unify t1 t2 = run $ fresh $ \subst =>
+  unifyTypes t1 t2 subst
+
+unifyTypes : Type -> Type -> Substitution -> Goal
+unifyTypes (TVar x) t subst = bindVar x t subst
+unifyTypes t (TVar x) subst = bindVar x t subst
+unifyTypes TInt TInt subst = subst === emptySubst
+unifyTypes TBool TBool subst = subst === emptySubst
+unifyTypes (TFun a1 r1) (TFun a2 r2) subst = fresh $ \s1, s2 =>
+  do unifyTypes a1 a2 s1
+     unifyTypes r1 r2 s2
+     composeSubst s1 s2 subst
+unifyTypes (TList t1) (TList t2) subst = unifyTypes t1 t2 subst
+unifyTypes _ _ _ = fail
+
+-- Exemple d'utilisation
+main : IO ()
+main = do
+  putStrLn "=== Programmation Logique en Astra ==="
+  
+  -- Prolog
+  queryExamples
+  
+  -- miniKanren: décompositions
+  putStrLn "\n=== Décompositions de [1,2,3] ==="
+  decomps <- findDecompositions [1, 2, 3]
+  traverse_ (\(xs, ys) => putStrLn "  \{show xs} ++ \{show ys}") decomps
+  
+  -- Facteurs
+  putStrLn "\n=== Facteurs de 12 ==="
+  facts <- factors 12
+  traverse_ (\(x, y) => putStrLn "  \{show x} * \{show y} = 12") facts
+  
+  -- N-reines
+  putStrLn "\n=== Solutions 8-reines ==="
+  solutions <- run $ nQueens 8
+  putStrLn "Nombre de solutions: \{show (length solutions)}"
+  
+  -- Inférence de types
+  putStrLn "\n=== Inférence de types ==="
+  let expr = Lam "x" (Lam "y" (App (Var "x") (Var "y")))
+  ty <- inferType expr
+  putStrLn "Type inféré: \{show ty}"
