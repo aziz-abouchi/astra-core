@@ -1,0 +1,346 @@
+-- examples/01-reactive-systems/weather_station.astra
+-- Système de station météo distribuée avec OTP behaviors et Pony capabilities
+-- Architecture OTP complète avec GenServer, Supervisor et Application
+
+module WeatherStation
+
+import OTP.GenServer
+import OTP.Supervisor
+import OTP.Application
+import Data.Stream
+import Effect.Time
+
+-- Types algébriques avec inférence Hindley-Milner
+data AlertLevel = Info | Warning | Critical
+
+record WeatherData where
+  constructor MkWeatherData
+  temperature : Double
+  humidity : Double
+  pressure : Double
+  timestamp : Time
+
+record Alert where
+  constructor MkAlert
+  level : AlertLevel
+  message : String
+  data : WeatherData
+
+-- Messages pour le GenServer
+data StationCall
+  = GetStatistics
+  | GetLastReading
+
+data StationCast
+  = UpdateThreshold Double
+  | ClearHistory
+
+data StationInfo
+  = Measure
+  | CheckSensors
+
+-- État du GenServer
+record StationState where
+  constructor MkStationState
+  location : String
+  readings : List WeatherData
+  alertThreshold : Double
+  sensorStatus : SensorStatus
+
+-- Behavior GenServer pour la station météo (style OTP)
+behavior WeatherStationServer : GenServer StationCall StationCast StationInfo StationState where
+  -- Initialisation (OTP init callback)
+  init : String -> Effect (InitResult StationState)
+  init location = do
+    logInfo "Initialisation station météo à \{location}"
+    schedule Measure (seconds 5)
+    pure $ InitOk (MkStationState location [] 35.0 Operational) (seconds 60)
+  
+  -- Handle synchrone (call) - avec réponse
+  handleCall : StationCall -> From -> StationState -> Effect (CallResult StationState)
+  handleCall GetStatistics from state = do
+    let stats = calculateStats state.readings
+    pure $ Reply stats state
+  
+  handleCall GetLastReading from state =
+    case head state.readings of
+      Just reading => pure $ Reply reading state
+      Nothing => pure $ Reply NoData state
+  
+  -- Handle asynchrone (cast) - sans réponse
+  handleCast : StationCast -> StationState -> Effect (CastResult StationState)
+  handleCast (UpdateThreshold newThreshold) state = do
+    logInfo "Mise à jour seuil: \{show newThreshold}"
+    pure $ NoReply (record { alertThreshold = newThreshold } state)
+  
+  handleCast ClearHistory state = do
+    logInfo "Historique effacé"
+    pure $ NoReply (record { readings = [] } state)
+  
+  -- Handle info (messages internes/timers)
+  handleInfo : StationInfo -> StationState -> Effect (InfoResult StationState)
+  handleInfo Measure state = do
+    -- Lecture des capteurs avec IO
+    temp <- readSensor TemperatureSensor
+    humid <- readSensor HumiditySensor
+    press <- readSensor PressureSensor
+    now <- currentTime
+    
+    let reading = MkWeatherData temp humid press now
+    let newReadings = take 1000 (reading :: state.readings)
+    
+    -- Notification async vers AlertService
+    when (temp > state.alertThreshold) $
+      GenServer.cast alertService (ProcessAlert $ createAlert reading)
+    
+    -- Broadcast vers abonnés (pub/sub)
+    broadcast "weather.reading" reading
+    
+    -- Re-schedule
+    schedule Measure (seconds 5)
+    pure $ NoReply (record { readings = newReadings } state)
+  
+  handleInfo CheckSensors state = do
+    status <- verifySensors
+    pure $ NoReply (record { sensorStatus = status } state)
+  
+  -- Terminate (cleanup)
+  terminate : Reason -> StationState -> Effect ()
+  terminate reason state = do
+    logInfo "Arrêt station: \{show reason}"
+    closeSensors
+
+-- Behavior GenServer pour le service d'alertes
+data AlertCall
+  = GetAlertHistory
+  | GetAlertCount
+
+data AlertCast
+  = ProcessAlert Alert
+  | Subscribe Pid
+  | Unsubscribe Pid
+
+record AlertState where
+  constructor MkAlertState
+  subscribers : List Pid
+  history : List Alert
+  countByLevel : Map AlertLevel Nat
+
+behavior AlertServer : GenServer AlertCall AlertCast () AlertState where
+  init : () -> Effect (InitResult AlertState)
+  init () = do
+    logInfo "Démarrage service d'alertes"
+    pure $ InitOk (MkAlertState [] [] empty)
+  
+  handleCall : AlertCall -> From -> AlertState -> Effect (CallResult AlertState)
+  handleCall GetAlertHistory from state =
+    pure $ Reply state.history state
+  
+  handleCall GetAlertCount from state =
+    let total = length state.history
+    in pure $ Reply total state
+  
+  handleCast : AlertCast -> AlertState -> Effect (CastResult AlertState)
+  handleCast (ProcessAlert alert) state = do
+    let newHistory = take 10000 (alert :: state.history)
+    let newCount = incrementCount alert.level state.countByLevel
+    
+    -- Broadcast vers abonnés avec Pony behavior
+    traverse_ (\sub => GenServer.cast sub (NotifyAlert alert)) state.subscribers
+    
+    -- Action selon niveau avec pattern matching
+    handleAlertLevel alert.level alert
+    
+    pure $ NoReply (record { history = newHistory
+                           , countByLevel = newCount } state)
+  
+  handleCast (Subscribe pid) state = do
+    logInfo "Nouvel abonné: \{show pid}"
+    link pid  -- OTP link pour supervision
+    pure $ NoReply (record { subscribers = pid :: state.subscribers } state)
+  
+  handleCast (Unsubscribe pid) state = do
+    unlink pid
+    let newSubs = filter (/= pid) state.subscribers
+    pure $ NoReply (record { subscribers = newSubs } state)
+  
+  terminate : Reason -> AlertState -> Effect ()
+  terminate _ state = do
+    logInfo "Arrêt service alertes, \{length state.history} alertes archivées"
+
+-- Pattern matching sur AlertLevel
+handleAlertLevel : AlertLevel -> Alert -> Effect ()
+handleAlertLevel Critical alert = do
+  logCritical "🚨 ALERTE CRITIQUE: \{alert.message}"
+  GenServer.cast emergencyService (Emergency alert)
+
+handleAlertLevel Warning alert =
+  logWarning "⚠️  ATTENTION: \{alert.message}"
+
+handleAlertLevel Info alert =
+  logInfo "ℹ️  \{alert.message}"
+
+-- Dashboard comme GenServer avec Pony behavior pour l'affichage
+data DashboardCall = GetStatus
+
+data DashboardCast
+  = NotifyAlert Alert
+  | UpdateReading WeatherData
+
+record DashboardState where
+  constructor MkDashboardState
+  currentData : Maybe WeatherData
+  alertCount : Nat
+  lastUpdate : Time
+
+-- Pony behavior pour capacités (iso/val/ref/tag)
+behavior Dashboard : GenServer DashboardCall DashboardCast () DashboardState 
+  with displayCapability : iso  -- Capacité isolée pour l'affichage
+  where
+  init : () -> Effect (InitResult DashboardState)
+  init () = do
+    now <- currentTime
+    pure $ InitOk (MkDashboardState Nothing Z now)
+  
+  handleCall : DashboardCall -> From -> DashboardState -> Effect (CallResult DashboardState)
+  handleCall GetStatus from state =
+    pure $ Reply (buildStatus state) state
+  
+  handleCast : DashboardCast -> DashboardState -> Effect (CastResult DashboardState)
+  handleCast (NotifyAlert alert) state = do
+    displayAlert alert  -- Utilise capability iso
+    pure $ NoReply (record { alertCount = S state.alertCount } state)
+  
+  handleCast (UpdateReading data) state = do
+    updateDisplay data  -- Utilise capability iso
+    now <- currentTime
+    pure $ NoReply (record { currentData = Just data
+                           , lastUpdate = now } state)
+
+-- Supervisor avec stratégie OTP (one_for_one, one_for_all, rest_for_one)
+weatherSupervisor : SupervisorSpec
+weatherSupervisor = MkSupervisor
+  { strategy = OneForOne
+  , intensity = 10        -- Max 10 restarts
+  , period = seconds 60   -- Dans une période de 60s
+  , children =
+      [ -- Station météo (permanent worker)
+        worker "weather_station"
+          (startLink WeatherStationServer "Paris-Centre")
+          Permanent  -- Toujours redémarré
+          (seconds 5)
+      
+      , -- Service d'alertes (transient worker)
+        worker "alert_service"
+          (startLink AlertServer ())
+          Transient  -- Redémarré seulement si termine anormalement
+          (seconds 5)
+      
+      , -- Dashboard (temporary worker)
+        worker "dashboard"
+          (startLink Dashboard ())
+          Temporary  -- Jamais redémarré
+          (seconds 5)
+      ]
+  }
+
+-- Application behavior (OTP Application)
+behavior WeatherApp : Application where
+  -- Start application (OTP callback)
+  start : StartType -> List String -> Effect (Either Error Pid)
+  start startType args = do
+    logInfo "Démarrage Weather Application"
+    
+    -- Démarrer le supervisor
+    result <- Supervisor.startLink weatherSupervisor
+    
+    case result of
+      Right supPid => do
+        -- Enregistrer les services globalement
+        register "weather_station" =<< whereis "weather_station"
+        register "alert_service" =<< whereis "alert_service"
+        register "dashboard" =<< whereis "dashboard"
+        
+        -- Configuration distribution
+        distributeServices
+        
+        pure $ Right supPid
+      
+      Left err => do
+        logError "Échec démarrage: \{show err}"
+        pure $ Left err
+  
+  -- Stop application (OTP callback)
+  stop : AppState -> Effect ()
+  stop state = do
+    logInfo "Arrêt graceful de l'application"
+    -- Le supervisor s'occupe d'arrêter les enfants
+
+-- Configuration de la distribution (Erlang distributed)
+distributeServices : Effect ()
+distributeServices = do
+  -- Station sur nœud capteurs
+  stationPid <- whereis "weather_station"
+  distributeProcess stationPid "sensor-node@weather-cluster"
+  
+  -- Alertes sur nœud processing
+  alertPid <- whereis "alert_service"
+  distributeProcess alertPid "processing-node@weather-cluster"
+  
+  -- Dashboard sur nœud display
+  dashPid <- whereis "dashboard"
+  distributeProcess dashPid "display-node@weather-cluster"
+
+-- Helper functions pures
+createAlert : WeatherData -> Alert
+createAlert data@(MkWeatherData temp _ _ _) =
+  MkAlert (determineLevel temp) (formatMessage data) data
+  where
+    determineLevel : Double -> AlertLevel
+    determineLevel t
+      | t > 40.0 = Critical
+      | t > 35.0 = Warning
+      | otherwise = Info
+
+formatMessage : WeatherData -> String
+formatMessage (MkWeatherData temp humid press _) = 
+  "Temp: \{show temp}°C, Humid: \{show humid}%, Press: \{show press}hPa"
+
+calculateStats : List WeatherData -> Statistics
+calculateStats [] = emptyStats
+calculateStats logs = 
+  let temps = map (.temperature) logs
+      avgTemp = sum temps / cast (length temps)
+      maxTemp = maximum temps
+      minTemp = minimum temps
+  in MkStatistics avgTemp maxTemp minTemp (length logs)
+
+incrementCount : AlertLevel -> Map AlertLevel Nat -> Map AlertLevel Nat
+incrementCount level counts =
+  insert level (lookupOr Z level counts + 1) counts
+
+-- Point d'entrée avec Application behavior
+main : IO ()
+main = do
+  -- Démarrage de l'application OTP
+  result <- Application.start WeatherApp Normal []
+  
+  case result of
+    Right supPid => do
+      putStrLn "✓ Weather Monitoring System démarré"
+      putStrLn "  Supervisor PID: \{show supPid}"
+      putStrLn "  Station: sensor-node@weather-cluster"
+      putStrLn "  Alertes: processing-node@weather-cluster"
+      putStrLn "  Dashboard: display-node@weather-cluster"
+      
+      -- Abonner le dashboard aux alertes
+      alertPid <- whereis "alert_service"
+      dashPid <- whereis "dashboard"
+      GenServer.cast alertPid (Subscribe dashPid)
+      
+      -- Attendre indéfiniment (l'application OTP gère le lifecycle)
+      receive
+    
+    Left err => do
+      putStrLn "✗ Échec démarrage: \{show err}"
+      exitWith 1
