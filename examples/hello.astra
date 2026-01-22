@@ -1,0 +1,7 @@
+-- hello.astra
+module Hello
+
+import System.IO
+
+main : IO ()
+main = putStrLn "Hello, Astra!"
