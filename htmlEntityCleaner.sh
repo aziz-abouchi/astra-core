@@ -18,3 +18,14 @@ grep -n "\->" vendor/tree-sitter-astra/grammar.js || true
 
 # Vérifie les backslashes dans la règle lambda (recherche approximative)
 grep -n "seq('\\\\'," vendor/tree-sitter-astra/grammar.js || true
+
+
+# 1) remplacer &amp; -> &
+find src -type f -print0 | xargs -0 sed -i '' 's/&amp;/\&/g'
+
+# 2) remplacer &lt; -> <
+find src -type f -print0 | xargs -0 sed -i '' 's/&lt;/</g'
+
+# 3) remplacer &gt; -> >
+find src -type f -print0 | xargs -0 sed -i '' 's/&gt;/>/g'
+

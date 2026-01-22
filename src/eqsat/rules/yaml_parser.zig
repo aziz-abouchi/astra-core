@@ -19,13 +19,18 @@ pub fn loadRules(gpa: std.mem.Allocator, path: []const u8) ![]Rule {
         const line = std.mem.trim(u8, line_raw, " \t");
         if (line.len == 0) continue;
         if (std.mem.startsWith(u8, line, "- name:")) {
-            if (cur_name) |n| if (cur_lhs) |l| if (cur_rhs) |r| {
-                const when_slice = try cur_when_items.toOwnedSlice();
-                try list.append(.{ .name = n, .lhs = l, .rhs = r, .when = when_slice });
-                cur_when_items = std.ArrayList([]const u8).init(gpa);
+            if (cur_name) |n| {
+                if (cur_lhs) |l| {
+                    if (cur_rhs) |r| {
+                        const when_slice = try cur_when_items.toOwnedSlice();
+                        try list.append(.{ .name = n, .lhs = l, .rhs = r, .when = when_slice });
+                        cur_when_items = std.ArrayList([]const u8).init(gpa);
+                    }
+                }
             }
             cur_name = std.mem.trim(u8, line[7..], " \t");
-            cur_lhs = null; cur_rhs = null;
+            cur_lhs = null;
+            cur_rhs = null;
             continue;
         }
         if (std.mem.startsWith(u8, line, "lhs:")) { cur_lhs = std.mem.trim(u8, line[4..], " \t\""); continue; }
@@ -33,7 +38,7 @@ pub fn loadRules(gpa: std.mem.Allocator, path: []const u8) ![]Rule {
         if (std.mem.startsWith(u8, line, "when:")) {
             const open = std.mem.indexOfScalar(u8, line, '[') orelse continue;
             const close = std.mem.indexOfScalar(u8, line, ']') orelse continue;
-            var inside = line[open+1..close];
+            const inside = line[open+1..close];
             var it2 = std.mem.tokenizeAny(u8, inside, ",");
             while (it2.next()) |wraw| {
                 const w = std.mem.trim(u8, wraw, " \t\"");
@@ -42,9 +47,14 @@ pub fn loadRules(gpa: std.mem.Allocator, path: []const u8) ![]Rule {
             continue;
         }
     }
-    if (cur_name) |n| if (cur_lhs) |l| if (cur_rhs) |r| {
-        const when_slice = try cur_when_items.toOwnedSlice();
-        try list.append(.{ .name = n, .lhs = l, .rhs = r, .when = when_slice });
+
+    if (cur_name) |n| {
+        if (cur_lhs) |l| {
+            if (cur_rhs) |r| {
+                const when_slice = try cur_when_items.toOwnedSlice();
+                try list.append(.{ .name = n, .lhs = l, .rhs = r, .when = when_slice });
+            }
+        }
     }
 
     return try list.toOwnedSlice();

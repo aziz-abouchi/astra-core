@@ -8,5 +8,5 @@ pub const Rebuilder = struct {
 };
 
 pub fn rebuild(eg: *EGraph, cfg: Rebuilder.Config) !void {
-    _ = eg; _ = cfg;
+    _ = eg;
 }

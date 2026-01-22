@@ -26,7 +26,7 @@ pub fn buildEGraphFromAirJson(gpa: std.mem.Allocator, air_json: []const u8, eg: 
         const sym = try symFromOp(an.op);
         var child_ids = std.ArrayList(u32).init(gpa); defer child_ids.deinit();
         if (an.children) |chs| { for (chs) |cid| { const p = id_to_class.get(cid) orelse return error.ChildNotLowered; try child_ids.append(p.*); } }
-        var n = Node{ .sym = sym, .children = try child_ids.toOwnedSlice() }; defer gpa.free(n.children);
+        const n = Node{ .sym = sym, .children = try child_ids.toOwnedSlice() }; defer gpa.free(n.children);
         const eclass_id = try eg.addENode(n);
         if (sym == .Var) { if (an.name) |nm| { try label_map.put(gpa, eclass_id, try std.mem.dupe(gpa, u8, nm)); } }
         if (sym == .Const) { if (an.value_i64) |v| { var buf: [24]u8 = undefined; const s = std.fmt.integerToSlice(&buf, v, 10, .lower, .{}); try label_map.put(gpa, eclass_id, try std.mem.dupe(gpa, u8, s)); } }
@@ -38,7 +38,11 @@ pub fn buildEGraphFromAirJson(gpa: std.mem.Allocator, air_json: []const u8, eg: 
 pub fn loadRulesFromYaml(gpa: std.mem.Allocator, path: []const u8) ![]Rule { return try YamlRules.loadRules(gpa, path); }
 
 pub fn saturate(gpa: std.mem.Allocator, eg: *EGraph, rules: []const Rule, cfg: RunConfig) !void {
-    var pass_count: usize = 0; var changed_any = true; while (changed_any and pass_count < cfg.max_saturation_passes) : (pass_count += 1) { changed_any = false; for (rules) |r| { const changed = try Apply.applyRule(gpa, eg, r); if (changed) changed_any = true; } _ = cfg; }
+    var pass_count: usize = 0; var changed_any = true;
+    while (changed_any and pass_count < cfg.max_saturation_passes) : (pass_count += 1) {
+        changed_any = false;
+        for (rules) |r| { const changed = try Apply.applyRule(gpa, eg, r); if (changed) changed_any = true; }
+    }
 }
 
 pub fn extractOptimizedSExpr(gpa: std.mem.Allocator, eg: *EGraph, root_eclass: u32, profile: RunProfile) ![]u8 { var extractor = try Extractor.init(gpa, eg, costProfile(profile)); defer extractor.deinit(); return try extractor.extractAsSExprString(gpa, root_eclass); }
@@ -51,33 +55,12 @@ pub fn runFromAirJson(gpa: std.mem.Allocator, air_json: []const u8, rules_yaml_p
     try saturate(gpa, &eg, rules, cfg); return try extractOptimizedSExpr(gpa, &eg, root, cfg.profile);
 }
 
-// Test unitaire (Zig 0.15 raw literal)
-
-test "EQSAT pass: map/map fusion" {
+// test JSON mono-ligne (compatible Zig 0.15)
+ test "EQSAT pass: map/map fusion" {
     const gpa = std.testing.allocator;
-
-    // JSON mono-ligne : évite toute ambiguïté de raw-literal
-
-    const air =
-        "{\"nodes\":["
-        ++ "{\"id\":1,\"op\":\"Var\",\"name\":\"s\"},"
-        ++ "{\"id\":2,\"op\":\"Var\",\"name\":\"g\"},"
-        ++ "{\"id\":3,\"op\":\"Var\",\"name\":\"f\"},"
-        ++ "{\"id\":4,\"op\":\"Map\",\"children\":[2,1]},"
-        ++ "{\"id\":5,\"op\":\"Map\",\"children\":[3,4]}"
-        ++ "],\"root\":5}";
-
+    const air = "{\"nodes\":[{\"id\":1,\"op\":\"Var\",\"name\":\"s\"},{\"id\":2,\"op\":\"Var\",\"name\":\"g\"},{\"id\":3,\"op\":\"Var\",\"name\":\"f\"},{\"id\":4,\"op\":\"Map\",\"children\":[2,1]},{\"id\":5,\"op\":\"Map\",\"children\":[3,4]}],\"root\":5}";
     const rules_path = "rules/rules_v1.yaml";
-    const cfg = RunConfig{
-        .profile = .default,
-        .max_fixpoint_iters = 8,
-        .max_saturation_passes = 64,
-        .enable_labels = false,
-    };
-
-    const out = try runFromAirJson(gpa, air, rules_path, cfg);
-    defer gpa.free(out);
-
+    const cfg = RunConfig{ .profile = .default, .max_fixpoint_iters = 8, .max_saturation_passes = 64, .enable_labels = false };
+    const out = try runFromAirJson(gpa, air, rules_path, cfg); defer gpa.free(out);
     try std.testing.expect(std.mem.startsWith(u8, out, "(map"));
-}
-
+ }
