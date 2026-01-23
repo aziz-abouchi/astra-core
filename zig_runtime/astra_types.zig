@@ -1,13 +1,22 @@
 pub const Type = union(enum) {
     Int,
     Bool,
-    Unit,
+    Fn: struct { from: *Type, to: *Type },
+    Var: u32,					// type variable (HM)
+    Session: *Session,
+};
 
-    Fn: struct {
-        from: *Type,
-        to: *Type,
+pub const Session = union(enum) {
+    Send: struct {
+        to: []const u8,
+        msg: *Type,
+        next: *Session,
     },
-
-    Var: u32, // type variable (HM)
+    Recv: struct {
+        from: []const u8,
+        msg: *Type,
+        next: *Session,
+    },
+    End,
 };
 

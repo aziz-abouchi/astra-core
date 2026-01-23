@@ -12,6 +12,14 @@ pub const TypeEnv = struct {
         };
     }
 
+    pub fn deinit(self: *TypeEnv) void {
+        var it = self.map.valueIterator();
+        while (it.next()) |ty_ptr| {
+            self.allocator.destroy(ty_ptr.*);
+        }
+        self.map.deinit();
+    }
+
     pub fn put(self: *TypeEnv, name: []const u8, ty: *Type) void {
         self.map.put(name, ty) catch unreachable;
     }
