@@ -1,0 +1,18 @@
+-- examples_lot2.astra
+cpu = Some (Budget 100)
+net = Some (Budget 500)
+
+lazyExpr = networkMacro (Expr "Hello") net
+val = force lazyExpr
+
+twiceVal = applyTwice (Expr "42")
+qt0Expr = applyQTT0 (Expr "Zero")
+
+session = Session Client true net
+_ = send session Ack
+
+redEq = eq_Color Red Green
+showRed = show_Color Red
+
+assocProof = addAssociative 1 2 3
+

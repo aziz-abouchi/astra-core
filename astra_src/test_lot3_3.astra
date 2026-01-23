@@ -1,0 +1,25 @@
+-- test_lot3_3.astra
+
+cpuOk  = Some (Budget 50)
+cpuLow = Some (Budget 5)
+
+--  OK compile + runtime
+x =
+  withBudget cpuOk 10 CompileTime (\() ->
+    withBudget cpuOk 20 Runtime (\() ->
+      42
+    )
+  )
+
+--  rejet compilation
+y =
+  withBudget cpuLow 10 CompileTime (\() ->
+    0
+  )
+
+-- Lazy avec budget
+lz =
+  lazyBudget (\() -> 99) cpuOk 10
+
+v = force lz
+

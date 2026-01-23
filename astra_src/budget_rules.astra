@@ -1,0 +1,41 @@
+-- budget_rules.astra
+
+withBudget :
+  budget : OptionBudget[Res]
+  cost   : Nat
+  phase  : Phase
+  expr   : () -> T
+  -> T
+
+withBudget budget cost phase expr =
+  let b2 = consume cost budget phase
+  expr()
+
+-- Annotation optionnelle
+@budget CPU 10
+computeHeavy : Nat -> Nat
+computeHeavy n =
+  n * n
+
+lazyBudget :
+  thunk  : () -> T
+  budget : OptionBudget[CPU]
+  cost   : Nat
+  -> Lazy[T]
+
+lazyBudget thunk budget cost =
+  lazy
+    (\() -> withBudget budget cost Runtime thunk)
+    Use1
+
+macro budgetAssert :
+  budget : OptionBudget[CPU]
+  cost   : Nat
+  -> Unit
+
+budgetAssert (Some b) cost =
+  consume cost (Some b) CompileTime
+
+budgetAssert None _ =
+  ()
+

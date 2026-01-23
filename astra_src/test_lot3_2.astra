@@ -1,0 +1,18 @@
+-- test_lot3_2.astra
+
+type Point =
+  x : Nat
+  y : Nat
+
+derive Eq Point
+derive Show Point
+
+p1 = Point 1 2
+p2 = Point 1 2
+p3 = Point 2 3
+
+a = eq p1 p2     -- true
+b = eq p1 p3     -- false
+
+s = show p1
+

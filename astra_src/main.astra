@@ -1,0 +1,20 @@
+-- main.astra
+cpu = Some (Budget 100)
+energy = Some (Budget 50)
+net = Some (Budget 500)
+
+ptr = allocate 20 None
+
+lazyVal = Lazy (\() -> allocate 10 cpu, Use0)
+val = force lazyVal
+
+twiceVal = applyTwice (Expr "42")
+
+session = Session Client true net
+_ = send session Ack
+
+redEq = eq_Color Red Green
+showRed = show_Color Red
+
+assocProof = addAssociative 1 2 3
+

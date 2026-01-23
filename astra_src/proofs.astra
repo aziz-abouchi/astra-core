@@ -1,0 +1,7 @@
+-- proofs.astra
+hole[T] : Option[T]
+
+proof addAssociative : Nat x Nat x Nat -> Bool
+addAssociative x y z =
+  hole Bool
+
