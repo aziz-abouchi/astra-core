@@ -39,9 +39,10 @@ test "LOT 4.3 valid linear session" {
     var t: astra_types.Type = astra_types.Type{ .Session = s_send };
     env.put("chan", &t);
 
+    var msg = astra_ast.Expr{ .Var = "x" };
     // Send
     var send = astra_ast.Expr{
-        .Send = .{ .to = "Server", .msg = &astra_ast.Expr{ .Var = "x" } },
+        .Send = .{ .to = "Server", .msg = &msg },
     };
     env.put("x", &astra_types.Type.Int);
 
@@ -75,11 +76,13 @@ test "LOT 4.3 double send must fail" {
             .next = s_end,
         },
     };
+ 
+    var chan_ty = astra_types.Type{ .Session = s_send };
+    env.put("chan", &chan_ty);
 
-    env.put("chan", &astra_types.Type{ .Session = s_send });
-
+    var msg = astra_ast.Expr{ .Var = "x" };
     var send_expr = astra_ast.Expr{
-        .Send = .{ .to = "Server", .msg = &astra_ast.Expr{ .Var = "x" } },
+        .Send = .{ .to = "Server", .msg = &msg },
     };
     env.put("x", &astra_types.Type.Int);
 
@@ -113,7 +116,8 @@ test "LOT 4.3 recv before send must fail" {
         },
     };
 
-    env.put("chan", &astra_types.Type{ .Session = s_send });
+    var chan_ty = astra_types.Type{ .Session = s_send };
+    env.put("chan", &chan_ty);
 
     var recv = astra_ast.Expr{
         .Recv = .{ .from = "Server", .var_name = "x" },

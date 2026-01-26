@@ -17,9 +17,18 @@ pub fn build(b: *std.Build) void {
 
     b.installArtifact(exe);
 
-    const run_cmd = b.addRunArtifact(exe);
+//    const run_cmd = b.addRunArtifact(exe);
 
-    const run_step = b.step("run", "Run astra-runtime");
+//    const run_step = b.step("run", "Run astra-runtime");
+//    run_step.dependOn(&run_cmd.step);
+
+    // Permet de passer des arguments au programme
+    const run_cmd = b.addRunArtifact(exe);
+    if (b.args) |args| {
+        run_cmd.addArgs(args);
+    }
+
+    const run_step = b.step("run", "Run Astra Core");
     run_step.dependOn(&run_cmd.step);
 }
 

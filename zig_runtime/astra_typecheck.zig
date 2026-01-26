@@ -1,7 +1,64 @@
 const std = @import("std");
 const Type = @import("astra_types.zig").Type;
+const Session = @import("astra_types.zig").Session;
 const Expr = @import("astra_ast.zig").Expr;
 const TypeEnv = @import("astra_env.zig").TypeEnv;
+
+pub fn typeEquals(a: *Type, b: *Type) bool {
+    if (a == b) return true;
+//    if (@intFromPtr(a) == @intFromPtr(b)) return true;
+
+    return switch (a.*) {
+        .Int => b.* == .Int,
+        .Bool => b.* == .Bool,
+
+        .Var => |va| switch (b.*) {
+            .Var => |vb| va == vb,
+            else => false,
+        },
+
+        .Fn => |fa| switch (b.*) {
+            .Fn => |fb|
+                typeEquals(fa.from, fb.from) and
+                typeEquals(fa.to, fb.to),
+            else => false,
+        },
+
+        .Session => |sa| switch (b.*) {
+            .Session => |sb| sessionEquals(sa, sb),
+            else => false,
+        },
+    };
+}
+
+fn typeAccepts(param: *Type, arg: *Type) bool {
+    return switch (param.*) {
+        .Var => true, // HM instantiation (simplifiée)
+        else => typeEquals(param, arg),
+    };
+}
+
+pub fn sessionEquals(sa: *Session, sb: *Session) bool {
+    if (@intFromPtr(sa) == @intFromPtr(sb)) return true;
+
+    return switch (sa.*) {
+        .End => sb.* == .End,
+
+        .Send => |s1| switch (sb.*) {
+            .Send => |s2|
+                typeEquals(s1.msg, s2.msg) and
+                sessionEquals(s1.next, s2.next),
+            else => false,
+        },
+
+        .Recv => |r1| switch (sb.*) {
+            .Recv => |r2|
+                typeEquals(r1.msg, r2.msg) and
+                sessionEquals(r1.next, r2.next),
+            else => false,
+        },
+    };
+}
 
 pub fn typeOf(expr: *Expr, env: *TypeEnv) *Type {
     const alloc = env.allocator;
@@ -45,7 +102,7 @@ pub fn typeOf(expr: *Expr, env: *TypeEnv) *Type {
 
     switch (fn_ty.*) {
         .Fn => |f| {
-            if (f.from != arg_ty)
+            if (!typeAccepts(f.from, arg_ty))
                 @panic("Function argument type mismatch");
             break :blk f.to;
         },
@@ -60,7 +117,8 @@ pub fn typeOf(expr: *Expr, env: *TypeEnv) *Type {
     const sess = chan.Session;
     if (sess.* != .Send) @panic("Send not allowed");
 
-    const msg_ty = typeOf(s.msg, env);
+    if (s.msg == null) @panic("Send message is null");
+    const msg_ty = typeOf(s.msg.?, env);
     if (msg_ty != sess.Send.msg)
         @panic("Message type mismatch");
 

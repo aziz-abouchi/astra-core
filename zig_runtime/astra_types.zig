@@ -19,4 +19,3 @@ pub const Session = union(enum) {
     },
     End,
 };
-

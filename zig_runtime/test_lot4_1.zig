@@ -5,9 +5,10 @@ const TypeEnv = @import("astra_env.zig").TypeEnv;
 const typeOf = @import("astra_typecheck.zig").typeOf;
 
 test "identity function applied to int" {
-    var gpa = std.heap.GeneralPurposeAllocator(.{}){};
-    defer _ = gpa.deinit();
-    const alloc = gpa.allocator();
+    var arena = std.heap.ArenaAllocator.init(std.heap.page_allocator);
+    defer arena.deinit();
+    const alloc = arena.allocator();
+
 
     var env = TypeEnv.init(alloc);
 
@@ -17,6 +18,7 @@ test "identity function applied to int" {
         .Lambda = .{
             .param = "x",
             .body = &body,
+            .qtt = 1,
         },
     };
 
@@ -25,6 +27,7 @@ test "identity function applied to int" {
         .Apply = .{
             .fn_expr = &lambda,
             .arg_expr = &arg,
+            .qtt = 1,
         },
     };
 
@@ -32,9 +35,9 @@ test "identity function applied to int" {
 }
 
 test "invalid application must fail" {
-    var gpa = std.heap.GeneralPurposeAllocator(.{}){};
-    defer _ = gpa.deinit();
-    const alloc = gpa.allocator();
+    var arena = std.heap.ArenaAllocator.init(std.heap.page_allocator);
+    defer arena.deinit();
+    const alloc = arena.allocator();
 
     var env = TypeEnv.init(alloc);
 
@@ -44,6 +47,7 @@ test "invalid application must fail" {
         .Lambda = .{
             .param = "x",
             .body = &body,
+            .qtt = 1,
         },
     };
 
@@ -52,18 +56,18 @@ test "invalid application must fail" {
         .Apply = .{
             .fn_expr = &lambda,
             .arg_expr = &arg1,
+            .qtt = 1,
         },
     };
-
     var arg2 = Expr{ .IntLit = 42 };
     var app2 = Expr{
         .Apply = .{
             .fn_expr = &app1,
             .arg_expr = &arg2,
+            .qtt = 1,
         },
     };
 
-    // doit PANIC
     _ = typeOf(&app2, &env);
 }
 

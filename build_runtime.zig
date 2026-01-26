@@ -5,25 +5,21 @@ pub fn build(b: *std.Build) void {
     const optimize = b.standardOptimizeOption(.{});
 
     const root_module = b.createModule(.{
-        .root_source_file = b.path("src/main.zig"),
+        .root_source_file = b.path("runtime/main.zig"),
         .target = target,
         .optimize = optimize,
     });
 
     const exe = b.addExecutable(.{
-        .name = "astra-core",
+        .name = "astra-runtime",
         .root_module = root_module,
     });
 
     b.installArtifact(exe);
 
-    // Permet de passer des arguments au programme
     const run_cmd = b.addRunArtifact(exe);
-    if (b.args) |args| {
-        run_cmd.addArgs(args);
-    }
 
-    const run_step = b.step("run", "Run Astra Core");
+    const run_step = b.step("run", "Run astra-runtime");
     run_step.dependOn(&run_cmd.step);
 }
 

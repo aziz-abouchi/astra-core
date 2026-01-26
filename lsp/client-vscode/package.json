@@ -1,0 +1,28 @@
+
+{
+  "name": "astra-vscode",
+  "displayName": "Astra Language",
+  "version": "0.0.1",
+  "publisher": "aziz-abouchi",
+  "engines": { "vscode": "^1.90.0" },
+  "activationEvents": ["onLanguage:astra"],
+  "contributes": {
+    "languages": [{ "id": "astra", "extensions": [".astra"], "aliases": ["Astra"] }],
+    "configuration": {
+      "properties": {
+        "astra.maxProblems": { "type": "number", "default": 100 }
+      }
+    }
+  },
+  "main": "./out/extension.js",
+  "scripts": {
+    "compile": "tsc -b",
+    "package": "vsce package"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0",
+    "vsce": "^3.0.0",
+    "vscode-languageclient": "^9.0.0"
+  }
+}
+
