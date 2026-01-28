@@ -13,47 +13,46 @@ test "LOT 4.3 valid linear session" {
     defer env.deinit();
 
     // Session: send Int → recv Bool → End
-    const s_end = try alloc.create(astra_types.Session);
-    s_end.* = .End;
-
     var bool_type: astra_types.Type = astra_types.Type.Bool;
-    const s_recv = try alloc.create(astra_types.Session);
-    s_recv.* = .{
-        .Recv = .{
-            .from = "Server",
-            .msg = &bool_type,
-            .next = s_end,
-        },
-    };
-
     var int_type: astra_types.Type = astra_types.Type.Int;
-    const s_send = try alloc.create(astra_types.Session);
-    s_send.* = .{
-        .Send = .{
-            .to = "Server",
-            .msg = &int_type,
-            .next = s_recv,
+
+    const s_end = astra_types.Session{ .End = {} };
+
+    const s_recv = astra_types.Session{
+        .Recv = .{
+            .from = "chan",
+            .msg = &bool_type,
+            .next = &s_end,
         },
     };
 
-    var t: astra_types.Type = astra_types.Type{ .Session = s_send };
+    const s_send = astra_types.Session{
+        .Send = .{
+            .to = "chan",
+            .msg = &int_type,
+            .next = &s_recv,
+        },
+    };
+
+    var t: astra_types.Type = astra_types.Type{ .Session = &s_send };
     env.put("chan", &t);
 
     var msg = astra_ast.Expr{ .Var = "x" };
     // Send
     var send = astra_ast.Expr{
-        .Send = .{ .to = "Server", .msg = &msg },
+        .Send = .{ .to = "chan", .msg = &msg },
     };
-    env.put("x", &astra_types.Type.Int);
+    var int_ty = astra_types.Type{ .Int = {} };
+    env.put("x", &int_ty);
 
-    _ = astra_typecheck.typeOf(&send, &env);
+    _ = try astra_typecheck.typeOf(&send, &env);
 
     // Recv
     var recv = astra_ast.Expr{
-        .Recv = .{ .from = "Server", .var_name = "y" },
+        .Recv = .{ .from = "chan", .msg = "y" },
     };
 
-    _ = astra_typecheck.typeOf(&recv, &env);
+    _ = try astra_typecheck.typeOf(&recv, &env);
 }
 
 test "LOT 4.3 double send must fail" {
@@ -64,35 +63,30 @@ test "LOT 4.3 double send must fail" {
     var env = astra_env.TypeEnv.init(alloc);
     defer env.deinit();
 
-    const s_end = try alloc.create(astra_types.Session);
-    s_end.* = .End;
-
-    var int_type: astra_types.Type = astra_types.Type.Int;
-    const s_send = try alloc.create(astra_types.Session);
-    s_send.* = .{
+    var s_end = astra_types.Session{ .End = {} };
+    var int_type = astra_types.Type{ .Int = {} };
+    var s_send = astra_types.Session{
         .Send = .{
-            .to = "Server",
+            .to = "chan",
             .msg = &int_type,
-            .next = s_end,
+            .next = &s_end,
         },
     };
- 
-    var chan_ty = astra_types.Type{ .Session = s_send };
+
+    var chan_ty = astra_types.Type{ .Session = &s_send };
     env.put("chan", &chan_ty);
 
     var msg = astra_ast.Expr{ .Var = "x" };
     var send_expr = astra_ast.Expr{
-        .Send = .{ .to = "Server", .msg = &msg },
+        .Send = .{ .to = "chan", .msg = &msg },
     };
-    env.put("x", &astra_types.Type.Int);
+    env.put("x", &int_type);
 
-    // Premier envoi passe
-    const passe1 = astra_typecheck.typeOf(&send_expr, &env);
-    std.testing.expect(passe1 == null);
+    // Premier envoi : OK
+    _ = try astra_typecheck.typeOf(&send_expr, &env);
 
-    // Second envoi → doit paniquer
     const passe2 = astra_typecheck.typeOf(&send_expr, &env);
-    std.testing.expect(passe2 == null);
+    try std.testing.expectError(astra_typecheck.TypeError.InvalidSend, passe2);
 }
 
 test "LOT 4.3 recv before send must fail" {
@@ -103,26 +97,24 @@ test "LOT 4.3 recv before send must fail" {
     var env = astra_env.TypeEnv.init(alloc);
     defer env.deinit();
 
-    const s_end = try alloc.create(astra_types.Session);
-    s_end.* = .End;
+    var s_end = astra_types.Session{ .End = {} };
 
-    var int_type: astra_types.Type = astra_types.Type.Int;
-    const s_send = try alloc.create(astra_types.Session);
-    s_send.* = .{
+    var int_type = astra_types.Type{ .Int = {} };
+    var s_send = astra_types.Session{
         .Send = .{
-            .to = "Server",
+            .to = "chan",
             .msg = &int_type,
-            .next = s_end,
+            .next = &s_end,
         },
     };
 
-    var chan_ty = astra_types.Type{ .Session = s_send };
+    var chan_ty = astra_types.Type{ .Session = &s_send };
     env.put("chan", &chan_ty);
 
     var recv = astra_ast.Expr{
-        .Recv = .{ .from = "Server", .var_name = "x" },
+        .Recv = .{ .from = "chan", .msg = "x" },
     };
 
     const rcvBfSend = astra_typecheck.typeOf(&recv, &env);
-    std.testing.expect(rcvBfSend == null);
+    try std.testing.expectError(astra_typecheck.TypeError.InvalidRecv, rcvBfSend);
 }

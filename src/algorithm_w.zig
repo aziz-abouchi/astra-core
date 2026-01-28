@@ -18,7 +18,7 @@ switch (ty.) {
 .Var => |v| return v == var,
 .Con => return false,
 .Arrow => |a| return occurs(var, a.from) or occurs(var, a.to),
-.App => |ap| return occurs(var, ap.head) or occurs(var, ap.arg),
+.Apply => |ap| return occurs(var, ap.head) or occurs(var, ap.arg),
 }
 }
 pub fn unify(s: Subst, a: Ty, b: Ty) !void {
@@ -28,7 +28,7 @@ switch (a., b.) {
 , .Var => |, vb| { if (occurs(vb, a)) return error.UnificationFailed; try s.put(vb, a.*); },
 .Con, .Con => |ca, cb| { if (!std.mem.eql(u8, ca, cb)) return error.UnificationFailed; },
 .Arrow, .Arrow => |aa, bb| { try unify(s, aa.from, bb.from); try unify(s, aa.to, bb.to); },
-.App, .App => |ap, bp| { try unify(s, ap.head, bp.head); try unify(s, ap.arg, bp.arg); },
+.Apply, .Apply => |ap, bp| { try unify(s, ap.head, bp.head); try unify(s, ap.arg, bp.arg); },
 else => return error.UnificationFailed,
 }
 }
@@ -48,7 +48,7 @@ pub fn inferContains() Scheme {
 // contains : forall a . [Eq a] => a -> List a -> Bool
 var a = Ty{ .Var = 0 };
 var list_con = Ty{ .Con = "List" };
-var list = Ty{ .App = .{ .head = &list_con, .arg = &a } };
+var list = Ty{ .Apply = .{ .head = &list_con, .arg = &a } };
 var bool = Ty{ .Con = "Bool" };
 var arr1 = Ty{ .Arrow = .{ .from = &a, .to = &list } };
 var arr2 = Ty{ .Arrow = .{ .from = &arr1, .to = &bool } };
@@ -59,7 +59,7 @@ switch (ty) {
 .Var => |v| { try w.print("a", .{}); },
 .Con => |c| { try w.print("{s}", .{c}); },
 .Arrow => |a| { try tyToString(a.from., w); try w.print(" -> ", .{}); try tyToString(a.to., w); },
-.App => |ap| { try tyToString(ap.head., w); try w.print(" ", .{}); try tyToString(ap.arg., w); },
+.Apply => |ap| { try tyToString(ap.head., w); try w.print(" ", .{}); try tyToString(ap.arg., w); },
 }
 }
 pub fn schemeToString(s: Scheme, w: anytype) !void {

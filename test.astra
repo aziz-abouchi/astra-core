@@ -1,2 +1,1 @@
-let id = fun x -> x
-id
+let id = fun x -> x in id

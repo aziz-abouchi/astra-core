@@ -5,22 +5,29 @@ pub const Allocator = std.mem.Allocator;
 pub const Ident = []const u8;
 
 pub const ExprTag = enum {
+    Int,
+    Bool,
     Var,
-    Fun,
-    App,
+    Lambda,
+    Apply,
     Let,
 };
 
+pub const LambdaExpr = struct {
+    param: Ident,
+    body: *Expr,
+};
+pub const ApplyExpr = struct {
+    fn: *Expr,
+    arg: *Expr,
+};
+
 pub const Expr = union(ExprTag) {
+    Int: i64,
+    Bool: bool,
     Var: Ident,
-    Fun: struct {
-        param: Ident,
-        body: *Expr,
-    },
-    App: struct {
-        func: *Expr,
-        arg: *Expr,
-    },
+    Lambda: LambdaExpr,
+    Apply: ApplyExpr,
     Let: struct {
         name: Ident,
         value: *Expr,
@@ -31,12 +38,12 @@ pub const Expr = union(ExprTag) {
         const pad = "                                "[0..@min(indent, 32)];
         switch (self.*) {
             .Var => |name| try w.print("{s}Var({s})\n", .{ pad, name }),
-            .Fun => |f| {
-                try w.print("{s}Fun({s})\n", .{ pad, f.param });
+            .Lambda => |f| {
+                try w.print("{s}Lambda({s})\n", .{ pad, f.param });
                 try f.body.dump(w, indent + 2);
             },
-            .App => |a| {
-                try w.print("{s}App\n", .{ pad });
+            .Apply => |a| {
+                try w.print("{s}Apply\n", .{ pad });
                 try a.func.dump(w, indent + 2);
                 try a.arg.dump(w, indent + 2);
             },

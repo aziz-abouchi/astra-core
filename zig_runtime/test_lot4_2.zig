@@ -2,6 +2,7 @@ const std = @import("std");
 const astra_ast = @import("astra_ast.zig");
 const astra_typecheck = @import("astra_typecheck.zig");
 const astra_env = @import("astra_env.zig");
+const astra_types = @import("astra_types.zig");
 
 // Fonction pour expectPanics
 fn makeLamWithZeroQTT(env: *astra_env.TypeEnv) void {
@@ -12,7 +13,7 @@ fn makeLamWithZeroQTT(env: *astra_env.TypeEnv) void {
             .qtt = 0,
         },
     };
-    const ty = astra_typecheck.typeOf(&lam_invalid, &env);
+    const ty = try astra_typecheck.typeOf(&lam_invalid, &env);
     std.testing.expect(ty == null); // ou équivalent pour vérifier l’erreur
 }
 
@@ -44,44 +45,62 @@ test "QTT respects quantity" {
             .qtt = 0,
         },
     };
-//    const ty = astra_typecheck.typeOf(&lam, &env);
+//    const ty = try astra_typecheck.typeOf(&lam, &env);
 //    std.testing.expect(ty == null); // ou équivalent pour vérifier l’erreur
-    _ = astra_typecheck.typeOf(&lam, &env);
+    _ = try astra_typecheck.typeOf(&lam, &env);
 //    expectPanics(makeLamWithZeroQTT, &env);
 }
 
-test "MPST recv then send" {
-    var gpa = std.heap.GeneralPurposeAllocator(.{}){};
-    defer {
-        const leaked = gpa.deinit();
-        std.testing.expect(leaked == .ok) catch unreachable;
-    }
+test "LOT 4.2 – MPST recv then send" {
+    var arena = std.heap.ArenaAllocator.init(std.heap.page_allocator);
+    defer arena.deinit();
+    const alloc = arena.allocator();
 
-    const alloc = gpa.allocator();
+    var env = astra_typecheck.TypeEnv.init(alloc);
 
-    var env = astra_env.TypeEnv.init(alloc);
-    defer env.deinit();
+    var int_ty = astra_types.Type{ .Int = {} };
+    var bool_ty = astra_types.Type{ .Bool = {} };
 
-    // RECV : introduit x
-    var recv_expr = astra_ast.Expr{
-        .Recv = .{
-            .from = "Client",
-            .var_name = "x",
+    var send_session = astra_types.Session{
+        .Send = .{
+            .to = "client",
+            .msg = &bool_ty,
+            .next = &astra_types.Session{ .End = {} },
         },
     };
 
-    _ = astra_typecheck.typeOf(&recv_expr, &env);
+    const recv_session = astra_types.Session{
+        .Recv = .{
+            .from = "server",
+            .msg = &int_ty,
+            .next = &send_session,
+        },
+    };
 
-    // SEND : utilise x
-    var msg = astra_ast.Expr{ .Var = "x" };
+    var from_ty = astra_types.Type{
+        .Session = &recv_session,
+    };
+
+    env.put("chan", &from_ty);
+
+    var recv_expr = astra_ast.Expr{
+        .Recv = .{
+            .from = "chan",
+            .msg = "x",
+        },
+    };
+
+    _ = try astra_typecheck.typeOf(&recv_expr, &env);
+
+    var true_expr = astra_ast.Expr{ .Bool = true };
 
     var send_expr = astra_ast.Expr{
         .Send = .{
-            .to = "Client",
-            .msg = &msg,
+            .to = "chan",
+            .msg = &true_expr,
         },
     };
 
-    _ = astra_typecheck.typeOf(&send_expr, &env);
+    _ = try astra_typecheck.typeOf(&send_expr, &env);
 }
 

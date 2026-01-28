@@ -45,7 +45,7 @@ fn matchENode(
     switch (pat) {
         .Var => |_| return true,
 
-        .App => |a| {
+        .Apply => |a| {
             const psym = try symFromStr(a.sym);
             if (en.sym != psym) return false;
             if (a.args.len != en.children.len) return false;
@@ -60,7 +60,7 @@ fn matchENode(
                             try env.put(gpa, vn, child_eclass);
                         }
                     },
-                    .App => |_| {
+                    .Apply => |_| {
                         var subs = std.ArrayList(Env).init(gpa);
                         defer subs.deinit();
 

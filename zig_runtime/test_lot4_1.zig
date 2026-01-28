@@ -22,7 +22,7 @@ test "identity function applied to int" {
         },
     };
 
-    var arg = Expr{ .IntLit = 42 };
+    var arg = Expr{ .Int = 42 };
     var app = Expr{
         .Apply = .{
             .fn_expr = &lambda,
@@ -51,7 +51,7 @@ test "invalid application must fail" {
         },
     };
 
-    var arg1 = Expr{ .BoolLit = true };
+    var arg1 = Expr{ .Bool = true };
     var app1 = Expr{
         .Apply = .{
             .fn_expr = &lambda,
@@ -59,7 +59,7 @@ test "invalid application must fail" {
             .qtt = 1,
         },
     };
-    var arg2 = Expr{ .IntLit = 42 };
+    var arg2 = Expr{ .Int = 42 };
     var app2 = Expr{
         .Apply = .{
             .fn_expr = &app1,

@@ -4,10 +4,11 @@ pub const TokenTag = enum {
     Ident,
     KwLet,
     KwFun,
-    Arrow,   // ->
-    Equal,   // =
-    LParen,  // (
-    RParen,  // )
+    KwIn,
+    Arrow,
+    Equal,
+    LParen,
+    RParen,
     EOF,
 };
 
@@ -73,6 +74,7 @@ pub const Lexer = struct {
             const lex = self.input[start..self.index];
             if (std.mem.eql(u8, lex, "let")) return .{ .tag = .KwLet, .lexeme = lex };
             if (std.mem.eql(u8, lex, "fun")) return .{ .tag = .KwFun, .lexeme = lex };
+            if (std.mem.eql(u8, lex, "in"))  return .{ .tag = .KwIn,  .lexeme = lex };
             return .{ .tag = .Ident, .lexeme = lex };
         }
 

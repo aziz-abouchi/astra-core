@@ -1,21 +1,38 @@
 pub const Type = union(enum) {
-    Int,
-    Bool,
-    Fn: struct { from: *Type, to: *Type },
-    Var: u32,					// type variable (HM)
-    Session: *Session,
+    Int: void,
+    Bool: void,
+
+    // fonction : from -> to
+    Fn: struct { 
+        from: *const Type, 
+        to: *const Type 
+    },
+
+    // variable de type (Hindley-Milner)
+    Var: u32,
+
+    // type de session
+    Session: *const Session,
+    Void: void,
 };
 
 pub const Session = union(enum) {
-    Send: struct {
-        to: []const u8,
-        msg: *Type,
-        next: *Session,
+    End: void,
+
+    Send: struct { to: []const u8, msg: *const Type, next: *const Session },
+    Recv: struct { from: []const u8, msg: *const Type, next: *const Session },
+
+    Choose: struct { // ⊕
+        cases: []const Case, // Case = { label, next }
     },
-    Recv: struct {
-        from: []const u8,
-        msg: *Type,
-        next: *Session,
+
+    Offer: struct { // &
+        cases: []const Case,
     },
-    End,
 };
+
+pub const Case = struct {
+    label: []const u8,
+    next: *const Session,
+};
+
