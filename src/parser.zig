@@ -108,7 +108,7 @@ fn parseApp(self: *Parser) ParseError!*Expr {
         const arg = try self.parseAtom();
         const node = try self.allocator.create(Expr);
         node.* = Expr{ .Apply = .{
-            .func = expr,
+            .fn = expr,
             .arg = arg,
         }};
         expr = node;

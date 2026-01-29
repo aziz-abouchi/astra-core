@@ -1,3 +1,8 @@
+pub const BranchCase = struct {
+    label: []const u8,
+    body: *Expr,
+};
+
 pub const Expr = union(enum) {
     Int: i64,
     Bool: bool,
@@ -36,15 +41,7 @@ pub const Expr = union(enum) {
 
     Branch: struct {
         chan: []const u8,
-        cases: []const struct {
-            label: []const u8,
-            body: *Expr,
-        },
+        cases: []const BranchCase,
     },
 
-};
-
-pub const BranchCase = struct {
-    label: []const u8,
-    body: *Expr,
 };

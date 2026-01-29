@@ -42,6 +42,10 @@ pub fn typeEquals(a: *const Type, b: *const Type) bool {
             .Session => |sb| sessionEquals(sa, sb),
             else => false,
         },
+        .Void => switch (b.*) {
+            .Void => true,
+            else => false,
+        },
     };
 }
 
@@ -198,14 +202,10 @@ pub fn typeOf(expr: *Expr, env: *TypeEnv) TypeError!*const Type {
     const sess = chan.Session;
     if (sess.* != .Choose) return TypeError.InvalidSelect;
 
-    // chercher la branche
     for (sess.Choose.cases) |c| {
         if (std.mem.eql(u8, c.label, s.label)) {
-            var new_ty = Type{ .Session = c.next };
-            env.put(s.chan, &new_ty);
-
-            const void_ty = Type{ .Void = {} };
-            return &void_ty;
+            chan.* = Type{ .Session = c.next };
+            return &void_ty; // ou un type que tu as choisi
         }
     }
 
@@ -218,32 +218,27 @@ pub fn typeOf(expr: *Expr, env: *TypeEnv) TypeError!*const Type {
     const sess = chan.Session;
     if (sess.* != .Offer) return TypeError.InvalidBranch;
 
-    // vérifier que toutes les branches du protocole sont présentes
     for (sess.Offer.cases) |proto_case| {
         var found = false;
+
         for (b.cases) |ast_case| {
             if (std.mem.eql(u8, ast_case.label, proto_case.label)) {
                 found = true;
 
-                // typer le corps sous la session correspondante
-                var new_ty = Type{ .Session = proto_case.next };
-                env.put(b.chan, &new_ty);
-
+                chan.* = Type{ .Session = proto_case.next };
                 _ = try typeOf(ast_case.body, env);
-
                 break;
             }
         }
+
         if (!found) return TypeError.InvalidBranch;
     }
 
-    // après toutes les branches, la session doit être End
-    var final_ty = Type{ .Session = sess.Offer.cases[0].next };
-    env.put(b.chan, &final_ty);
+    // session finale : ici tu peux décider de la remettre à End,
+    // ou laisser l’état avancé par les branches si c’est déjà End.
+    // Si toutes les branches mènent à End, chan.* est déjà cohérent.
 
-    const void_ty = Type{ .Void = {} };
     return &void_ty;
 },
-
 };
 }
