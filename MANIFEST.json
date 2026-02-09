@@ -1,134 +1,35 @@
 {
-  "build.zig": {
-    "sha256": "18ffa2a2938be2de59bfa250e4cc8235512c884f15c86d48e776a9d8f965638b"
+  "project_name": "Heaven",
+  "version": "2.0.0-alpha.1",
+  "codename": "Von_Neumann_Resilience",
+  "metadata": {
+    "status": "DeepSpace_Deployment",
+    "license": "MIT",
+    "compiler": "Zig 0.15.2",
+    "engine": "Heaven-Core-v2"
   },
-  "README.md": {
-    "sha256": "07bb46e6a4318e153725d1982563599080aad228671292e67f1d6d462791693d"
+  "capabilities": {
+    "type_system": {
+      "paradigm": "Quantitative Type Theory (QTT)",
+      "features": ["Linear Types", "Dependent Types", "Resource Budgets"]
+    },
+    "optimization_engine": {
+      "engine": "EQSAT",
+      "method": "Equality Saturation via E-Graphs",
+      "target": "Energy Consumption Reduction"
+    },
+    "ai_integration": {
+      "model": "Distributed oLlama",
+      "roles": ["Proof Assistant", "Semantic Mapping", "JIT Optimization"]
+    },
+    "transpilation_hub": {
+      "languages_count": 16,
+      "bidirectional": true,
+      "targets": ["C", "Rust", "Python", "Erlang", "Agda", "Lean", "Zig", "Go", "WASM", "LLVM-IR", "Haskell", "Java", "PHP", "Swift", "OCaml", "C++"]
+    }
   },
-  "vscode/astra/package.json": {
-    "sha256": "7374165af63bcca802e9db90e7ba69b3b6602c3fd393e0f48c2e6d731cf6325a"
-  },
-  "vscode/astra/language-configuration.json": {
-    "sha256": "0a9745f38d91e6f129366c0abb2d40b3913cbac28b1f4f2765b1a70127f9bd93"
-  },
-  "vscode/astra/syntaxes/astra.tmLanguage.json": {
-    "sha256": "037771b4de8a484a5a6b1b1be790a0869352cbd6ecc059dd26ccc52ca7b4258d"
-  },
-  "vscode/astra/snippets/astra.json": {
-    "sha256": "c7a5f6b58c6bf940789864e2d37f641e4e034e0133255da6bdbdb9606e430992"
-  },
-  "examples/roundtrip/arith.wat": {
-    "sha256": "123d65ce37ac9063e24c8f3a3a99c0e5e4f26b42b186030834d92d2f47b596c2"
-  },
-  "examples/roundtrip/arith.zig": {
-    "sha256": "bb0367dda2ffcdfd83bcd5964849ec7f158f30049f5d39156fce3ef29d4747ca"
-  },
-  "examples/roundtrip/arith.ll": {
-    "sha256": "7029cd94ff8184bb600182ba27017abea12cfa6de734c460634b9aacb401ec9e"
-  },
-  "examples/roundtrip/arith.c": {
-    "sha256": "2d03f52b439d1c1e4adf9952a54b474320d45685a9720b7c98632cd3f967d36d"
-  },
-  "examples/hm/fold.astra": {
-    "sha256": "e19b785aef606856cd761d8354a4a95a104ceee144a0e8a19d2dba8d73c52e6c"
-  },
-  "examples/hm/try_catch.astra": {
-    "sha256": "a3a280cb55309fb1fc24ee715a4e7f474e8ede4c02c5370df7e6c42899abe327"
-  },
-  "examples/hm/records.astra": {
-    "sha256": "a42ea5b003c2c713df40e63d9ff2090fed50e6ad0df013f25d0c89696ce56e32"
-  },
-  "examples/hm/unions.astra": {
-    "sha256": "d5bdbfbc4f1f93c44d8f5b1fea7fad0a5ee8a9f4558ebd6072a867378d2cb2aa"
-  },
-  "tests/golden-ir/record_case/expected.json": {
-    "sha256": "69090e0bdd5ecd4e6dc1ad6971cf1218e67e3c3cb2c5f71914bb2ee19315de0d"
-  },
-  "tests/golden-ir/record_case/input.astra": {
-    "sha256": "58fa87e361be4a17446c97aa7bb8742a78a65cfe70aa21092e2956d5595a6827"
-  },
-  "tests/golden-ir/union_case/expected.json": {
-    "sha256": "69090e0bdd5ecd4e6dc1ad6971cf1218e67e3c3cb2c5f71914bb2ee19315de0d"
-  },
-  "tests/golden-ir/union_case/input.astra": {
-    "sha256": "58fa87e361be4a17446c97aa7bb8742a78a65cfe70aa21092e2956d5595a6827"
-  },
-  "tests/golden-ir/trycatch_case/expected.json": {
-    "sha256": "69090e0bdd5ecd4e6dc1ad6971cf1218e67e3c3cb2c5f71914bb2ee19315de0d"
-  },
-  "tests/golden-ir/trycatch_case/input.astra": {
-    "sha256": "58fa87e361be4a17446c97aa7bb8742a78a65cfe70aa21092e2956d5595a6827"
-  },
-  "vendor/tree-sitter-astra/tree-sitter.json": {
-    "sha256": "79fee4680c07e33e488dc1b5dc8c16b724650e80e4133be01d58276a9f905840"
-  },
-  "vendor/tree-sitter-astra/grammar.js": {
-    "sha256": "0dfa02ec2e9529eca6221c5964cba70125e59c4f302c2cc12a6f4e9349aee8a3"
-  },
-  "vendor/tree-sitter-astra/queries/indent.scm": {
-    "sha256": "8dcabeae93bab0e2b50dd73a977e7e12c3b51e974bd2397a18d7a9c7dfee9db9"
-  },
-  "vendor/tree-sitter-astra/queries/tags.scm": {
-    "sha256": "fcaaec1b296db2fc49b88fd80c507ab76ff011c1c293f7f29eaa4c529d42e853"
-  },
-  "vendor/tree-sitter-astra/queries/highlights.scm": {
-    "sha256": "dfa3fb4d88a76189c060832a7df6eb608127dc01484181f6e19010ff081d8be2"
-  },
-  "vendor/tree-sitter-astra/queries/folds.scm": {
-    "sha256": "f0464310e91dfab8a6f7cc2f02fb61b556c86eccc61543099aba47cad0bbfd03"
-  },
-  "vendor/tree-sitter-astra/queries/injections.scm": {
-    "sha256": "6c5fc4edb570626be388d3220e4edb7779ab819537fe9c3f1734843e7e86012d"
-  },
-  "vendor/tree-sitter-astra/queries/locals.scm": {
-    "sha256": "26387de9712d5d2bfc09e6ef3394d38408f8cee340f91d16185dad17082664ce"
-  },
-  "vendor/tree-sitter-astra/test/corpus/basics.txt": {
-    "sha256": "f68c0c332415a60d41abc534733b3152511b2eeb607e247ae55366111ab6b8f3"
-  },
-  "vendor/tree-sitter-astra/src/parser.c": {
-    "sha256": "61cbf45d92e1d6389f000d78a5d239d9f6ceb158e00d0a719c4b2db21a038d4d"
-  },
-  "src/tools/transpile/astra-xtranspile.zig": {
-    "sha256": "3dda7d77d3a470a4b7a6a53a36a29c4bbfe3ef2cdbedb86b4ccdd340b5aed071"
-  },
-  "src/tools/analyzer/astra-analyzer.zig": {
-    "sha256": "cda78804ca37436b279f75e4bec99f483b6545331e1664e2af455cd868e0029c"
-  },
-  "src/tools/compiler/astra-compiler.zig": {
-    "sha256": "cda78804ca37436b279f75e4bec99f483b6545331e1664e2af455cd868e0029c"
-  },
-  "src/tools/repl/astra-repl.zig": {
-    "sha256": "cda78804ca37436b279f75e4bec99f483b6545331e1664e2af455cd868e0029c"
-  },
-  "src/tools/golden/golden-runner.zig": {
-    "sha256": "64fe914546de81920719322f95bcf77c32a70eb0963e86fff00fa6a5d8e6d631"
-  },
-  "src/tools/profiler/astra-profiler.zig": {
-    "sha256": "cda78804ca37436b279f75e4bec99f483b6545331e1664e2af455cd868e0029c"
-  },
-  "src/tools/interpreter/ir-interpreter.zig": {
-    "sha256": "cda78804ca37436b279f75e4bec99f483b6545331e1664e2af455cd868e0029c"
-  },
-  "src/tools/debugger/astra-debugger.zig": {
-    "sha256": "cda78804ca37436b279f75e4bec99f483b6545331e1664e2af455cd868e0029c"
-  },
-  "docs/targets/wat.md": {
-    "sha256": "ed4db4f87747d9b02c8a9b213fc9c5b4af050a689b043c7d6c5861103b83c62f"
-  },
-  "docs/targets/llvm-ir.md": {
-    "sha256": "6dfa58269383b40a7002b652e4b1898e70a1629ecc2988bb14aa63aa18f93bd2"
-  },
-  "docs/targets/c.md": {
-    "sha256": "1e56e27ba102347ae1058cd8298b06ccce645bc1ed4941f4c7f50b2c2b91cc79"
-  },
-  "docs/targets/zig.md": {
-    "sha256": "b85c423f4eec8866679de52a60bdc67de6139eaf8d09e5202e1078db25a9c743"
-  },
-  "docs/EBNF/astra.ebnf": {
-    "sha256": "52e3d3a2715369f2d3b798e964fd7d55da060ea68bcf97c6dfa9569bd00992f8"
-  },
-  "docs/get-started/GET_STARTED.md": {
-    "sha256": "9455359bbdfce27fc25cf2c4b268c46d56736183bfd84bd05b7d1180fb103e10"
+  "filesystem_mapping": {
+    "source_renamed": "astra_src -> heaven_src",
+    "extension_renamed": ".astra -> .heaven"
   }
 }

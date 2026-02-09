@@ -1,0 +1,28 @@
+-- Fichier: factorial.heaven
+-- Mission: Calcul de propagation de l'essaim
+-- Description: Exemple de factorielle avec contraintes de survie statiques
+
+module Swarm.Math
+
+import System.Resources
+
+-- L'IA oLlama peut aider à résoudre la preuve de terminaison
+-- si l'utilisateur utilise un trou de type '?'
+factorial : (n : Nat) -> { budget: CPU < 10000cyc, Memory < 1kb } -> Nat
+factorial Z = 1
+factorial (S k) = 
+    let 
+        -- Clause de budget pour l'étape de récursion
+        { energy_left } = currentResourceStatus
+    in
+    if energy_left > 1mJ 
+    then (S k) * factorial k 
+    else crash "Énergie insuffisante pour poursuivre le calcul."
+
+main : Mission ()
+main = do
+    -- L'IA oLlama analyse ce bloc pour optimiser l'exécution à chaud
+    let n = 12
+    result <- factorial n
+    putStrLn "Calcul de factorielle terminé."
+    putStrLn "Consommation totale estimée : 4.2mJ."

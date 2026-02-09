@@ -1,16 +1,23 @@
-# Astra-Core
+# Heaven (formerly Astra-Core)
 
 [![Zig](https://img.shields.io/badge/Zig-0.15.2-orange.svg)](https://ziglang.org/)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg)]()
+[![Status](https://img.shields.io/badge/Status-DeepSpace_Deployment-brightgreen.svg)]()
 
-**Langage et plateforme fonctionnel réactif orienté concurrence, parallélisme et distribution**
+**Système d'exploitation et langage de programmation pour essaims de réplicants (Sondes de Von Neumann).**
 
-Astra est un langage de programmation innovant qui combine les paradigmes les plus puissants pour créer des systèmes distribués fiables, performants et vérifiés formellement.
+Heaven est une plateforme de calcul distribué conçue pour la survie et l'expansion autonome dans l'espace profond. Il fusionne la vérification formelle, la gestion stricte des ressources énergétiques et l'intelligence artificielle auto-apprenante au sein d'un écosystème unique.
 
-## 🌟 Philosophie
+## 🌌 Philosophie : La Survie par la Rigueur
 
-Astra fusionne le meilleur de plusieurs mondes :
+Dans Heaven, chaque cycle CPU et chaque joule d'énergie est une ressource finie dont la consommation doit être prouvée statiquement. Le projet repose sur quatre piliers :
+
+1. **Vérification Quantitative (QTT)** : Utilisation de la *Quantitative Type Theory* pour garantir que les budgets de mission (Temps, Mémoire, Énergie) ne sont jamais dépassés.
+2. **Conscience Artificielle (oLlama ou équivalent)** : Un moteur d'IA embarqué assiste le compilateur dans la résolution de preuves complexes et optimise l'interpréteur en temps réel.
+3. **Optimisation EQSAT** : Réduction drastique de l'empreinte énergétique via la saturation d'égalité (e-graphs).
+4. **Interopérabilité Universelle** : Un hub de transpilation bidirectionnel supportant 16 langages cibles pour coloniser n'importe quel environnement technique.
+
+Heaven fusionne le meilleur de plusieurs mondes :
 
 - **Erlang/OTP** : Modèle d'acteurs, tolérance aux pannes, distribution
 - **Idris2** : Types dépendants, inférence Hindley-Milner, preuves formelles
@@ -20,22 +27,35 @@ Astra fusionne le meilleur de plusieurs mondes :
 
 Le résultat : un langage où **la correction est garantie par le système de types**, **la concurrence est native et sûre**, et **la logique est un citoyen de première classe**.
 
-## ✨ Caractéristiques principales
+## ✨ Caractéristiques de Mission
+
+### 📊 Budgets de Mission (QTT)
+Heaven impose une sémantique de ressources linéaires. Un objet possédant une "consommation" ne peut être dupliqué sans preuve d'énergie disponible.
+
+### 🤖 IA Co-Pilot (Distributed oLlama)
+L'IA n'est pas un outil externe, mais un composant du runtime :
+- **Aide aux preuves** : Résolution automatique des trous de type (*holes*).
+- **Mapping sémantique** : Aide à la transpilation entre Heaven et les 16 langages supportés.
+- **Auto-optimisation** : Réécriture du code machine en fonction des métriques de l'essaim.
+
+### 🔌 Hub de Transpilation (16 cibles)
+Conversion bidirectionnelle fluide entre Heaven et :
+*Zig, C, Rust, Python, Erlang, Agda, Lean, Go, WASM, LLVM-IR, Haskell, Java, PHP, Swift, OCaml, C++.*
 
 ### 🎭 OTP Behaviors intégrés
 
-Astra intègre nativement les patterns éprouvés d'Erlang/OTP :
+Heaven intègre nativement les patterns éprouvés d'Erlang/OTP :
 
-```astra
+```heaven
 behavior WeatherStation : GenServer Call Cast Info State where
   init config = do
     logInfo "Starting weather station"
     pure $ InitOk initialState (seconds 60)
-  
+ 
   handleCall GetTemperature from state = do
     temp <- readSensor
     pure $ Reply temp state
-  
+ 
   handleCast (UpdateThreshold newThreshold) state =
     pure $ NoReply (record { threshold = newThreshold } state)
 ```
@@ -46,7 +66,7 @@ behavior WeatherStation : GenServer Call Cast Info State where
 
 Sécurité mémoire garantie au niveau du type :
 
-```astra
+```heaven
 behavior CacheService : GenServer Call Cast Info State
   with cacheCapability : ref    -- Mutable partagé
      , configCapability : val   -- Immutable
@@ -62,7 +82,7 @@ behavior CacheService : GenServer Call Cast Info State
 
 Prolog et miniKanren intégrés pour la recherche et l'inférence :
 
-```astra
+```heaven
 -- Style Prolog
 rule $ \x, y =>
   Ancestor x y :- Parent x y
@@ -87,7 +107,7 @@ appendo xs ys zs = conde
 
 Vecteurs dimensionnés, protocoles type-safe, preuves formelles :
 
-```astra
+```heaven
 -- Vecteur de taille n (connue statiquement)
 head : Vect (S n) a -> a
 head (x :: xs) = x
@@ -105,7 +125,7 @@ send : Socket Authenticated -> Data -> IO ()
 -- Preuve formelle
 plusCommutative : (n : Nat) -> (m : Nat) -> n + m = m + n
 plusCommutative Z m = sym (plusZeroRightNeutral m)
-plusCommutative (S k) m = 
+plusCommutative (S k) m =
   calc
     S k + m ={ Refl }= S (k + m)
             ={ cong S (plusCommutative k m) }= S (m + k)
@@ -117,7 +137,7 @@ plusCommutative (S k) m =
 
 Streams, pipelines, acteurs distribués :
 
-```astra
+```heaven
 -- Pipeline de traitement
 logPipeline : Stream LogEntry -> Stream Alert
 logPipeline =
@@ -128,6 +148,47 @@ logPipeline =
   >>> branch handleByLevel
 ```
 
+## 🏗️ Architecture des Dossiers
+
+```
+heaven/
+ ├── src/               # Compilateur Heaven (Zig)
+ │   ├── parser/        # Analyseur syntaxique (Grammaire Heaven)
+ │   ├── typechecker/   # Vérificateur QTT (Quantitative Type Theory)
+ │   ├── eqsat/         # Optimiseur e-graphs (Consommation Énergie)
+ │   ├── codegen/       # Générateurs de code (Multi-target)
+ │   └── ai_engine/     # Interface oLlama (Inférence compilateur)
+ ├── runtime/           # Runtime Heaven
+ │   ├── otp/           # Implémentation OTP
+ │   ├── scheduler/     # Ordonnanceur d'acteurs/d'essaim (Work-stealing)
+ │   ├── metrics/       # Dashboard temps-réel (Consommation Joules)
+ │   └── safety/        # Isolation mémoire (Capabilities)
+ ├── stdlib/            # Bibliothèque standard (Communication inter-sondes)
+ ├── tools/             # Outillage (Hub de transpilation, LSP, formatter)
+ ├── tests/             # Suite de tests
+ ├── docs/              # Documentation
+ └── examples/          # Exemples, tutoriels, Protocoles de mission (.heaven)
+```
+
+## 📐 Exemple : Factorielle avec Budget de Mission
+
+Le code suivant prouve statiquement qu'il s'exécutera en moins de 500ms et n'utilisera pas plus de 10 mJ.
+
+```heaven
+module Math.Surveillance
+
+-- Définition avec clauses de budget strictes
+factorial : (n : Nat) -> { budget: Time < 500ms, Energy < 10mJ } -> Nat
+factorial Z = 1
+factorial (S k) = (S k) * factorial k
+
+main : Mission ()
+main = do
+  res <- factorial 10
+  logMission "Résultat calculé avec succès pour l'essaim."
+
+///////////////////////////////
+
 ## 🚀 Démarrage rapide
 
 ### Installation
@@ -136,9 +197,9 @@ logPipeline =
 # Prérequis : Zig 0.15.2
 curl https://ziglang.org/download/0.15.2/... | tar -xJ
 
-# Cloner Astra
-git clone https://github.com/aziz-abouchi/astra-core.git
-cd astra-core
+# Cloner Heaven
+git clone https://github.com/aziz-abouchi/heaven.git
+cd heaven
 
 # Compiler
 zig build
@@ -149,24 +210,24 @@ zig build test
 
 ### Premier programme
 
-```astra
--- hello.astra
+```heaven
+-- hello.heaven
 module Main
 
 import System.IO
 
 main : IO ()
-main = putStrLn "Hello, Astra!"
+main = putStrLn "Hello, Heaven!"
 ```
 
 ```bash
-astra build hello.astra
+heaven build hello.heaven
 ./hello
 ```
 
 ### Premier GenServer
 
-```astra
+```heaven
 module Counter
 
 import OTP.GenServer
@@ -224,30 +285,9 @@ main = do
 - Planification avec miniKanren
 - Analyse de programmes avec e-graphs (EQSAT)
 
-## 🏗️ Architecture
-
-```
-astra-core/
-├── src/               # Compilateur Astra (Zig)
-│   ├── parser/        # Analyseur syntaxique
-│   ├── typechecker/   # Vérificateur de types
-│   ├── eqsat/         # Optimisations EQSAT
-│   └── codegen/       # Génération de code
-├── runtime/           # Runtime Astra
-│   ├── otp/           # Implémentation OTP
-│   ├── scheduler/     # Ordonnanceur d'acteurs
-│   └── gc/            # Garbage collector
-├── stdlib/            # Bibliothèque standard
-├── examples/          # Exemples et tutoriels
-├── tests/             # Suite de tests
-├── docs/              # Documentation
-├── tools/             # Outillage (LSP, formatter)
-└── vendor/            # Dépendances externes
-```
-
 ## 🔧 Optimisations EQSAT
 
-Astra utilise **Equality Saturation** (e-graphs) pour des optimisations puissantes :
+Heaven utilise **Equality Saturation** (e-graphs) pour des optimisations puissantes :
 
 ```bash
 # Compiler avec optimisations EQSAT
@@ -271,7 +311,7 @@ zig build test
 zig build test-integration
 
 # Vérification des preuves
-astra check examples/06-proof-assistant/
+heaven check examples/06-proof-assistant/
 
 # Benchmark
 zig build bench
@@ -300,7 +340,7 @@ Les contributions sont les bienvenues ! Voir [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## 📖 Publications et références
 
-Astra s'inspire de recherches académiques :
+Heaven s'inspire de recherches académiques :
 
 - **Erlang/OTP** : Armstrong, J. (2003). "Making reliable distributed systems in the presence of software errors"
 - **Idris2** : Brady, E. (2021). "Idris 2: Quantitative Type Theory in Practice"
@@ -322,12 +362,12 @@ MIT License - voir [LICENSE](LICENSE) pour les détails.
 
 ## 📬 Contact
 
-- **Issues** : [GitHub Issues](https://github.com/aziz-abouchi/astra-core/issues)
-- **Discussions** : [GitHub Discussions](https://github.com/aziz-abouchi/astra-core/discussions)
+- **Issues** : [GitHub Issues](https://github.com/aziz-abouchi/heaven/issues)
+- **Discussions** : [GitHub Discussions](https://github.com/aziz-abouchi/heaven/discussions)
 - **Email** : [maintainer email]
 
 ---
 
-**Astra** - *Where types meet actors, and logic meets distribution*
+**Heaven** - *Where types meet actors, and logic meets distribution*
 
 **Status** : En développement actif | Zig 0.15.2 | Contributions bienvenues
