@@ -1,4 +1,4 @@
-# Tests parallèles dans Astra Core
+# Tests parallèles dans Heaven Core
 
 Les tests peuvent être exécutés en parallèle :
 

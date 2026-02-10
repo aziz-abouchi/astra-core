@@ -1,6 +1,6 @@
-# Sémantique de l’évaluation non déterministe dans Astra Core
+# Sémantique de l’évaluation non déterministe dans Heaven Core
 
-Astra Core intègre un modèle non déterministe contrôlé, principalement via :
+Heaven Core intègre un modèle non déterministe contrôlé, principalement via :
 
 - la logique relationnelle (miniKanren),
 - les effets indexés,
@@ -36,7 +36,7 @@ Les branches peuvent être :
 
 ## Contrôle du non-déterminisme
 
-Astra Core garantit :
+Heaven Core garantit :
 
 - absence de divergence non contrôlée,
 - budgets logiques,
@@ -46,6 +46,6 @@ Astra Core garantit :
 
 Les effets logiques sont encapsulés dans :
 
-```astra
+```heaven
 Logic a
 

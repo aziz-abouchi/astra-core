@@ -1,4 +1,4 @@
-# Benchmarks énergie/logique dans Astra Core
+# Benchmarks énergie/logique dans Heaven Core
 
 Ces benchmarks mesurent :
 

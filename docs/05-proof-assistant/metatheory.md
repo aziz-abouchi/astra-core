@@ -1,4 +1,4 @@
-# Métathéorie du proof assistant Astra Core
+# Métathéorie du proof assistant Heaven Core
 
 Ce document résume les propriétés fondamentales du système.
 

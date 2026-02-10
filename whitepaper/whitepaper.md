@@ -1,5 +1,5 @@
 
-# Astra: Typed Actors, Dependent Types, Capability Safety
+# Heaven: Typed Actors, Dependent Types, Capability Safety
 
 ## Abstract
 (200 mots)...

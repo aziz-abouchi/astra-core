@@ -1,4 +1,4 @@
-# Handshakes de connexion dans Astra Core
+# Handshakes de connexion dans Heaven Core
 
 Les handshakes garantissent :
 

@@ -1,6 +1,6 @@
-# Verrous distribués dans Astra Core
+# Verrous distribués dans Heaven Core
 
-Astra Core fournit des verrous distribués typés pour :
+Heaven Core fournit des verrous distribués typés pour :
 
 - la coordination,
 - la synchronisation,
@@ -16,7 +16,7 @@ Les verrous sont :
 
 ## API
 
-```astra
+```heaven
 acquire : LockCap -> Eff s s LockToken
 release : LockToken -> Eff s s ()
 

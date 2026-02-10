@@ -1,4 +1,4 @@
-# Logique temporelle dans Astra Core
+# Logique temporelle dans Heaven Core
 
 La logique temporelle permet :
 

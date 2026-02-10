@@ -1,4 +1,4 @@
-# Capacités temporelles dans Astra Core
+# Capacités temporelles dans Heaven Core
 
 Les capacités temporelles permettent :
 
@@ -8,6 +8,6 @@ Les capacités temporelles permettent :
 
 ## Syntaxe
 
-```astra
+```heaven
 data TempCap (t : TimeWindow) : Type
 

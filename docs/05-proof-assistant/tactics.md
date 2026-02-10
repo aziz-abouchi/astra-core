@@ -1,6 +1,6 @@
 # Tactiques du proof assistant
 
-Astra Core fournit un ensemble minimal mais puissant de tactiques.
+Heaven Core fournit un ensemble minimal mais puissant de tactiques.
 
 ## Tactiques de base
 

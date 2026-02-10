@@ -1,4 +1,4 @@
-# Supervision dans Astra Core
+# Supervision dans Heaven Core
 
 La supervision est inspirée d’OTP, mais enrichie par les types.
 

@@ -1,8 +1,8 @@
 const std = @import("std");
 
-const Expr = @import("astra_ast.zig").Expr;
-const TypeEnv = @import("astra_env.zig").TypeEnv;
-const typeOf = @import("astra_typecheck.zig").typeOf;
+const Expr = @import("heaven_ast.zig").Expr;
+const TypeEnv = @import("heaven_env.zig").TypeEnv;
+const typeOf = @import("heaven_typecheck.zig").typeOf;
 
 test "identity function applied to int" {
     var arena = std.heap.ArenaAllocator.init(std.heap.page_allocator);

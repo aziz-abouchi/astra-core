@@ -1,6 +1,6 @@
-# Vérification de terminaison dans Astra Core
+# Vérification de terminaison dans Heaven Core
 
-Astra Core garantit que :
+Heaven Core garantit que :
 
 - les fonctions terminent,
 - les preuves terminent,
@@ -14,6 +14,6 @@ La méthode par défaut.
 
 ### 2. Mesures
 
-```astra
+```heaven
 @[measure size]
 

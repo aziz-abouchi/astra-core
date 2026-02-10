@@ -1,4 +1,4 @@
-# Region Fault Testing dans Astra Core
+# Region Fault Testing dans Heaven Core
 
 Le region fault testing permet :
 

@@ -1,4 +1,4 @@
-# Benchmarks énergie vs throughput dans Astra Core
+# Benchmarks énergie vs throughput dans Heaven Core
 
 Ces benchmarks mesurent :
 

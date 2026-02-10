@@ -1,4 +1,4 @@
-# Tests de consensus dans Astra Core
+# Tests de consensus dans Heaven Core
 
 Les tests de consensus garantissent :
 

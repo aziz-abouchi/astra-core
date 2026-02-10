@@ -1,4 +1,4 @@
-# Couverture distribuée dans Astra Core
+# Couverture distribuée dans Heaven Core
 
 La couverture distribuée mesure :
 

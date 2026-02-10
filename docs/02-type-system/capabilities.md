@@ -1,4 +1,4 @@
-# Capacités dans Astra Core
+# Capacités dans Heaven Core
 
 Les capacités contrôlent l’accès aux effets.
 
@@ -12,6 +12,6 @@ Les capacités contrôlent l’accès aux effets.
 
 ## Exemple
 
-```astra
+```heaven
 readFile : FileCap -> Path -> String
 

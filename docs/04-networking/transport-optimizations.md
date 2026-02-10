@@ -1,4 +1,4 @@
-# Optimisations de transport dans Astra Core
+# Optimisations de transport dans Heaven Core
 
 Le runtime optimise les transports réseau via :
 

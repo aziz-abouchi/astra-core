@@ -1,6 +1,6 @@
-# Sémantique acteurs + logique dans Astra Core
+# Sémantique acteurs + logique dans Heaven Core
 
-Astra Core unifie :
+Heaven Core unifie :
 
 - le modèle d’acteurs,
 - la logique relationnelle (miniKanren),
@@ -11,7 +11,7 @@ Astra Core unifie :
 
 Un acteur peut exécuter des goals logiques :
 
-```astra
+```heaven
 logic : ActorCap p -> Logic a -> Eff s s [a]
 
 ## Propriétés

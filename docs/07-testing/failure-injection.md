@@ -1,4 +1,4 @@
-# Injection de pannes dans Astra Core
+# Injection de pannes dans Heaven Core
 
 L’injection de pannes permet :
 
@@ -17,6 +17,6 @@ L’injection de pannes permet :
 
 ## API
 
-```astra
+```heaven
 inject : Failure -> Eff s s ()
 

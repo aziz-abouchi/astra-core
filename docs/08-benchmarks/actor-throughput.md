@@ -1,4 +1,4 @@
-# Benchmarks de throughput des acteurs dans Astra Core
+# Benchmarks de throughput des acteurs dans Heaven Core
 
 Ces benchmarks mesurent :
 

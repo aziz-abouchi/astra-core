@@ -1,4 +1,4 @@
-# Diagnostics du toolchain Astra Core
+# Diagnostics du toolchain Heaven Core
 
 Le toolchain fournit des diagnostics :
 

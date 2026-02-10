@@ -1,6 +1,6 @@
 # Terminaison et récursion bien fondée
 
-Astra Core exige que les fonctions et preuves récursives soient terminantes.
+Heaven Core exige que les fonctions et preuves récursives soient terminantes.
 
 ## Méthodes de vérification
 
@@ -13,6 +13,6 @@ La forme la plus simple :
 ### 2. Relations bien fondées
 Pour les cas complexes :
 
-```astra
+```heaven
 measure size
 

@@ -1,6 +1,6 @@
-# Sémantique du scheduling dans Astra Core
+# Sémantique du scheduling dans Heaven Core
 
-Le scheduling dans Astra Core est :
+Le scheduling dans Heaven Core est :
 
 - déterministe en mode test,
 - frugal en mode production,

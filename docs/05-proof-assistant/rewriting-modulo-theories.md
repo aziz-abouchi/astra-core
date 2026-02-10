@@ -1,4 +1,4 @@
-# Réécriture modulo théories dans Astra Core
+# Réécriture modulo théories dans Heaven Core
 
 La réécriture peut être effectuée modulo :
 

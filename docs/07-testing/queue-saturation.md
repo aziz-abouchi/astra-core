@@ -1,4 +1,4 @@
-# Tests de saturation de queues dans Astra Core
+# Tests de saturation de queues dans Heaven Core
 
 Ces tests mesurent :
 

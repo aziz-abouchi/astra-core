@@ -1,4 +1,4 @@
-# Benchmarks distribués dans Astra Core
+# Benchmarks distribués dans Heaven Core
 
 Ces benchmarks mesurent :
 

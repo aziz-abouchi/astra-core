@@ -1,4 +1,4 @@
-# Benchmark Runner Astra Core
+# Benchmark Runner Heaven Core
 
 Le benchmark runner orchestre :
 

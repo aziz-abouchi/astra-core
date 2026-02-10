@@ -1,6 +1,6 @@
 # Automatisation des benchmarks
 
-Astra Core fournit un framework d’automatisation des benchmarks.
+Heaven Core fournit un framework d’automatisation des benchmarks.
 
 ## Objectifs
 
@@ -13,7 +13,7 @@ Astra Core fournit un framework d’automatisation des benchmarks.
 
 Les scripts :
 
-- compilent Astra, Roc, Zig, Bun, PHP, Lys,
+- compilent Heaven, Roc, Zig, Bun, PHP, Lys,
 - exécutent les benchmarks,
 - collectent les métriques,
 - génèrent des rapports.

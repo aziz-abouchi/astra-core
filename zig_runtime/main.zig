@@ -4,20 +4,20 @@ const io = @import("io.zig");
 const parser = @import("parser.zig");
 const evaler = @import("eval.zig");
 
-const testFile = "../astra_src/test_lot3_3.astra";
+const testFile = "../heaven_src/test_lot3_3.heaven";
 
 pub fn main() void {
-    io.println("ASTRA minimal runtime start");
+    io.println("HEAVEN minimal runtime start");
 
-    const astra_code = io.readFile( testFile );
-    if (astra_code == null) {
+    const heaven_code = io.readFile( testFile );
+    if (heaven_code == null) {
         io.println("Cannot read testFile");
         return;
     }
 
-    const ast = parser.parse(astra_code.?);
+    const ast = parser.parse(heaven_code.?);
     evaler.eval(ast);
 
-    io.println("ASTRA bootstrap complete");
+    io.println("HEAVEN bootstrap complete");
 }
 

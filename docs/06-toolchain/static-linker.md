@@ -1,4 +1,4 @@
-# Linker statique dans Astra Core
+# Linker statique dans Heaven Core
 
 Le linker statique permet :
 

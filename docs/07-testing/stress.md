@@ -1,4 +1,4 @@
-# Stress Testing dans Astra Core
+# Stress Testing dans Heaven Core
 
 Les stress tests mesurent :
 

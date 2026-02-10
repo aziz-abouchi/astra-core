@@ -1,7 +1,7 @@
 # Implications runtime des types dépendants et linéaires
 
 Les features de haut niveau (types indexés, dépendants, linéaires) ont des
-conséquences directes sur le runtime d’Astra Core.
+conséquences directes sur le runtime d’Heaven Core.
 
 ## Erasure des preuves
 

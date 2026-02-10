@@ -1,6 +1,6 @@
-# Méthodologie de benchmarks Astra Core
+# Méthodologie de benchmarks Heaven Core
 
-Les benchmarks d’Astra Core doivent être :
+Les benchmarks d’Heaven Core doivent être :
 
 - reproductibles,
 - frugaux,
@@ -25,7 +25,7 @@ Les benchmarks d’Astra Core doivent être :
 
 ## Comparaisons
 
-Astra peut être comparé à :
+Heaven peut être comparé à :
 
 - Roc,
 - Zig,

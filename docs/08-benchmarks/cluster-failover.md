@@ -1,4 +1,4 @@
-# Benchmarks de failover de cluster dans Astra Core
+# Benchmarks de failover de cluster dans Heaven Core
 
 Ces benchmarks mesurent :
 

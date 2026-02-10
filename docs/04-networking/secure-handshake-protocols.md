@@ -1,4 +1,4 @@
-# Protocoles de handshake sécurisé dans Astra Core
+# Protocoles de handshake sécurisé dans Heaven Core
 
 Les handshakes sécurisés garantissent :
 

@@ -1,6 +1,6 @@
-# Tolérance aux pannes dans Astra Core
+# Tolérance aux pannes dans Heaven Core
 
-Astra Core s’inspire d’OTP, mais avec des garanties typées.
+Heaven Core s’inspire d’OTP, mais avec des garanties typées.
 
 ## Supervision
 

@@ -1,4 +1,4 @@
-# Résolution avancée de contraintes dans Astra Core
+# Résolution avancée de contraintes dans Heaven Core
 
 La résolution avancée combine :
 

@@ -1,4 +1,4 @@
-# Recherche de buts dans Astra Core
+# Recherche de buts dans Heaven Core
 
 Le proof assistant inclut un moteur de recherche de buts.
 
@@ -18,6 +18,6 @@ Le proof assistant inclut un moteur de recherche de buts.
 
 ### 2. Recherche limitée
 
-```astra
+```heaven
 search-depth 5
 

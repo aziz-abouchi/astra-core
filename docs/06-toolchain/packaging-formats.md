@@ -1,10 +1,10 @@
-# Formats de packaging dans Astra Core
+# Formats de packaging dans Heaven Core
 
-Astra Core supporte plusieurs formats de packaging.
+Heaven Core supporte plusieurs formats de packaging.
 
 ## Formats
 
-### 1. `.astra`
+### 1. `.heaven`
 Format source.
 
 ### 2. `.acore`

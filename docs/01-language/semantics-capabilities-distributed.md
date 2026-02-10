@@ -1,4 +1,4 @@
-# Sémantique des capacités distribuées dans Astra Core
+# Sémantique des capacités distribuées dans Heaven Core
 
 Les capacités distribuées permettent :
 
@@ -16,7 +16,7 @@ Les capacités distribuées permettent :
 
 ## Capacités distantes
 
-```astra
+```heaven
 data DistCap (n : NodeId) (c : Cap) : Type
 
 ## Transitions

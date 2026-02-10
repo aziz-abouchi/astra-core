@@ -1,6 +1,6 @@
-# Induction–Récursion dans Astra Core
+# Induction–Récursion dans Heaven Core
 
-Astra Core supporte les définitions induction–récursion :
+Heaven Core supporte les définitions induction–récursion :
 
 - types définis inductivement,
 - fonctions définies récursivement,
@@ -8,7 +8,7 @@ Astra Core supporte les définitions induction–récursion :
 
 ## Exemple
 
-```astra
+```heaven
 data U = ...
 interp : U -> Type
 

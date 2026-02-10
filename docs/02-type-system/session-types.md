@@ -1,10 +1,10 @@
-# Session Types dans Astra Core
+# Session Types dans Heaven Core
 
 Les session types décrivent des protocoles de communication typés.
 
 ## Syntaxe
 
-```astra
+```heaven
 protocol Chat =
   Hello : Chat -> Waiting
   Msg   : Waiting -> Waiting

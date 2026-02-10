@@ -1,4 +1,4 @@
-# Types affines dans Astra Core
+# Types affines dans Heaven Core
 
 Les types affines permettent :
 
@@ -12,6 +12,6 @@ Un type affine peut être utilisé **au plus une fois**, mais pas nécessairemen
 
 ## Syntaxe
 
-```astra
+```heaven
 f : Affine Resource -> Result
 

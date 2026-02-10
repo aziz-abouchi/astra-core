@@ -1,4 +1,4 @@
-# Routage QoS dans Astra Core
+# Routage QoS dans Heaven Core
 
 Le routage QoS permet :
 
@@ -15,6 +15,6 @@ Le routage QoS permet :
 
 ## Routage typé
 
-```astra
+```heaven
 route : NetCap qos -> Msg p -> Eff s s ()
 

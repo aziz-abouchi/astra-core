@@ -1,4 +1,4 @@
-# Scheduling de transport dans Astra Core
+# Scheduling de transport dans Heaven Core
 
 Le scheduling réseau permet :
 
@@ -15,6 +15,6 @@ Le scheduling réseau permet :
 
 ## Scheduling typé
 
-```astra
+```heaven
 send : NetCap qos -> Msg p -> Eff s s ()
 

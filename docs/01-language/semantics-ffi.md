@@ -1,6 +1,6 @@
-# Sémantique FFI avancée dans Astra Core
+# Sémantique FFI avancée dans Heaven Core
 
-Le FFI d’Astra Core est conçu pour être :
+Le FFI d’Heaven Core est conçu pour être :
 
 - sûr,
 - frugal,
@@ -17,7 +17,7 @@ Le FFI d’Astra Core est conçu pour être :
 
 ## Déclaration
 
-```astra
+```heaven
 foreign import ccall "math.h sin"
   sin : Float -> Float
 

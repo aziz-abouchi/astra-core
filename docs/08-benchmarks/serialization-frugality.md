@@ -1,4 +1,4 @@
-# Benchmarks de frugalité de sérialisation dans Astra Core
+# Benchmarks de frugalité de sérialisation dans Heaven Core
 
 Ces benchmarks mesurent :
 

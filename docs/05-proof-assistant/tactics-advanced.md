@@ -6,6 +6,6 @@ Ces tactiques permettent d’automatiser ou de structurer des preuves complexes.
 
 Réécrit une expression selon une égalité :
 
-```astra
+```heaven
 rewrite (plusZeroRight x)
 

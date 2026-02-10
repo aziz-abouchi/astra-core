@@ -1,6 +1,6 @@
-# RPC typé dans Astra Core
+# RPC typé dans Heaven Core
 
-Astra Core fournit un système RPC typé, basé sur :
+Heaven Core fournit un système RPC typé, basé sur :
 
 - les capacités,
 - les protocoles,
@@ -8,7 +8,7 @@ Astra Core fournit un système RPC typé, basé sur :
 
 ## Définition d’un service
 
-```astra
+```heaven
 service Math =
   add : Int -> Int -> Int
   mul : Int -> Int -> Int

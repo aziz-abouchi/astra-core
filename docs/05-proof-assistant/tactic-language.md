@@ -1,10 +1,10 @@
-# Langage de tactiques dans Astra Core
+# Langage de tactiques dans Heaven Core
 
-Astra Core inclut un mini-langage pour définir des tactiques.
+Heaven Core inclut un mini-langage pour définir des tactiques.
 
 ## Syntaxe
 
-```astra
+```heaven
 tactic myTac =
   intro;
   simp;

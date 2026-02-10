@@ -1,4 +1,4 @@
-# Release Engineering dans Astra Core
+# Release Engineering dans Heaven Core
 
 Le release engineering garantit :
 
@@ -31,7 +31,7 @@ Le release engineering garantit :
 
 ## Distribution
 
-- registre Astra,
+- registre Heaven,
 - CDN,
 - fédération.
 

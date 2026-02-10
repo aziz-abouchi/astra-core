@@ -1,4 +1,4 @@
-# Arguments implicites dans Astra Core
+# Arguments implicites dans Heaven Core
 
 Les arguments implicites permettent :
 
@@ -8,6 +8,6 @@ Les arguments implicites permettent :
 
 ## Syntaxe
 
-```astra
+```heaven
 f : {a : Type} -> a -> a
 

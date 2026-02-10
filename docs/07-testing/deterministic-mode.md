@@ -1,6 +1,6 @@
 # Mode déterministe pour les tests
 
-Astra Core peut exécuter le code en mode déterministe.
+Heaven Core peut exécuter le code en mode déterministe.
 
 ## Objectifs
 

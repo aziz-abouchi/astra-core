@@ -1,4 +1,4 @@
-# Modèle énergétique distribué dans Astra Core
+# Modèle énergétique distribué dans Heaven Core
 
 Le modèle énergétique distribué permet :
 

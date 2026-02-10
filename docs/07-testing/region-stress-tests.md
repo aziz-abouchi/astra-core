@@ -1,4 +1,4 @@
-# Stress tests de régions dans Astra Core
+# Stress tests de régions dans Heaven Core
 
 Les stress tests de régions mesurent :
 

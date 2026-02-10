@@ -1,6 +1,6 @@
-# Versioning dans Astra Core
+# Versioning dans Heaven Core
 
-Astra Core adopte un versioning reproductible et typé.
+Heaven Core adopte un versioning reproductible et typé.
 
 ## Objectifs
 

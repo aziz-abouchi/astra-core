@@ -1,4 +1,4 @@
-# Scheduling de buts dans Astra Core
+# Scheduling de buts dans Heaven Core
 
 Le scheduling de buts permet :
 

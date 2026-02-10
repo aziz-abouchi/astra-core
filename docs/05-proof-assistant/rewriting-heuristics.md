@@ -1,4 +1,4 @@
-# Heuristiques de réécriture dans Astra Core
+# Heuristiques de réécriture dans Heaven Core
 
 Les heuristiques améliorent :
 

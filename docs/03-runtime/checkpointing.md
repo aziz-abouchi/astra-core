@@ -1,4 +1,4 @@
-# Checkpointing dans Astra Core
+# Checkpointing dans Heaven Core
 
 Le runtime permet de sauvegarder et restaurer :
 

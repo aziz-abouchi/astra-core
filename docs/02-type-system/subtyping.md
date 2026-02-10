@@ -1,6 +1,6 @@
-# Sous-typage dans Astra Core
+# Sous-typage dans Heaven Core
 
-Astra Core adopte un sous-typage **structuré**, **limité**, et **prévisible**.
+Heaven Core adopte un sous-typage **structuré**, **limité**, et **prévisible**.
 
 ## Principes
 
@@ -12,6 +12,6 @@ Astra Core adopte un sous-typage **structuré**, **limité**, et **prévisible**
 
 ### 1. Sous-typage des capacités
 
-```astra
+```heaven
 LinearCap <: AffineCap <: PersistentCap
 

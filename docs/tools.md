@@ -2,15 +2,15 @@
 
 ## Objectifs
 
-Astra doit fournir un ensemble minimal d’outils pour garantir un workflow complet et productif : interprétation, interaction, compilation, profilage et débogage.
+Heaven doit fournir un ensemble minimal d’outils pour garantir un workflow complet et productif : interprétation, interaction, compilation, profilage et débogage.
 
 ## Interpréteur
 
-Exécute directement du code Astra sans compilation préalable.
+Exécute directement du code Heaven sans compilation préalable.
 
 Utile pour prototypage rapide, scripts et tests exploratoires.
 
-Basé sur l’IR interne d’Astra.
+Basé sur l’IR interne d’Heaven.
 
 Respecte les capabilités et budgets de ressources.
 
@@ -26,7 +26,7 @@ Génère automatiquement des tests de propriétés.
 
 ##️ Compilateur
 
-Cœur du projet, écrit en Astra lui‑même (auto‑hébergement).
+Cœur du projet, écrit en Heaven lui‑même (auto‑hébergement).
 
 Frontend : parsing, typechecking (QTT, MPST, capabilités).
 
@@ -44,7 +44,7 @@ Compare l’estimation et la consommation réelle.
 
 ## Débuggeur
 
-Débogage interactif des programmes Astra.
+Débogage interactif des programmes Heaven.
 
 Support des acteurs et des protocoles MPST (visualisation des sessions).
 
@@ -54,7 +54,7 @@ Fonctionne en mode distribué via libp2p.
 
 ## En résumé
 
-Ces outils fondamentaux garantissent que chaque développeur Astra dispose d’un environnement complet :
+Ces outils fondamentaux garantissent que chaque développeur Heaven dispose d’un environnement complet :
 
 Interpréteur pour exécution rapide.
 
@@ -66,4 +66,4 @@ Profileur pour optimisation et frugalité.
 
 Débuggeur pour correction et compréhension des programmes.
 
-Astra se positionne ainsi comme une plateforme complète, auto‑suffisante et tournée vers la productivité et la fiabilité.
+Heaven se positionne ainsi comme une plateforme complète, auto‑suffisante et tournée vers la productivité et la fiabilité.

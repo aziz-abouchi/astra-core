@@ -1,4 +1,4 @@
-# Injection de latence dans Astra Core
+# Injection de latence dans Heaven Core
 
 L’injection de latence permet :
 
@@ -15,6 +15,6 @@ L’injection de latence permet :
 
 ## API
 
-```astra
+```heaven
 injectLatency : Duration -> Eff s s ()
 

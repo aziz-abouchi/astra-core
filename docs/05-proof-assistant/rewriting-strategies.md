@@ -1,4 +1,4 @@
-# Stratégies de réécriture dans Astra Core
+# Stratégies de réécriture dans Heaven Core
 
 Le moteur de réécriture supporte plusieurs stratégies.
 
@@ -28,6 +28,6 @@ Le moteur de réécriture supporte plusieurs stratégies.
 
 ### 5. Réécriture ciblée
 
-```astra
+```heaven
 rewriteAt path lemma
 

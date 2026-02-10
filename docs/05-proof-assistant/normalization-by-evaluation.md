@@ -1,6 +1,6 @@
-# Normalisation par évaluation (NbE) dans Astra Core
+# Normalisation par évaluation (NbE) dans Heaven Core
 
-Astra Core utilise la NbE pour :
+Heaven Core utilise la NbE pour :
 
 - normaliser les termes,
 - vérifier l’égalité,

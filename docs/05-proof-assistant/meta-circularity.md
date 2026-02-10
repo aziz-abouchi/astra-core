@@ -1,6 +1,6 @@
-# Méta-circularité dans Astra Core
+# Méta-circularité dans Heaven Core
 
-Astra Core évite la méta-circularité dangereuse tout en permettant :
+Heaven Core évite la méta-circularité dangereuse tout en permettant :
 
 - la réflexion,
 - la génération de preuves,
@@ -18,7 +18,7 @@ Le proof assistant **ne peut pas** :
 
 Les termes peuvent être inspectés :
 
-```astra
+```heaven
 quote : a -> Term a
 unquote : Term a -> a
 

@@ -1,4 +1,4 @@
-# REPL Astra Core
+# REPL Heaven Core
 
 Le REPL est un environnement interactif :
 

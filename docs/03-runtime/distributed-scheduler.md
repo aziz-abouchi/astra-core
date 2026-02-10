@@ -1,7 +1,7 @@
-# Scheduler distribué d’Astra Core
+# Scheduler distribué d’Heaven Core
 
 Le scheduler distribué coordonne l’exécution des fibres à travers plusieurs
-nœuds d’un cluster Astra.
+nœuds d’un cluster Heaven.
 
 ## Objectifs
 

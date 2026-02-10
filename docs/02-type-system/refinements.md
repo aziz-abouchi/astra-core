@@ -1,10 +1,10 @@
-# Types raffinés dans Astra Core
+# Types raffinés dans Heaven Core
 
 Les types raffinés permettent d’exprimer des contraintes logiques sur les
 valeurs.
 
 ## Syntaxe
 
-```astra
+```heaven
 type Positive = { x : Int | x > 0 }
 

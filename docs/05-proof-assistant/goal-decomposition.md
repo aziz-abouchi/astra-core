@@ -1,4 +1,4 @@
-# Décomposition de buts dans Astra Core
+# Décomposition de buts dans Heaven Core
 
 La décomposition de buts permet :
 

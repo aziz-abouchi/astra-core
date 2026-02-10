@@ -1,6 +1,6 @@
-# Gestionnaire de paquets Astra Core
+# Gestionnaire de paquets Heaven Core
 
-Astra Core inclut un gestionnaire de paquets frugal et reproductible.
+Heaven Core inclut un gestionnaire de paquets frugal et reproductible.
 
 ## Objectifs
 

@@ -1,4 +1,4 @@
-# Parametricité dans Astra Core
+# Parametricité dans Heaven Core
 
 La parametricité garantit :
 
@@ -16,7 +16,7 @@ Une fonction polymorphe ne peut pas :
 
 ## Exemple
 
-```astra
+```heaven
 id : a -> a
 id x = x
 

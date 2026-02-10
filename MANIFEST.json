@@ -29,7 +29,7 @@
     }
   },
   "filesystem_mapping": {
-    "source_renamed": "astra_src -> heaven_src",
-    "extension_renamed": ".astra -> .heaven"
+    "source_renamed": "heaven_src -> heaven_src",
+    "extension_renamed": ".heaven -> .heaven"
   }
 }

@@ -1,4 +1,4 @@
-# Modalités graduées dans Astra Core
+# Modalités graduées dans Heaven Core
 
 Les modalités graduées permettent :
 
@@ -19,6 +19,6 @@ Modélise une ressource optionnelle.
 
 ## Exemple
 
-```astra
+```heaven
 f : !2 (FileCap Read) -> Eff s s String
 

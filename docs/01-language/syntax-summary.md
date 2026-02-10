@@ -1,10 +1,10 @@
-# Résumé de la syntaxe d’Astra Core
+# Résumé de la syntaxe d’Heaven Core
 
 Ce document synthétise les éléments syntaxiques essentiels du langage.
 
 ## Modules
 
-```astra
+```heaven
 module Data.List where
 import Data.Nat
 

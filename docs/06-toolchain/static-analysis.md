@@ -1,4 +1,4 @@
-# Analyse statique dans Astra Core
+# Analyse statique dans Heaven Core
 
 Le toolchain inclut un analyseur statique typé.
 

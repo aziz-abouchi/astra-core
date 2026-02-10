@@ -1,4 +1,4 @@
-# Formatter Astra Core
+# Formatter Heaven Core
 
 Le formatter garantit un style cohérent et lisible.
 
@@ -19,7 +19,7 @@ Le formatter garantit un style cohérent et lisible.
 
 ## Exemple
 
-```astra
+```heaven
 calc
   x + 0
     ={ plusZeroRight x }=

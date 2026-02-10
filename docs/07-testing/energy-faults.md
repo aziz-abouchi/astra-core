@@ -1,4 +1,4 @@
-# Energy Fault Testing dans Astra Core
+# Energy Fault Testing dans Heaven Core
 
 Les fautes énergétiques permettent :
 

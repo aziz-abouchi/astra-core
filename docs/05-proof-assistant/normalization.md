@@ -1,4 +1,4 @@
-# Normalisation dans Astra Core
+# Normalisation dans Heaven Core
 
 La normalisation garantit que :
 

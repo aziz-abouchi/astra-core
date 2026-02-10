@@ -1,4 +1,4 @@
-# Formes normales dans Astra Core
+# Formes normales dans Heaven Core
 
 Les formes normales garantissent :
 
@@ -10,6 +10,6 @@ Les formes normales garantissent :
 
 Les lambdas sont réduites :
 
-```astra
+```heaven
 (\x => f x) y  →  f y
 

@@ -1,6 +1,6 @@
-# Modèle énergétique du runtime Astra Core
+# Modèle énergétique du runtime Heaven Core
 
-Astra Core intègre un modèle énergétique pour :
+Heaven Core intègre un modèle énergétique pour :
 
 - optimiser la frugalité,
 - mesurer la consommation,
@@ -26,7 +26,7 @@ Le runtime expose :
 
 Les fibres peuvent être limitées :
 
-```astra
+```heaven
 @[energy 1000]
 compute x
 

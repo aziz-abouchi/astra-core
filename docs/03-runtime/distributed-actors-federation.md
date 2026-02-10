@@ -1,4 +1,4 @@
-# Fédération d’acteurs distribués dans Astra Core
+# Fédération d’acteurs distribués dans Heaven Core
 
 La fédération permet :
 

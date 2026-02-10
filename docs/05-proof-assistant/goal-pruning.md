@@ -1,4 +1,4 @@
-# Élagage de buts (Goal Pruning) dans Astra Core
+# Élagage de buts (Goal Pruning) dans Heaven Core
 
 L’élagage de buts permet :
 

@@ -1,4 +1,4 @@
-# Long-Run Testing dans Astra Core
+# Long-Run Testing dans Heaven Core
 
 Les tests longue durée garantissent :
 

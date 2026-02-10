@@ -1,6 +1,6 @@
-# Virtualisation réseau dans Astra Core
+# Virtualisation réseau dans Heaven Core
 
-Astra Core peut fonctionner dans des environnements virtualisés :
+Heaven Core peut fonctionner dans des environnements virtualisés :
 
 - containers,
 - VMs,

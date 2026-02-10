@@ -1,4 +1,4 @@
-# Sémantique du FFI distribué dans Astra Core
+# Sémantique du FFI distribué dans Heaven Core
 
 Le FFI distribué permet :
 
@@ -16,7 +16,7 @@ Un appel FFI peut être :
 
 ## Appels distants
 
-```astra
+```heaven
 foreign remote "libmath.so sin"
   sinRemote : NodeId -> Float -> Eff s s Float
 

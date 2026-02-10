@@ -31,7 +31,7 @@ Les capacités sont sérialisées de manière sûre :
 
 ## Exemple
 
-```astra
+```heaven
 send : RemoteCap -> Msg -> Eff s s ()
 recv : RemoteCap -> Eff s s Msg
 

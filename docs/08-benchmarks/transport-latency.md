@@ -1,4 +1,4 @@
-# Benchmarks de latence de transport dans Astra Core
+# Benchmarks de latence de transport dans Heaven Core
 
 Ces benchmarks mesurent :
 

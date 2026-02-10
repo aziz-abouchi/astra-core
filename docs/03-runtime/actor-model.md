@@ -1,6 +1,6 @@
-# Modèle d’acteurs dans Astra Core
+# Modèle d’acteurs dans Heaven Core
 
-Astra Core intègre un modèle d’acteurs inspiré d’OTP, mais typé et frugal.
+Heaven Core intègre un modèle d’acteurs inspiré d’OTP, mais typé et frugal.
 
 ## Acteurs
 
@@ -13,7 +13,7 @@ Un acteur est :
 
 ## Définition
 
-```astra
+```heaven
 actor Counter =
   state : Nat
   protocol =

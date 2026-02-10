@@ -1,4 +1,4 @@
-# Optimiseur de bytecode Astra Core
+# Optimiseur de bytecode Heaven Core
 
 L’optimiseur de bytecode applique :
 

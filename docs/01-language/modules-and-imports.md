@@ -1,9 +1,9 @@
-# Modules et imports dans Astra Core
+# Modules et imports dans Heaven Core
 
-Astra Core organise le code en modules hiérarchiques.
+Heaven Core organise le code en modules hiérarchiques.
 
 ## Déclaration de module
 
-```astra
+```heaven
 module Data.List where
 

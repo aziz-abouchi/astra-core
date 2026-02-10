@@ -1,4 +1,4 @@
-# Polymorphisme de régions dans Astra Core
+# Polymorphisme de régions dans Heaven Core
 
 Le polymorphisme de régions permet :
 
@@ -8,6 +8,6 @@ Le polymorphisme de régions permet :
 
 ## Définition
 
-```astra
+```heaven
 f : forall (r : Region). Ref r Int -> Eff s s Int
 

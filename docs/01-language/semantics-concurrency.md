@@ -1,6 +1,6 @@
-# Sémantique de la concurrence dans Astra Core
+# Sémantique de la concurrence dans Heaven Core
 
-Astra Core adopte une sémantique de concurrence :
+Heaven Core adopte une sémantique de concurrence :
 
 - **sans partage mutable**,
 - **basée sur les fibres**,

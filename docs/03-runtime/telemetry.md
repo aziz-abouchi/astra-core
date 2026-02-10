@@ -1,4 +1,4 @@
-# Télémétrie du runtime Astra Core
+# Télémétrie du runtime Heaven Core
 
 La télémétrie fournit une vision globale du système.
 

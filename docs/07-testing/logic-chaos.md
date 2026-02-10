@@ -1,4 +1,4 @@
-# Logic Chaos Testing dans Astra Core
+# Logic Chaos Testing dans Heaven Core
 
 Le logic chaos testing permet :
 

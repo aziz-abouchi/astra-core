@@ -1,6 +1,6 @@
-# Tests distribués dans Astra Core
+# Tests distribués dans Heaven Core
 
-Astra Core permet de tester des systèmes distribués de manière déterministe.
+Heaven Core permet de tester des systèmes distribués de manière déterministe.
 
 ## Objectifs
 
@@ -28,6 +28,6 @@ Le framework crée :
 
 ### 3. Assertions typées
 
-```astra
+```heaven
 assert (state counter == 42)
 

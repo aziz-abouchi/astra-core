@@ -1,4 +1,4 @@
-# Injection de fautes d’acteurs dans Astra Core
+# Injection de fautes d’acteurs dans Heaven Core
 
 L’injection de fautes permet :
 
@@ -16,6 +16,6 @@ L’injection de fautes permet :
 
 ## API
 
-```astra
+```heaven
 injectFault : ActorId -> Fault -> Eff s s ()
 

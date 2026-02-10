@@ -1,6 +1,6 @@
-# Sémantique avancée des capacités dans Astra Core
+# Sémantique avancée des capacités dans Heaven Core
 
-Les capacités sont le mécanisme central de contrôle des effets dans Astra Core.
+Les capacités sont le mécanisme central de contrôle des effets dans Heaven Core.
 Elles garantissent :
 
 - la sûreté,
@@ -29,7 +29,7 @@ Valides sur plusieurs nœuds.
 
 Les capacités peuvent évoluer :
 
-```astra
+```heaven
 open : FileCap Closed -> Eff s s (FileCap Open)
 close : FileCap Open -> Eff s s (FileCap Closed)
 

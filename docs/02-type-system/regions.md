@@ -1,4 +1,4 @@
-# Régions mémoire dans Astra Core
+# Régions mémoire dans Heaven Core
 
 Les régions permettent :
 
@@ -8,7 +8,7 @@ Les régions permettent :
 
 ## Définition
 
-```astra
+```heaven
 region R in
   let x = alloc R value
   ...

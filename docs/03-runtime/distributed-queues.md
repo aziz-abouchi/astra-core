@@ -1,4 +1,4 @@
-# Queues distribuées dans Astra Core
+# Queues distribuées dans Heaven Core
 
 Les queues distribuées permettent :
 
@@ -14,7 +14,7 @@ Les queues distribuées permettent :
 
 ## API
 
-```astra
+```heaven
 enqueue : QueueCap a -> a -> Eff s s ()
 dequeue : QueueCap a -> Eff s s (Maybe a)
 

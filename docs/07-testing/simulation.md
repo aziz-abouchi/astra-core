@@ -1,6 +1,6 @@
-# Simulation dans Astra Core
+# Simulation dans Heaven Core
 
-Astra Core permet de simuler :
+Heaven Core permet de simuler :
 
 - des clusters,
 - des protocoles,

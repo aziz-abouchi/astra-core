@@ -1,6 +1,6 @@
-# Fuzzing dans Astra Core
+# Fuzzing dans Heaven Core
 
-Astra Core inclut un moteur de fuzzing typé.
+Heaven Core inclut un moteur de fuzzing typé.
 
 ## Objectifs
 

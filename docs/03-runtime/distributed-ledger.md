@@ -1,6 +1,6 @@
-# Ledger distribué dans Astra Core
+# Ledger distribué dans Heaven Core
 
-Astra Core inclut un ledger distribué typé pour :
+Heaven Core inclut un ledger distribué typé pour :
 
 - la réplication,
 - la coordination,

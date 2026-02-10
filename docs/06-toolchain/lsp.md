@@ -1,6 +1,6 @@
-# LSP (Language Server Protocol) pour Astra Core
+# LSP (Language Server Protocol) pour Heaven Core
 
-Astra Core fournit un serveur LSP complet.
+Heaven Core fournit un serveur LSP complet.
 
 ## Fonctionnalités
 

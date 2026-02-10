@@ -1,4 +1,4 @@
-# Benchmarks de migration d’acteurs dans Astra Core
+# Benchmarks de migration d’acteurs dans Heaven Core
 
 Ces benchmarks mesurent :
 

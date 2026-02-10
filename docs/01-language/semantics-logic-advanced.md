@@ -1,6 +1,6 @@
-# Sémantique avancée de la logique dans Astra Core
+# Sémantique avancée de la logique dans Heaven Core
 
-Astra Core combine deux logiques :
+Heaven Core combine deux logiques :
 
 - logique relationnelle (miniKanren),
 - logique constructive (Curry–Howard).

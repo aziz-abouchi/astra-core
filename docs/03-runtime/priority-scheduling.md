@@ -1,4 +1,4 @@
-# Scheduling par priorité dans Astra Core
+# Scheduling par priorité dans Heaven Core
 
 Le scheduler peut attribuer des priorités aux fibres.
 
@@ -11,7 +11,7 @@ Le scheduler peut attribuer des priorités aux fibres.
 
 ## Annotation
 
-```astra
+```heaven
 @[priority High]
 compute x
 

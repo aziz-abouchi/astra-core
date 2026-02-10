@@ -1,4 +1,4 @@
-# Benchmarks de scaling logique dans Astra Core
+# Benchmarks de scaling logique dans Heaven Core
 
 Ces benchmarks mesurent :
 

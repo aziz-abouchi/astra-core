@@ -1,6 +1,6 @@
-# Modèle mémoire d’Astra Core
+# Modèle mémoire d’Heaven Core
 
-Le modèle mémoire d’Astra Core vise :
+Le modèle mémoire d’Heaven Core vise :
 
 - la **sécurité** (pas de data races),
 - la **prédictibilité** (comportement déterministe optionnel),

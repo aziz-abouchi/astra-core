@@ -1,4 +1,4 @@
-# Stratégies de normalisation dans Astra Core
+# Stratégies de normalisation dans Heaven Core
 
 La normalisation est essentielle pour :
 

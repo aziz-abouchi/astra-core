@@ -1,4 +1,4 @@
-# Optimisation guidée par profil (PGO) dans Astra Core
+# Optimisation guidée par profil (PGO) dans Heaven Core
 
 Le toolchain supporte la PGO pour :
 

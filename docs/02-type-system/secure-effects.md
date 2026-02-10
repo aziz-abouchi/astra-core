@@ -1,4 +1,4 @@
-# Effets sécurisés dans Astra Core
+# Effets sécurisés dans Heaven Core
 
 Les effets sécurisés garantissent :
 
@@ -8,7 +8,7 @@ Les effets sécurisés garantissent :
 
 ## Syntaxe
 
-```astra
+```heaven
 Eff (secure = k) s1 s2 a
 
 ## Propriétés

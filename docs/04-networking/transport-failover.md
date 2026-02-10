@@ -1,4 +1,4 @@
-# Failover de transport dans Astra Core
+# Failover de transport dans Heaven Core
 
 Le failover de transport garantit :
 

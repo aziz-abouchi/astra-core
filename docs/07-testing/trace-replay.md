@@ -1,4 +1,4 @@
-# Trace Replay dans Astra Core
+# Trace Replay dans Heaven Core
 
 Le trace replay permet de :
 
@@ -23,6 +23,6 @@ Les traces sont :
 
 ## Replay
 
-```astra
+```heaven
 replay : Trace -> Eff s s Result
 

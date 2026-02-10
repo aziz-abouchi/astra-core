@@ -1,4 +1,4 @@
-# Link-Time Optimization (LTO) de cluster dans Astra Core
+# Link-Time Optimization (LTO) de cluster dans Heaven Core
 
 La LTO distribuée permet :
 

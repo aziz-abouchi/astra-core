@@ -1,6 +1,6 @@
-# Sécurité mémoire dans Astra Core
+# Sécurité mémoire dans Heaven Core
 
-Astra Core garantit la sécurité mémoire via :
+Heaven Core garantit la sécurité mémoire via :
 
 - un ownership strict,
 - des types linéaires,

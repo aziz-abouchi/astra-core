@@ -1,4 +1,4 @@
-# Kinds sécurisés dans Astra Core
+# Kinds sécurisés dans Heaven Core
 
 Les kinds sécurisés permettent :
 

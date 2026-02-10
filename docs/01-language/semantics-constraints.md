@@ -1,4 +1,4 @@
-# Sémantique des contraintes dans Astra Core
+# Sémantique des contraintes dans Heaven Core
 
 Les contraintes jouent un rôle central dans :
 
@@ -12,6 +12,6 @@ Les contraintes jouent un rôle central dans :
 
 ### 1. Contraintes d’égalité
 
-```astra
+```heaven
 a = b
 

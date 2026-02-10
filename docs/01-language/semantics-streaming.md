@@ -1,6 +1,6 @@
-# Sémantique du streaming dans Astra Core
+# Sémantique du streaming dans Heaven Core
 
-Le streaming dans Astra Core est :
+Le streaming dans Heaven Core est :
 
 - typé,
 - frugal,
@@ -12,7 +12,7 @@ Le streaming dans Astra Core est :
 
 Un flux est une structure potentiellement infinie :
 
-```astra
+```heaven
 data Stream a =
   Cons a (Eff s s (Stream a))
   | End

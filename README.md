@@ -1,4 +1,4 @@
-# Heaven (formerly Astra-Core)
+# Heaven
 
 [![Zig](https://img.shields.io/badge/Zig-0.15.2-orange.svg)](https://ziglang.org/)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)

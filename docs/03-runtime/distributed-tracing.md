@@ -1,4 +1,4 @@
-# Tracing distribué dans Astra Core
+# Tracing distribué dans Heaven Core
 
 Le tracing distribué permet :
 

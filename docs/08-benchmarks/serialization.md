@@ -1,4 +1,4 @@
-# Benchmarks de sérialisation dans Astra Core
+# Benchmarks de sérialisation dans Heaven Core
 
 Ces benchmarks mesurent :
 

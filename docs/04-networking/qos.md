@@ -1,6 +1,6 @@
-# Qualité de service (QoS) dans Astra Core
+# Qualité de service (QoS) dans Heaven Core
 
-Astra Core permet de contrôler la QoS des communications distribuées.
+Heaven Core permet de contrôler la QoS des communications distribuées.
 
 ## Paramètres QoS
 
@@ -12,6 +12,6 @@ Astra Core permet de contrôler la QoS des communications distribuées.
 
 ## Capacités QoS
 
-```astra
+```heaven
 data NetCap (qos : QoS)
 

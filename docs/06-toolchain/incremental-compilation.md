@@ -1,4 +1,4 @@
-# Compilation incrémentale dans Astra Core
+# Compilation incrémentale dans Heaven Core
 
 La compilation incrémentale permet :
 

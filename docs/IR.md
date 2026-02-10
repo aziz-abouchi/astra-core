@@ -1,4 +1,4 @@
-Astra IR (MVP) — src/ir.zig
+Heaven IR (MVP) — src/ir.zig
 Cet IR intermédiaire (MIR) sert de base à la monomorphisation et à la génération LLVM IR.
 
 Concepts

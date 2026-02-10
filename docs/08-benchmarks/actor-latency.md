@@ -1,4 +1,4 @@
-# Benchmarks de latence des acteurs dans Astra Core
+# Benchmarks de latence des acteurs dans Heaven Core
 
 Ces benchmarks mesurent :
 

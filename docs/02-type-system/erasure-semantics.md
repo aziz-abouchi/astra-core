@@ -1,4 +1,4 @@
-# Sémantique d’effacement (Erasure) dans Astra Core
+# Sémantique d’effacement (Erasure) dans Heaven Core
 
 L’effacement garantit que :
 

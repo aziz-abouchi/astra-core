@@ -1,6 +1,6 @@
-# Bytecode Astra Core
+# Bytecode Heaven Core
 
-Astra Core compile vers un bytecode portable.
+Heaven Core compile vers un bytecode portable.
 
 ## Objectifs
 

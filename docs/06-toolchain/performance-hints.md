@@ -1,4 +1,4 @@
-# Performance Hints dans Astra Core
+# Performance Hints dans Heaven Core
 
 Le toolchain fournit des conseils de performance.
 

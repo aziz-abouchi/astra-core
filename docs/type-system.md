@@ -9,7 +9,7 @@
 ## Syntaxe
 - Un seul `:` pour les signatures.
 - Exemple :
-  ```astra
+  ```heaven
   length : Vec a n -> Nat
 
 ## Extensions

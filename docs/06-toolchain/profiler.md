@@ -1,4 +1,4 @@
-# Profiler Astra Core
+# Profiler Heaven Core
 
 Le profiler mesure :
 

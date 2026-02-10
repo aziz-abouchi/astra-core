@@ -12,7 +12,7 @@ pub fn run() !void {
     var vm = VM.init();
 
     while (true) {
-        try stdout.print("Astra REPL> ", .{});
+        try stdout.print("Heaven REPL> ", .{});
         try stdout.flush();
 
         var line_buf: [256]u8 = undefined;

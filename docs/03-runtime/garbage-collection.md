@@ -1,6 +1,6 @@
-# Garbage Collection dans Astra Core
+# Garbage Collection dans Heaven Core
 
-Astra Core minimise le GC grâce à :
+Heaven Core minimise le GC grâce à :
 
 - l’ownership,
 - les régions,

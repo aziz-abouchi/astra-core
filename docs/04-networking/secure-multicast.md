@@ -1,4 +1,4 @@
-# Multicast sécurisé dans Astra Core
+# Multicast sécurisé dans Heaven Core
 
 Le multicast sécurisé permet :
 
@@ -8,6 +8,6 @@ Le multicast sécurisé permet :
 
 ## Groupes sécurisés
 
-```astra
+```heaven
 data SecureGroup p = MkSecureGroup [SecureChannel p]
 

@@ -1,4 +1,4 @@
-# Backpressure dans Astra Core
+# Backpressure dans Heaven Core
 
 Le backpressure garantit :
 
@@ -32,6 +32,6 @@ Le runtime choisit dynamiquement.
 
 Les flux peuvent encoder leur capacité :
 
-```astra
+```heaven
 data Stream (cap : Nat) a = ...
 

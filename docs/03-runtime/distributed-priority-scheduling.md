@@ -1,4 +1,4 @@
-# Scheduling distribué par priorité dans Astra Core
+# Scheduling distribué par priorité dans Heaven Core
 
 Le scheduler distribué gère :
 

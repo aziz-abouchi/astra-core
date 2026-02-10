@@ -1,4 +1,4 @@
-# Tests de régression dans Astra Core
+# Tests de régression dans Heaven Core
 
 Les tests de régression garantissent :
 

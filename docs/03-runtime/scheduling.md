@@ -1,6 +1,6 @@
-# Scheduler global d’Astra Core
+# Scheduler global d’Heaven Core
 
-Le scheduler d’Astra Core est conçu pour concilier :
+Le scheduler d’Heaven Core est conçu pour concilier :
 
 - **concurrence massive** (fibres légères),
 - **distribution** (nœuds multiples),
@@ -34,7 +34,7 @@ Stratégie :
 
 ## Classes de tâches
 
-Astra distingue plusieurs classes :
+Heaven distingue plusieurs classes :
 
 - **Compute** : calcul pur, déterministe.
 - **IO** : opérations réseau / disque.

@@ -1,6 +1,6 @@
-# Debugger Astra Core
+# Debugger Heaven Core
 
-Le debugger d’Astra Core est conçu pour :
+Le debugger d’Heaven Core est conçu pour :
 
 - la concurrence,
 - la logique,

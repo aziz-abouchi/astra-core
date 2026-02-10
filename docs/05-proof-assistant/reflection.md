@@ -1,4 +1,4 @@
-# Réflexion dans Astra Core
+# Réflexion dans Heaven Core
 
 La réflexion permet :
 
@@ -8,6 +8,6 @@ La réflexion permet :
 
 ## Quotation
 
-```astra
+```heaven
 quote : a -> Term a
 

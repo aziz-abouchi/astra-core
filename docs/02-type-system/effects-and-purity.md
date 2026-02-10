@@ -1,6 +1,6 @@
 # Pureté, effets et séparation logique
 
-Astra Core distingue trois catégories :
+Heaven Core distingue trois catégories :
 
 1. **Pur** : aucune interaction avec le monde extérieur.
 2. **Effets contrôlés** : via capacités.
@@ -24,6 +24,6 @@ Le compilateur peut :
 
 Les effets nécessitent une capacité :
 
-```astra
+```heaven
 readFile : FileCap -> Path -> String
 

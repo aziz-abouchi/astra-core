@@ -1,4 +1,4 @@
-# Métriques du runtime Astra Core
+# Métriques du runtime Heaven Core
 
 Le runtime expose des métriques pour :
 

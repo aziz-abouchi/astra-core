@@ -1,4 +1,4 @@
-# Broadcast sécurisé dans Astra Core
+# Broadcast sécurisé dans Heaven Core
 
 Le broadcast sécurisé permet :
 
@@ -8,7 +8,7 @@ Le broadcast sécurisé permet :
 
 ## API
 
-```astra
+```heaven
 broadcastSecure : SecureGroup p -> Msg p -> Eff s s ()
 
 ## Propriétés

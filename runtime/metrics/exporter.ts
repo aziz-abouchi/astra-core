@@ -7,6 +7,6 @@ const exporter = new PrometheusExporter({ port: 9464 }, () => {
   console.log('Prometheus scrape on :9464/metrics');
 });
 const meterProvider = new MeterProvider({ readers: [exporter] });
-const meter = meterProvider.getMeter('astra-runtime');
-export const actorCount = meter.createUpDownCounter('astra_actors', { description: 'actors live' });
+const meter = meterProvider.getMeter('heaven-runtime');
+export const actorCount = meter.createUpDownCounter('heaven_actors', { description: 'actors live' });
 

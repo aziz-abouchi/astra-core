@@ -1,4 +1,4 @@
-# Variance avancée dans Astra Core
+# Variance avancée dans Heaven Core
 
 La variance détermine comment les types réagissent au sous-typage.
 

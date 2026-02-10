@@ -1,4 +1,4 @@
-# Snapshots distribués avancés dans Astra Core
+# Snapshots distribués avancés dans Heaven Core
 
 Les snapshots avancés permettent :
 

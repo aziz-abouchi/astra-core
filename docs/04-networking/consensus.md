@@ -1,6 +1,6 @@
-# Consensus dans Astra Core
+# Consensus dans Heaven Core
 
-Astra Core inclut un module de consensus typé pour :
+Heaven Core inclut un module de consensus typé pour :
 
 - coordination,
 - réplication,
@@ -22,7 +22,7 @@ Astra Core inclut un module de consensus typé pour :
 
 ## API
 
-```astra
+```heaven
 propose : ConsensusCap -> Value -> Eff s s Result
 read    : ConsensusCap -> Eff s s Value
 

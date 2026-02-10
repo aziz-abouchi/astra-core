@@ -1,4 +1,4 @@
-# Polymorphisme affine dans Astra Core
+# Polymorphisme affine dans Heaven Core
 
 Le polymorphisme affine permet :
 
@@ -8,6 +8,6 @@ Le polymorphisme affine permet :
 
 ## Syntaxe
 
-```astra
+```heaven
 f : forall (a : Type). Affine a -> Eff s s ()
 

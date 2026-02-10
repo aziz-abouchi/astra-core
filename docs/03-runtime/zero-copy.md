@@ -1,4 +1,4 @@
-# Zero-Copy dans Astra Core
+# Zero-Copy dans Heaven Core
 
 Le runtime optimise les transferts mémoire via :
 

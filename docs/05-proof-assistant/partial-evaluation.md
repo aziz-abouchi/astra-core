@@ -1,4 +1,4 @@
-# Évaluation partielle dans Astra Core
+# Évaluation partielle dans Heaven Core
 
 L’évaluation partielle permet :
 

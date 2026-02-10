@@ -8,7 +8,7 @@ Ce document décrit les briques sémantiques qui sous-tendent :
 
 ## Sous-langage logique
 
-Astra expose un sous-langage logique relationnel, inspiré de miniKanren.
+Heaven expose un sous-langage logique relationnel, inspiré de miniKanren.
 
 ### Primitives
 
@@ -26,7 +26,7 @@ L’évaluation d’un but produit un **flux de solutions** (potentiellement inf
 - `g1 /\ g2` compose les substitutions si possible.
 - `conde [g1, g2, ...]` explore les branches de manière interleavée.
 
-Les exemples de `logic_programming.astra` (e.g. `appendo`, `membero`, Sudoku,
+Les exemples de `logic_programming.heaven` (e.g. `appendo`, `membero`, Sudoku,
 N-reines) servent de référence comportementale.
 
 ## Types dépendants et indexés
@@ -40,6 +40,6 @@ Les types dépendants sont restreints à une forme **pratique** :
 
 Un type peut être indexé par une valeur d’un type “indice” :
 
-```astra
+```heaven
 T : I -> Type -> Type
 

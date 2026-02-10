@@ -1,4 +1,4 @@
-# Load Balancing dans Astra Core
+# Load Balancing dans Heaven Core
 
 Le runtime distribué inclut un système de répartition de charge typé.
 

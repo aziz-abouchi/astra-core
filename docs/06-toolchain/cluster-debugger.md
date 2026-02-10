@@ -1,4 +1,4 @@
-# Débogueur de cluster Astra Core
+# Débogueur de cluster Heaven Core
 
 Le débogueur distribué permet :
 

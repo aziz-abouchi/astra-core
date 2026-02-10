@@ -1,6 +1,6 @@
-# Ownership linéaire dans Astra Core
+# Ownership linéaire dans Heaven Core
 
-Astra Core combine :
+Heaven Core combine :
 
 - ownership,
 - linéarité,
@@ -16,6 +16,6 @@ Astra Core combine :
 
 ## Syntaxe
 
-```astra
+```heaven
 f : Resource ⊸ Result
 

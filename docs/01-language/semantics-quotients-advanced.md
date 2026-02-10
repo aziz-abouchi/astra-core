@@ -1,4 +1,4 @@
-# Sémantique avancée des types quotient dans Astra Core
+# Sémantique avancée des types quotient dans Heaven Core
 
 Les types quotient permettent de raisonner modulo une relation d’équivalence tout en
 préservant :
@@ -10,6 +10,6 @@ préservant :
 
 ## Structure générale
 
-```astra
+```heaven
 quotient : (A : Type) -> (R : A -> A -> Prop) -> Type
 

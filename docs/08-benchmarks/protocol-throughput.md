@@ -1,4 +1,4 @@
-# Benchmarks de throughput de protocoles dans Astra Core
+# Benchmarks de throughput de protocoles dans Heaven Core
 
 Ces benchmarks mesurent :
 

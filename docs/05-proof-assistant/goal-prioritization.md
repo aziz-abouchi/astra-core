@@ -1,4 +1,4 @@
-# Priorisation de buts dans Astra Core
+# Priorisation de buts dans Heaven Core
 
 La priorisation de buts permet :
 

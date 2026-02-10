@@ -1,4 +1,4 @@
-# Benchmarks énergétiques distribués dans Astra Core
+# Benchmarks énergétiques distribués dans Heaven Core
 
 Ces benchmarks mesurent :
 

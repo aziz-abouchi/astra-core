@@ -1,6 +1,6 @@
-# Sémantique avancée des protocoles dans Astra Core
+# Sémantique avancée des protocoles dans Heaven Core
 
-Les protocoles dans Astra Core sont :
+Les protocoles dans Heaven Core sont :
 
 - typés,
 - indexés par états,
@@ -10,7 +10,7 @@ Les protocoles dans Astra Core sont :
 
 ## Structure générale
 
-```astra
+```heaven
 protocol FileP where
   Closed -> Open
   Open -> Closed

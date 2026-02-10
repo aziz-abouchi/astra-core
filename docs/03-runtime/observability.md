@@ -1,4 +1,4 @@
-# Observabilité dans Astra Core
+# Observabilité dans Heaven Core
 
 L’observabilité permet :
 
@@ -37,6 +37,6 @@ Les traces capturent :
 
 Les événements sont typés :
 
-```astra
+```heaven
 data Event = FiberSpawn | FiberExit | MsgSend | MsgRecv | ...
 

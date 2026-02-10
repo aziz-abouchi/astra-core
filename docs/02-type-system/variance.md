@@ -1,4 +1,4 @@
-# Variance dans Astra Core
+# Variance dans Heaven Core
 
 La variance décrit comment les types réagissent aux sous-types.
 

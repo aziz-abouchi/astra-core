@@ -1,4 +1,4 @@
-# Benchmarks mémoire dans Astra Core
+# Benchmarks mémoire dans Heaven Core
 
 Ces benchmarks mesurent :
 

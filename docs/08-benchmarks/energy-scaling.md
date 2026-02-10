@@ -1,4 +1,4 @@
-# Benchmarks de scaling énergétique dans Astra Core
+# Benchmarks de scaling énergétique dans Heaven Core
 
 Ces benchmarks mesurent :
 

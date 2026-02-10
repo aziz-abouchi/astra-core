@@ -1,6 +1,6 @@
-# Multicast typé dans Astra Core
+# Multicast typé dans Heaven Core
 
-Astra Core supporte le multicast typé pour :
+Heaven Core supporte le multicast typé pour :
 
 - diffusion,
 - consensus,
@@ -10,6 +10,6 @@ Astra Core supporte le multicast typé pour :
 
 Un groupe multicast est :
 
-```astra
+```heaven
 data Group p = MkGroup [Channel p]
 

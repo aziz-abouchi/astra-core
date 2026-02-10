@@ -1,6 +1,6 @@
-# Mesure d’énergie dans les benchmarks Astra Core
+# Mesure d’énergie dans les benchmarks Heaven Core
 
-Astra Core peut mesurer la consommation énergétique.
+Heaven Core peut mesurer la consommation énergétique.
 
 ## Objectifs
 

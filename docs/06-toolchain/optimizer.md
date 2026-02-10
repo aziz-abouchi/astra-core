@@ -1,4 +1,4 @@
-# Optimiseur Astra Core
+# Optimiseur Heaven Core
 
 L’optimiseur transforme le Core IR en code frugal et performant.
 

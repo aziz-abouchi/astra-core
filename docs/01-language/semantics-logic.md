@@ -1,6 +1,6 @@
-# Sémantique de la logique dans Astra Core
+# Sémantique de la logique dans Heaven Core
 
-Astra Core intègre deux couches logiques :
+Heaven Core intègre deux couches logiques :
 
 1. **Logique relationnelle (miniKanren)** — non-déterministe, exploratoire.
 2. **Logique propositionnelle (Curry–Howard)** — constructive, prouvable.

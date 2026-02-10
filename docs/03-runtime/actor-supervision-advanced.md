@@ -1,4 +1,4 @@
-# Supervision avancée des acteurs dans Astra Core
+# Supervision avancée des acteurs dans Heaven Core
 
 La supervision avancée permet :
 

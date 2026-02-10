@@ -1,4 +1,4 @@
-# Procédures de décision dans Astra Core
+# Procédures de décision dans Heaven Core
 
 Le proof assistant inclut des procédures de décision légères.
 

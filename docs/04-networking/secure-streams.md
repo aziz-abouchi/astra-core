@@ -1,4 +1,4 @@
-# Streams sécurisés dans Astra Core
+# Streams sécurisés dans Heaven Core
 
 Les streams sécurisés permettent :
 
@@ -8,7 +8,7 @@ Les streams sécurisés permettent :
 
 ## API
 
-```astra
+```heaven
 openStream  : SecureCap k -> Eff s s (Stream k)
 writeStream : Stream k -> Msg p -> Eff s s ()
 readStream  : Stream k -> Eff s s (Maybe (Msg p))

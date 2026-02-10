@@ -1,4 +1,4 @@
-# Égalité définitionnelle dans Astra Core
+# Égalité définitionnelle dans Heaven Core
 
 L’égalité définitionnelle est au cœur du proof assistant.
 
@@ -13,6 +13,6 @@ Deux termes sont définitionnellement égaux s’ils :
 
 ### β-réduction
 
-```astra
+```heaven
 (\x => f x) y  →  f y
 

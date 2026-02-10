@@ -1,6 +1,6 @@
 # Scheduler, non-déterminisme et logique
 
-Le runtime d’Astra Core doit concilier :
+Le runtime d’Heaven Core doit concilier :
 
 - concurrence (acteurs, fibres, OTP-like),
 - non-déterminisme contrôlé (miniKanren, `conde`),
@@ -30,7 +30,7 @@ Deux approches possibles (non exclusives) :
    - Le scheduler distribue les branches sur plusieurs workers.
    - Permet de paralléliser la recherche logique.
 
-Astra peut combiner les deux selon le contexte et les annotations.
+Heaven peut combiner les deux selon le contexte et les annotations.
 
 ## Stratégie de recherche
 
@@ -88,5 +88,5 @@ Le runtime distribué doit alors :
 - éventuellement recombiner les résultats.
 
 Ce lien entre **logique**, **scheduler** et **distribution** est illustré par les
-exemples `logic_programming.astra` et les scénarios de microservices.
+exemples `logic_programming.heaven` et les scénarios de microservices.
 

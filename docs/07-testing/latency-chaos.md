@@ -1,4 +1,4 @@
-# Latency Chaos Testing dans Astra Core
+# Latency Chaos Testing dans Heaven Core
 
 Le latency chaos testing permet :
 
@@ -16,6 +16,6 @@ Le latency chaos testing permet :
 
 ## API
 
-```astra
+```heaven
 injectLatency : Duration -> Eff s s ()
 

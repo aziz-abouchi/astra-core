@@ -1,4 +1,4 @@
-# Chaos Testing dans Astra Core
+# Chaos Testing dans Heaven Core
 
 Le chaos testing permet de tester la résilience du système distribué.
 
@@ -21,6 +21,6 @@ Le chaos testing permet de tester la résilience du système distribué.
 
 Les scénarios sont typés :
 
-```astra
+```heaven
 scenario : ChaosCap -> Eff s s ()
 

@@ -1,4 +1,4 @@
-# Machines à états distribuées dans Astra Core
+# Machines à états distribuées dans Heaven Core
 
 Les machines à états distribuées permettent :
 
@@ -8,7 +8,7 @@ Les machines à états distribuées permettent :
 
 ## Définition
 
-```astra
+```heaven
 data DStateMachine p = ...
 
 ## Propriétés

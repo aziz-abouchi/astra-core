@@ -1,4 +1,4 @@
-# Effets gradués dans Astra Core
+# Effets gradués dans Heaven Core
 
 Les effets gradués permettent :
 
@@ -8,6 +8,6 @@ Les effets gradués permettent :
 
 ## Syntaxe
 
-```astra
+```heaven
 Eff (grade = k) s1 s2 a
 

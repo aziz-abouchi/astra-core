@@ -1,4 +1,4 @@
-# Profiler de cluster Astra Core
+# Profiler de cluster Heaven Core
 
 Le profiler distribué permet :
 

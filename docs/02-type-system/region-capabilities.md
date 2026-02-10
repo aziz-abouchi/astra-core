@@ -1,4 +1,4 @@
-# Capacités de région dans Astra Core
+# Capacités de région dans Heaven Core
 
 Les régions sont contrôlées par des capacités :
 
@@ -9,6 +9,6 @@ Les régions sont contrôlées par des capacités :
 
 ## Définition
 
-```astra
+```heaven
 data RegionCap (r : Region) : Mode -> Type
 

@@ -1,4 +1,4 @@
-# Contraintes linéaires dans Astra Core
+# Contraintes linéaires dans Heaven Core
 
 Les contraintes linéaires permettent :
 
@@ -8,7 +8,7 @@ Les contraintes linéaires permettent :
 
 ## Syntaxe
 
-```astra
+```heaven
 a + b <= 1
 
 ## Utilisations

@@ -1,4 +1,4 @@
-# Annotations de rôle dans Astra Core
+# Annotations de rôle dans Heaven Core
 
 Les rôles permettent de contrôler la variance et la sécurité des types.
 
@@ -15,6 +15,6 @@ Le paramètre n’apparaît pas dans la représentation.
 
 ## Exemple
 
-```astra
+```heaven
 data Box (a : Type) @[role phantom] = MkBox Int
 

@@ -1,6 +1,6 @@
-# Ownership et Borrowing dans Astra Core
+# Ownership et Borrowing dans Heaven Core
 
-Astra Core combine :
+Heaven Core combine :
 
 - ownership linéaire,
 - borrowing affine,
@@ -22,6 +22,6 @@ Les prêts sont :
 - immuables,
 - vérifiés statiquement.
 
-```astra
+```heaven
 borrow : Resource -> (Borrowed Resource -> a) -> a
 

@@ -1,4 +1,4 @@
-# Acteurs distribués avancés dans Astra Core
+# Acteurs distribués avancés dans Heaven Core
 
 Les acteurs distribués avancés supportent :
 

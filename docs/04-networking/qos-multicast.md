@@ -1,4 +1,4 @@
-# Multicast QoS dans Astra Core
+# Multicast QoS dans Heaven Core
 
 Le multicast QoS permet :
 
@@ -15,7 +15,7 @@ Le multicast QoS permet :
 
 ## API
 
-```astra
+```heaven
 multicastQoS : QoS -> Group p -> Msg p -> Eff s s ()
 
 ## Visualisation

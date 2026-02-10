@@ -1,4 +1,4 @@
-# Extraction de code dans Astra Core
+# Extraction de code dans Heaven Core
 
 Le proof assistant permet d’extraire :
 

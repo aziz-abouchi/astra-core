@@ -1,6 +1,6 @@
-# Couverture de tests dans Astra Core
+# Couverture de tests dans Heaven Core
 
-Astra Core mesure la couverture :
+Heaven Core mesure la couverture :
 
 - des branches,
 - des patterns,

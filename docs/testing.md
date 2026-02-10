@@ -5,7 +5,7 @@
 - QuickCheck intégré.
 
 ## Exemple
-```astra
+```heaven
 prop_lengthPreserved : Vec a n -> Bool
 prop_lengthPreserved v = length (sort v) == length v
 

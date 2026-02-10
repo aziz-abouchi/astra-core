@@ -1,4 +1,4 @@
-# Topologies sécurisées dans Astra Core
+# Topologies sécurisées dans Heaven Core
 
 Les topologies sécurisées permettent :
 

@@ -1,4 +1,4 @@
-# Calculus du proof assistant Astra Core
+# Calculus du proof assistant Heaven Core
 
 Le proof assistant repose sur un **calcul minimal** :
 

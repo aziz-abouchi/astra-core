@@ -1,6 +1,6 @@
-# Patterns avancés dans Astra Core
+# Patterns avancés dans Heaven Core
 
-Astra Core étend le pattern matching avec :
+Heaven Core étend le pattern matching avec :
 
 - des patterns dépendants,
 - des patterns sur indices,
@@ -12,7 +12,7 @@ Astra Core étend le pattern matching avec :
 
 Pour les types indexés :
 
-```astra
+```heaven
 case v of
   VNil        => ...
   VCons x xs  => ...

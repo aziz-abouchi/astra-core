@@ -1,4 +1,4 @@
-# Orchestrateur de benchmarks Astra Core
+# Orchestrateur de benchmarks Heaven Core
 
 L’orchestrateur permet :
 

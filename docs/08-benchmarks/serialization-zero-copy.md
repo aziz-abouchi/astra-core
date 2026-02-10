@@ -1,4 +1,4 @@
-# Benchmarks de sérialisation zero-copy dans Astra Core
+# Benchmarks de sérialisation zero-copy dans Heaven Core
 
 Ces benchmarks mesurent :
 

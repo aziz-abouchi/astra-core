@@ -1,4 +1,4 @@
-# Service Discovery dans Astra Core
+# Service Discovery dans Heaven Core
 
 Le runtime distribué inclut un système de découverte typé.
 
@@ -21,6 +21,6 @@ Chaque service annonce :
 
 ### 2. Résolution
 
-```astra
+```heaven
 discover : Protocol -> Eff s s (RemoteCap)
 

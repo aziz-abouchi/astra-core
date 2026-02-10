@@ -1,4 +1,4 @@
-# Sémantique des effets distribués dans Astra Core
+# Sémantique des effets distribués dans Heaven Core
 
 Les effets distribués permettent :
 
@@ -9,6 +9,6 @@ Les effets distribués permettent :
 
 ## Effets distribués typés
 
-```astra
+```heaven
 remote : NodeId -> Eff s1 s2 a -> Eff s1 s2 a
 

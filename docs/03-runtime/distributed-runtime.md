@@ -1,10 +1,10 @@
-# Runtime distribué d’Astra Core
+# Runtime distribué d’Heaven Core
 
-Astra Core inclut un runtime distribué inspiré d’OTP, mais typé et frugal.
+Heaven Core inclut un runtime distribué inspiré d’OTP, mais typé et frugal.
 
 ## Nœuds
 
-Un nœud Astra :
+Un nœud Heaven :
 
 - exécute des fibres,
 - possède un scheduler local,
@@ -15,7 +15,7 @@ Un nœud Astra :
 
 Les canaux sont définis par un protocole :
 
-```astra
+```heaven
 protocol PingPong =
   Ping : PingPong -> Pong
   Pong : PingPong -> Ping

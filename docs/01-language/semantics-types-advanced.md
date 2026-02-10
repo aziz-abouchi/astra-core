@@ -1,6 +1,6 @@
-# Sémantique avancée des types dans Astra Core
+# Sémantique avancée des types dans Heaven Core
 
-Astra Core étend la sémantique des types avec :
+Heaven Core étend la sémantique des types avec :
 
 - des invariants riches,
 - des indices effaçables,
@@ -30,6 +30,6 @@ Les types peuvent dépendre :
 
 Exemple :
 
-```astra
+```heaven
 safeHead : Vect (S n) a -> a
 

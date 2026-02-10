@@ -1,4 +1,4 @@
-# Cache de build distribué dans Astra Core
+# Cache de build distribué dans Heaven Core
 
 Le cache distribué permet :
 

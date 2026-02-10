@@ -1,4 +1,4 @@
-# Sémantique des quotients logiques dans Astra Core
+# Sémantique des quotients logiques dans Heaven Core
 
 Les quotients logiques unifient :
 
@@ -11,7 +11,7 @@ Les quotients logiques unifient :
 
 Un quotient logique identifie des branches logiques équivalentes :
 
-```astra
+```heaven
 quotLogic : Logic a -> (a -> a -> Prop) -> Logic a
 
 ## Propriétés

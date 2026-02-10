@@ -1,4 +1,4 @@
-# Synthèse automatique de lemmes dans Astra Core
+# Synthèse automatique de lemmes dans Heaven Core
 
 La synthèse de lemmes permet :
 

@@ -1,4 +1,4 @@
-# Automatisation avancée dans Astra Core
+# Automatisation avancée dans Heaven Core
 
 Le proof assistant inclut des outils avancés d’automatisation.
 
@@ -24,6 +24,6 @@ Recherche limitée en profondeur.
 ### 4. `solve-by`
 Combinaison de tactiques :
 
-```astra
+```heaven
 solve-by [simp, auto, rewrite]
 

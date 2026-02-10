@@ -1,4 +1,4 @@
-# Quality Gates dans Astra Core
+# Quality Gates dans Heaven Core
 
 Les quality gates garantissent :
 

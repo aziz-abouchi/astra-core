@@ -4,13 +4,13 @@
 
 ### Phase 0
 - Prototype en Zig.
-- Sous-ensemble minimal d’Astra.
+- Sous-ensemble minimal d’Heaven.
 
 ### Phase 1
-- Compilation d’un sous-ensemble Astra via Zig.
+- Compilation d’un sous-ensemble Heaven via Zig.
 
 ### Phase 2
-- Compilateur Astra écrit en Astra.
+- Compilateur Heaven écrit en Heaven.
 
 ### Phase 3
 - Auto-hébergement complet.

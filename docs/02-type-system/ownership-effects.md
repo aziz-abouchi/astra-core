@@ -1,6 +1,6 @@
-# Ownership et effets dans Astra Core
+# Ownership et effets dans Heaven Core
 
-Astra Core relie ownership et effets pour garantir :
+Heaven Core relie ownership et effets pour garantir :
 
 - sûreté,
 - frugalité,
@@ -10,6 +10,6 @@ Astra Core relie ownership et effets pour garantir :
 
 Une capacité linéaire donne accès à un effet :
 
-```astra
+```heaven
 read : FileCap Read -> Eff s s String
 

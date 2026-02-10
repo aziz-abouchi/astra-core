@@ -1,6 +1,6 @@
-# Intégration CI pour Astra Core
+# Intégration CI pour Heaven Core
 
-Astra Core s’intègre facilement dans les pipelines CI/CD.
+Heaven Core s’intègre facilement dans les pipelines CI/CD.
 
 ## Objectifs
 

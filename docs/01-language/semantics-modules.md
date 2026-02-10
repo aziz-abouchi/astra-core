@@ -1,4 +1,4 @@
-# Sémantique des modules dans Astra Core
+# Sémantique des modules dans Heaven Core
 
 Les modules structurent le code, contrôlent la visibilité et guident la compilation.
 
@@ -11,7 +11,7 @@ Les modules structurent le code, contrôlent la visibilité et guident la compil
 
 ## Structure
 
-```astra
+```heaven
 module Data.List where
 import Data.Nat
 

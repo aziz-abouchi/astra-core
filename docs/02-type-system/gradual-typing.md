@@ -1,6 +1,6 @@
-# Typage graduel dans Astra Core
+# Typage graduel dans Heaven Core
 
-Astra Core supporte un typage graduel **optionnel**, **contrôlé**, et **frugal**.
+Heaven Core supporte un typage graduel **optionnel**, **contrôlé**, et **frugal**.
 
 ## Objectifs
 
@@ -10,6 +10,6 @@ Astra Core supporte un typage graduel **optionnel**, **contrôlé**, et **frugal
 
 ## Type dynamique
 
-```astra
+```heaven
 data Dyn
 

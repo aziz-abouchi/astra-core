@@ -1,14 +1,14 @@
-# Scheduling & Work‑Stealing in Astra
+# Scheduling & Work‑Stealing in Heaven
 
-## Objectifs du scheduler Astra
-Le scheduler d’Astra est conçu pour offrir :
+## Objectifs du scheduler Heaven
+Le scheduler d’Heaven est conçu pour offrir :
 - une **concurrence massive**,
 - une **distribution transparente** entre nœuds,
 - une **frugalité** (respect des budgets de ressources),
 - une **tolérance aux pannes**,
 - un **équilibrage automatique** de la charge.
 
-Astra combine **work‑stealing local** (entre threads) et **work‑stealing remote** (entre nœuds via libp2p).
+Heaven combine **work‑stealing local** (entre threads) et **work‑stealing remote** (entre nœuds via libp2p).
 
 ---
 
@@ -58,7 +58,7 @@ Chaque thread :
 # 3. Work‑Stealing Remote (Distribué)
 
 ## Principe
-Les nœuds Astra sont connectés via **libp2p**.  
+Les nœuds Heaven sont connectés via **libp2p**.  
 Chaque nœud possède :
 - ses propres acteurs,
 - ses propres files de tâches,
@@ -90,7 +90,7 @@ Si un nœud tombe :
 # 4. Budgets & Frugalité dans le scheduling
 
 ## Rôle du Budget Manager
-Avant d’exécuter ou de voler une tâche, Astra estime :
+Avant d’exécuter ou de voler une tâche, Heaven estime :
 - le temps CPU nécessaire,
 - la mémoire,
 - l’énergie,
@@ -102,6 +102,6 @@ Si le budget est insuffisant :
 - ou est **renvoyée** au nœud d’origine.
 
 ## Exemple
-```astra
+```heaven
 runWithBudget task { cpu=50ms, mem=128MB, energy=10J }
 

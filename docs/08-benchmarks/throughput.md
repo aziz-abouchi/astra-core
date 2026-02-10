@@ -1,4 +1,4 @@
-# Benchmarks de throughput dans Astra Core
+# Benchmarks de throughput dans Heaven Core
 
 Ces benchmarks mesurent :
 

@@ -1,4 +1,4 @@
-# Élaboration des termes dans Astra Core
+# Élaboration des termes dans Heaven Core
 
 L’élaboration transforme :
 

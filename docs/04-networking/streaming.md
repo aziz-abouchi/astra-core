@@ -1,6 +1,6 @@
-# Streaming typé dans Astra Core
+# Streaming typé dans Heaven Core
 
-Astra Core supporte le streaming typé pour :
+Heaven Core supporte le streaming typé pour :
 
 - les flux de données,
 - les pipelines,
@@ -8,7 +8,7 @@ Astra Core supporte le streaming typé pour :
 
 ## Types de flux
 
-```astra
+```heaven
 data Stream a =
   Cons a (Eff s s (Stream a))
   | End

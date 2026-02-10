@@ -1,4 +1,4 @@
-# Sous-typage d’ownership dans Astra Core
+# Sous-typage d’ownership dans Heaven Core
 
 Le sous-typage d’ownership permet :
 
@@ -15,7 +15,7 @@ Borrowed <: ReadOnly
 ### 1. Perte de permissions
 On peut toujours affaiblir :
 
-```astra
+```heaven
 Owned a -> Borrowed a
 Borrowed a -> ReadOnly a
 

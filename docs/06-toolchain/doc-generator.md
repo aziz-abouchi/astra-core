@@ -1,6 +1,6 @@
-# Générateur de documentation Astra Core
+# Générateur de documentation Heaven Core
 
-Astra Core inclut un générateur de documentation typée.
+Heaven Core inclut un générateur de documentation typée.
 
 ## Fonctionnalités
 

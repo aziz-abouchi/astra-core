@@ -1,4 +1,4 @@
-# Traffic Shaping dans Astra Core
+# Traffic Shaping dans Heaven Core
 
 Le traffic shaping permet :
 
@@ -15,6 +15,6 @@ Le traffic shaping permet :
 
 ## Capacités
 
-```astra
+```heaven
 data NetCap (qos : QoS)
 

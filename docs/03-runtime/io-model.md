@@ -1,4 +1,4 @@
-# Modèle d’IO dans Astra Core
+# Modèle d’IO dans Heaven Core
 
 Le modèle d’IO est :
 
@@ -17,7 +17,7 @@ Le modèle d’IO est :
 
 ### Fichiers
 
-```astra
+```heaven
 readFile  : FileCap -> Path -> String
 writeFile : FileCap -> Path -> String -> ()
 

@@ -1,4 +1,4 @@
-# Mesure de latence dans Astra Core
+# Mesure de latence dans Heaven Core
 
 La latence est une métrique clé pour :
 

@@ -1,4 +1,4 @@
-# Annotations dans Astra Core
+# Annotations dans Heaven Core
 
 Les annotations permettent d’influencer :
 
@@ -9,7 +9,7 @@ Les annotations permettent d’influencer :
 
 ## Syntaxe générale
 
-```astra
+```heaven
 @[annotation]
 definition
 

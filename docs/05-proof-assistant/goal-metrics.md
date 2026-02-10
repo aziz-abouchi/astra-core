@@ -1,4 +1,4 @@
-# Métriques de buts dans Astra Core
+# Métriques de buts dans Heaven Core
 
 Les métriques permettent :
 

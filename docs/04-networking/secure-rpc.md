@@ -1,4 +1,4 @@
-# RPC sécurisé dans Astra Core
+# RPC sécurisé dans Heaven Core
 
 Les RPC sécurisés permettent :
 
@@ -8,6 +8,6 @@ Les RPC sécurisés permettent :
 
 ## API
 
-```astra
+```heaven
 rpc : SecureCap k -> NodeId -> Msg p -> Eff s s (Resp p)
 

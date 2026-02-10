@@ -1,16 +1,16 @@
 
 {
-  "name": "astra-vscode",
-  "displayName": "Astra Language",
+  "name": "heaven-vscode",
+  "displayName": "Heaven Language",
   "version": "0.0.1",
   "publisher": "aziz-abouchi",
   "engines": { "vscode": "^1.90.0" },
-  "activationEvents": ["onLanguage:astra"],
+  "activationEvents": ["onLanguage:heaven"],
   "contributes": {
-    "languages": [{ "id": "astra", "extensions": [".astra"], "aliases": ["Astra"] }],
+    "languages": [{ "id": "heaven", "extensions": [".heaven"], "aliases": ["Heaven"] }],
     "configuration": {
       "properties": {
-        "astra.maxProblems": { "type": "number", "default": 100 }
+        "heaven.maxProblems": { "type": "number", "default": 100 }
       }
     }
   },

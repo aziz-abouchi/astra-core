@@ -1,6 +1,6 @@
 # Tests basés sur les propriétés (Property-Based Testing)
 
-Astra Core inclut un framework de tests génératifs.
+Heaven Core inclut un framework de tests génératifs.
 
 ## Principe
 
@@ -12,7 +12,7 @@ Au lieu d’exemples :
 
 ## Syntaxe
 
-```astra
+```heaven
 property reverseReverse xs =
   reverse (reverse xs) == xs
 

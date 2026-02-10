@@ -1,4 +1,4 @@
-# Tests de cohérence dans Astra Core
+# Tests de cohérence dans Heaven Core
 
 Les tests de cohérence garantissent :
 

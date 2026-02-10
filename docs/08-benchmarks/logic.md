@@ -1,4 +1,4 @@
-# Benchmarks de logique dans Astra Core
+# Benchmarks de logique dans Heaven Core
 
 Ces benchmarks mesurent :
 

@@ -1,6 +1,6 @@
-# Hot Reload dans Astra Core
+# Hot Reload dans Heaven Core
 
-Astra Core supporte le hot reload :
+Heaven Core supporte le hot reload :
 
 - des modules,
 - des acteurs,

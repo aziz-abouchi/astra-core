@@ -1,6 +1,6 @@
-# Sémantique des IO dans Astra Core
+# Sémantique des IO dans Heaven Core
 
-Les IO dans Astra Core sont :
+Les IO dans Heaven Core sont :
 
 - explicites,
 - contrôlées par capacités,
@@ -12,6 +12,6 @@ Les IO dans Astra Core sont :
 
 Aucun effet IO n’est implicite. Toute opération doit déclarer sa capacité :
 
-```astra
+```heaven
 readFile : FileCap Read -> Path -> Eff s s String
 

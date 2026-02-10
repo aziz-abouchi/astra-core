@@ -1,6 +1,6 @@
-# Compilateur Astra Core
+# Compilateur Heaven Core
 
-Le compilateur Astra est conçu comme :
+Le compilateur Heaven est conçu comme :
 
 - un **pipeline modulaire**,
 - un **backend multiple** (Zig, C, WASM, JS),

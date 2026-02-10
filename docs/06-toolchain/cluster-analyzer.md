@@ -1,4 +1,4 @@
-# Analyseur de cluster Astra Core
+# Analyseur de cluster Heaven Core
 
 L’analyseur distribué permet :
 

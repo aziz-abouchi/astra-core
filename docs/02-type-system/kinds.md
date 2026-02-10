@@ -1,4 +1,4 @@
-# Kinds dans Astra Core
+# Kinds dans Heaven Core
 
 Les kinds décrivent la structure des types.
 
@@ -10,6 +10,6 @@ Les kinds décrivent la structure des types.
 
 ## Kinds fléchés
 
-```astra
+```heaven
 Vect : Nat -> Type -> Type
 

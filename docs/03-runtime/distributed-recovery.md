@@ -1,4 +1,4 @@
-# Mécanismes de reprise distribuée dans Astra Core
+# Mécanismes de reprise distribuée dans Heaven Core
 
 La reprise distribuée garantit :
 

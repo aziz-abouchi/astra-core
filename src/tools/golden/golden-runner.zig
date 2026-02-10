@@ -14,7 +14,7 @@ pub fn main() !void {
     defer std.process.argsFree(a, args);
 
     if (args.len < 2) {
-        std.debug.print("usage: astra-golden <tests/golden-ir>\n", .{});
+        std.debug.print("usage: heaven-golden <tests/golden-ir>\n", .{});
         return;
     }
 
@@ -34,7 +34,7 @@ pub fn main() !void {
     // Sortie IR déterministe — DOIT matcher expected.json des cas goldens
     const produced_ir =
         "{\n" ++
-        "  \"module\": \"astra.ir\",\n" ++
+        "  \"module\": \"heaven.ir\",\n" ++
         "  \"decls\": [],\n" ++
         "  \"meta\": { \"profile\": \"test\" }\n" ++
         "}\n";
@@ -46,7 +46,7 @@ pub fn main() !void {
         const case_dir = try std.fs.path.join(a, &[_][]const u8{ root, e.name });
         defer a.free(case_dir);
 
-        const in_path  = try std.fs.path.join(a, &[_][]const u8{ case_dir, "input.astra" });
+        const in_path  = try std.fs.path.join(a, &[_][]const u8{ case_dir, "input.heaven" });
         const exp_path = try std.fs.path.join(a, &[_][]const u8{ case_dir, "expected.json" });
 
         const _input   = try readAllAlloc(a, in_path);   // non utilisé pour l’instant

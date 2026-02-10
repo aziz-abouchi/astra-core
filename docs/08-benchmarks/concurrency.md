@@ -1,4 +1,4 @@
-# Benchmarks de concurrence dans Astra Core
+# Benchmarks de concurrence dans Heaven Core
 
 Ces benchmarks mesurent :
 

@@ -1,4 +1,4 @@
-# Pruning de contraintes dans Astra Core
+# Pruning de contraintes dans Heaven Core
 
 Le pruning de contraintes permet :
 

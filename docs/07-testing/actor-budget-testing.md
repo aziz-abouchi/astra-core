@@ -1,4 +1,4 @@
-# Actor Budget Testing dans Astra Core
+# Actor Budget Testing dans Heaven Core
 
 Le budget testing permet :
 

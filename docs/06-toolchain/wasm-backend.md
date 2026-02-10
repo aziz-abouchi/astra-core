@@ -1,6 +1,6 @@
-# Backend WebAssembly (WASM) dans Astra Core
+# Backend WebAssembly (WASM) dans Heaven Core
 
-Astra Core peut compiler vers WASM pour :
+Heaven Core peut compiler vers WASM pour :
 
 - le web,
 - les environnements embarqués,

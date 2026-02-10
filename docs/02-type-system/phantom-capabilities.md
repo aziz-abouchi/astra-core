@@ -1,4 +1,4 @@
-# Capacités fantômes dans Astra Core
+# Capacités fantômes dans Heaven Core
 
 Les capacités fantômes permettent :
 
@@ -8,6 +8,6 @@ Les capacités fantômes permettent :
 
 ## Définition
 
-```astra
+```heaven
 data PhantomCap (tag : Type)
 

@@ -1,6 +1,6 @@
-# Caches distribués dans Astra Core
+# Caches distribués dans Heaven Core
 
-Astra Core fournit des caches distribués :
+Heaven Core fournit des caches distribués :
 
 - typés,
 - frugaux,
@@ -16,7 +16,7 @@ Un cache distribué est :
 
 ## API
 
-```astra
+```heaven
 get : CacheCap k v -> k -> Eff s s (Maybe v)
 put : CacheCap k v -> k -> v -> Eff s s ()
 

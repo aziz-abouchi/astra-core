@@ -1,4 +1,4 @@
-# IO distribués dans Astra Core
+# IO distribués dans Heaven Core
 
 Les IO distribués permettent :
 
@@ -8,7 +8,7 @@ Les IO distribués permettent :
 
 ## IO typés
 
-```astra
+```heaven
 readRemote  : FileCap Read -> NodeId -> Path -> Eff s s String
 writeRemote : FileCap Write -> NodeId -> Path -> String -> Eff s s ()
 

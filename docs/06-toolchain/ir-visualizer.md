@@ -1,4 +1,4 @@
-# Visualiseur IR dans Astra Core
+# Visualiseur IR dans Heaven Core
 
 Le visualiseur IR permet :
 

@@ -1,6 +1,6 @@
-# Résolution de contraintes dans Astra Core
+# Résolution de contraintes dans Heaven Core
 
-Le système de contraintes d’Astra Core est :
+Le système de contraintes d’Heaven Core est :
 
 - dépendant,
 - arithmétique,

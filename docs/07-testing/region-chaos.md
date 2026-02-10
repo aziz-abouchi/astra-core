@@ -1,4 +1,4 @@
-# Region Chaos Testing dans Astra Core
+# Region Chaos Testing dans Heaven Core
 
 Le region chaos testing permet :
 

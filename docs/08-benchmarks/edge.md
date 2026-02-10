@@ -1,4 +1,4 @@
-# Benchmarks edge dans Astra Core
+# Benchmarks edge dans Heaven Core
 
 Ces benchmarks mesurent :
 

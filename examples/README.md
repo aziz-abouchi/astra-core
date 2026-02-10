@@ -1,10 +1,10 @@
-# Exemples Astra-Core
+# Exemples Heaven-Core
 
-Ce dossier contient des exemples d'utilisation du langage Astra pour différents cas d'usage, démontrant l'intégration des **OTP behaviors d'Erlang** et des **capabilities de Pony**.
+Ce dossier contient des exemples d'utilisation du langage Heaven pour différents cas d'usage, démontrant l'intégration des **OTP behaviors d'Erlang** et des **capabilities de Pony**.
 
-## À propos d'Astra
+## À propos d'Heaven
 
-Astra est un langage fonctionnel réactif fortement inspiré de :
+Heaven est un langage fonctionnel réactif fortement inspiré de :
 - **Idris2** : Système de types dépendants et inférence Hindley-Milner
 - **Erlang** : Modèle d'acteurs, OTP behaviors, tolérance aux pannes, distribution
 - **Prolog** : Programmation logique et unification
@@ -15,11 +15,11 @@ Astra est un langage fonctionnel réactif fortement inspiré de :
 
 ### OTP Behaviors (d'Erlang)
 
-Astra intègre les patterns éprouvés d'OTP :
+Heaven intègre les patterns éprouvés d'OTP :
 
 #### GenServer
 Serveur générique avec callbacks standards :
-```astra
+```heaven
 behavior MyService : GenServer CallMsg CastMsg InfoMsg State where
   init : Config -> Effect (InitResult State)
   handleCall : CallMsg -> From -> State -> Effect (CallResult State)
@@ -30,7 +30,7 @@ behavior MyService : GenServer CallMsg CastMsg InfoMsg State where
 
 #### Supervisor
 Gestion de la tolérance aux pannes avec stratégies :
-```astra
+```heaven
 supervisor = MkSupervisor
   { strategy = OneForOne  -- ou OneForAll, RestForOne
   , intensity = 10        -- Max restarts
@@ -41,7 +41,7 @@ supervisor = MkSupervisor
 
 #### Application
 Lifecycle d'application avec supervision tree :
-```astra
+```heaven
 behavior MyApp : Application where
   start : StartType -> List String -> Effect (Either Error Pid)
   stop : AppState -> Effect ()
@@ -51,7 +51,7 @@ behavior MyApp : Application where
 
 Système de références avec garanties de sécurité au niveau du type :
 
-```astra
+```heaven
 behavior Service : GenServer Call Cast Info State
   with capability1 : iso   -- Isolated (unique)
      , capability2 : val   -- Value (immutable partagé)
@@ -67,9 +67,9 @@ behavior Service : GenServer Call Cast Info State
 
 ### Signatures de type
 
-Astra utilise `:` comme séparateur unique (style Idris/Haskell) :
+Heaven utilise `:` comme séparateur unique (style Idris/Haskell) :
 
-```astra
+```heaven
 -- Fonction simple
 add : Int -> Int -> Int
 add x y = x + y
@@ -85,7 +85,7 @@ sort : Ord a => List a -> List a
 
 Le système de types infère automatiquement :
 
-```astra
+```heaven
 -- Type inféré : a -> a
 identity x = x
 
@@ -97,7 +97,7 @@ multiply x y = x * y
 
 Sans `case of` redondant (style Haskell/Erlang) :
 
-```astra
+```heaven
 -- Pattern matching sur les paramètres
 handleMessage (Init loc) state = ...
 handleMessage Measure state = ...
@@ -115,13 +115,13 @@ processLog entry
 ```
 examples/
 ├── 01-reactive-systems/     # Acteurs, GenServer, Supervisor
-│   ├── weather_station.astra
+│   ├── weather_station.heaven
 │   └── README.md
 ├── 02-data-pipelines/       # Pipelines, OTP, miniKanren
-│   ├── log_pipeline_with_otp.astra
+│   ├── log_pipeline_with_otp.heaven
 │   └── README.md
 ├── 03-microservices/        # Application behavior, distribution
-│   ├── user_service_with_otp.astra
+│   ├── user_service_with_otp.heaven
 │   └── README.md
 ├── 04-real-time/            # À venir
 ├── 05-parallel-computing/   # À venir
@@ -133,7 +133,7 @@ examples/
 
 ### 1. Station Météo (OTP complet)
 
-`01-reactive-systems/weather_station.astra`
+`01-reactive-systems/weather_station.heaven`
 
 **Démontre :**
 - GenServer pour les acteurs (WeatherStation, AlertService, Dashboard)
@@ -160,7 +160,7 @@ zig build example -Dname=weather_station
 
 ### 2. Pipeline de Logs (OTP + miniKanren)
 
-`02-data-pipelines/log_pipeline_with_otp.astra`
+`02-data-pipelines/log_pipeline_with_otp.heaven`
 
 **Démontre :**
 - GenServer pour traitement par batch
@@ -191,7 +191,7 @@ LogPipelineApp (Application)
 
 ### 3. Microservice REST (Production-ready)
 
-`03-microservices/user_service_with_otp.astra`
+`03-microservices/user_service_with_otp.heaven`
 
 **Démontre :**
 - Application behavior complète
@@ -227,46 +227,46 @@ UserManagementApp (Application)
 ### Restart Strategies
 
 **OneForOne** : Si un child crash, le redémarrer seul
-```astra
+```heaven
 strategy = OneForOne
 ```
 
 **OneForAll** : Si un child crash, redémarrer TOUS les children
-```astra
+```heaven
 strategy = OneForAll
 ```
 
 **RestForOne** : Si un child crash, redémarrer lui et tous les suivants
-```astra
+```heaven
 strategy = RestForOne  -- Cascade
 ```
 
 ### Child Restart Types
 
 **Permanent** : Toujours redémarré, peu importe la raison
-```astra
+```heaven
 worker "critical_service" (...) Permanent (seconds 5)
 ```
 
 **Transient** : Redémarré seulement si termine anormalement
-```astra
+```heaven
 worker "http_handler" (...) Transient (seconds 5)
 ```
 
 **Temporary** : Jamais redémarré automatiquement
-```astra
+```heaven
 worker "one_shot_task" (...) Temporary (seconds 5)
 ```
 
 ### GenServer Call vs Cast
 
 **Call** : Synchrone avec réponse
-```astra
+```heaven
 result <- GenServer.call serverPid GetData (seconds 5)
 ```
 
 **Cast** : Asynchrone sans réponse (fire and forget)
-```astra
+```heaven
 GenServer.cast serverPid (UpdateData newData)
 ```
 
@@ -274,7 +274,7 @@ GenServer.cast serverPid (UpdateData newData)
 
 ### Isolation (`iso`)
 Référence unique, ownership exclusif :
-```astra
+```heaven
 with fileCapability : iso
 ```
 - Une seule référence existe
@@ -283,7 +283,7 @@ with fileCapability : iso
 
 ### Valeur (`val`)
 Immutable partageable :
-```astra
+```heaven
 with configCapability : val
 ```
 - Lecture seule
@@ -292,7 +292,7 @@ with configCapability : val
 
 ### Référence (`ref`)
 Mutable partageable avec contrôle :
-```astra
+```heaven
 with cacheCapability : ref
 ```
 - Lecture/écriture
@@ -301,7 +301,7 @@ with cacheCapability : ref
 
 ### Tag (`tag`)
 Opaque, pour identité :
-```astra
+```heaven
 with tokenCapability : tag
 ```
 - Pas de lecture/écriture
@@ -321,7 +321,7 @@ zig build example -Dname=weather_station
 ./zig-out/bin/weather_station
 
 # Tests
-zig test examples/01-reactive-systems/weather_station.astra
+zig test examples/01-reactive-systems/weather_station.heaven
 ```
 
 ## Distribution Erlang
@@ -330,10 +330,10 @@ Les exemples utilisent la distribution Erlang :
 
 ```bash
 # Démarrer un nœud
-astra run weather_station --name sensor-node@localhost --cookie secret
+heaven run weather_station --name sensor-node@localhost --cookie secret
 
 # Se connecter à un cluster
-astra run --name processing-node@localhost --connect sensor-node@localhost
+heaven run --name processing-node@localhost --connect sensor-node@localhost
 ```
 
 ## Ressources

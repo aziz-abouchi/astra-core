@@ -1,6 +1,6 @@
 # Canaux, protocoles et communication typée
 
-La communication dans Astra Core repose sur :
+La communication dans Heaven Core repose sur :
 
 - des **canaux typés**,
 - des **protocoles** décrits au niveau des types,
@@ -10,6 +10,6 @@ La communication dans Astra Core repose sur :
 
 Un canal est paramétré par un protocole :
 
-```astra
+```heaven
 channel : Protocol -> Type
 

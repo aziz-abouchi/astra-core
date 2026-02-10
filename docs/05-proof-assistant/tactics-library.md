@@ -1,6 +1,6 @@
 # Bibliothèque de tactiques du proof assistant
 
-Astra Core fournit une bibliothèque standard de tactiques.
+Heaven Core fournit une bibliothèque standard de tactiques.
 
 ## Tactiques de base
 

@@ -1,6 +1,6 @@
-# Fédération dans Astra Core
+# Fédération dans Heaven Core
 
-La fédération permet de connecter plusieurs clusters Astra Core.
+La fédération permet de connecter plusieurs clusters Heaven Core.
 
 ## Objectifs
 

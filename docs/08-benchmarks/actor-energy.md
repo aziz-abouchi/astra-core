@@ -1,4 +1,4 @@
-# Benchmarks énergie/acteurs dans Astra Core
+# Benchmarks énergie/acteurs dans Heaven Core
 
 Ces benchmarks mesurent :
 

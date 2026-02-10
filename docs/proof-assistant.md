@@ -6,7 +6,7 @@
 - Preuves effacées au runtime.
 
 ## Exemple
-```astra
+```heaven
 sort : Vec a n -> Vec a n
 proof sortPreservesLength : ∀ v. length (sort v) = length v
 

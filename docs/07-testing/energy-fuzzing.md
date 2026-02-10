@@ -1,4 +1,4 @@
-# Energy Fuzzing dans Astra Core
+# Energy Fuzzing dans Heaven Core
 
 Le energy fuzzing permet :
 

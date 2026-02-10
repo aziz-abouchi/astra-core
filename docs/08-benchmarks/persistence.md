@@ -1,4 +1,4 @@
-# Benchmarks de persistance dans Astra Core
+# Benchmarks de persistance dans Heaven Core
 
 Ces benchmarks mesurent :
 

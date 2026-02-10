@@ -1,4 +1,4 @@
-# Visualiseur de cluster Astra Core
+# Visualiseur de cluster Heaven Core
 
 Le visualiseur permet :
 

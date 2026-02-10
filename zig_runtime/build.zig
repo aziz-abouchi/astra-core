@@ -11,7 +11,7 @@ pub fn build(b: *std.Build) void {
     });
 
     const exe = b.addExecutable(.{
-        .name = "astra-runtime",
+        .name = "heaven-runtime",
         .root_module = root_module,
     });
 
@@ -19,7 +19,7 @@ pub fn build(b: *std.Build) void {
 
 //    const run_cmd = b.addRunArtifact(exe);
 
-//    const run_step = b.step("run", "Run astra-runtime");
+//    const run_step = b.step("run", "Run heaven-runtime");
 //    run_step.dependOn(&run_cmd.step);
 
     // Permet de passer des arguments au programme
@@ -28,7 +28,7 @@ pub fn build(b: *std.Build) void {
         run_cmd.addArgs(args);
     }
 
-    const run_step = b.step("run", "Run Astra Core");
+    const run_step = b.step("run", "Run Heaven Core");
     run_step.dependOn(&run_cmd.step);
 }
 

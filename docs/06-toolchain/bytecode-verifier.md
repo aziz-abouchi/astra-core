@@ -1,4 +1,4 @@
-# Vérificateur de bytecode Astra Core
+# Vérificateur de bytecode Heaven Core
 
 Le vérificateur garantit :
 

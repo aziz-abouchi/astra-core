@@ -1,4 +1,4 @@
-# Capacités linéaires dans Astra Core
+# Capacités linéaires dans Heaven Core
 
 Les capacités linéaires garantissent :
 
@@ -8,6 +8,6 @@ Les capacités linéaires garantissent :
 
 ## Définition
 
-```astra
+```heaven
 data FileCap : Mode -> Type
 

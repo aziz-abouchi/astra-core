@@ -1,6 +1,6 @@
-# Automatisation des preuves dans Astra Core
+# Automatisation des preuves dans Heaven Core
 
-Astra Core inclut un moteur d’automatisation léger mais puissant.
+Heaven Core inclut un moteur d’automatisation léger mais puissant.
 
 ## Objectifs
 

@@ -27,7 +27,7 @@ Pour un type `T : I -> Type -> Type` :
 
 Exemple :
 
-```astra
+```heaven
 data Vect : Nat -> Type -> Type where
   VNil  : Vect Z a
   VCons : a -> Vect n a -> Vect (S n) a

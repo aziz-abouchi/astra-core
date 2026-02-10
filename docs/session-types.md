@@ -5,7 +5,7 @@
 - Vérification statique des échanges.
 
 ## Exemple
-```astra
+```heaven
 protocol Chat {
   Client -> Server : Login(username : String)
   Server -> Client : Welcome(message : String)

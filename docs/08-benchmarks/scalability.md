@@ -1,4 +1,4 @@
-# Scalabilité dans les benchmarks Astra Core
+# Scalabilité dans les benchmarks Heaven Core
 
 Les benchmarks de scalabilité mesurent :
 

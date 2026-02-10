@@ -1,6 +1,6 @@
-# Sémantique des acteurs dans Astra Core
+# Sémantique des acteurs dans Heaven Core
 
-Astra Core adopte un modèle d’acteurs :
+Heaven Core adopte un modèle d’acteurs :
 
 - typé,
 - supervisé,

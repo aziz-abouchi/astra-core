@@ -1,4 +1,4 @@
-# Découverte de pairs dans Astra Core
+# Découverte de pairs dans Heaven Core
 
 La découverte de pairs permet :
 

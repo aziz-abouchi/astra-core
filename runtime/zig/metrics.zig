@@ -18,9 +18,9 @@ pub const Metrics = struct {
     }
 
     pub fn renderPrometheus(self: *Metrics, w: anytype) !void {
-        try writeLine(w, "astra_actors", "Number of live actors", "gauge",  self.actor_count.load(.SeqCst));
-        try writeLine(w, "astra_restarts_total", "Number of actor restarts", "counter", self.restarts_total.load(.SeqCst));
-        try writeLine(w, "astra_mailbox_depth", "Mailbox depth (last sampled)", "gauge", self.mailbox_depth.load(.SeqCst));
+        try writeLine(w, "heaven_actors", "Number of live actors", "gauge",  self.actor_count.load(.SeqCst));
+        try writeLine(w, "heaven_restarts_total", "Number of actor restarts", "counter", self.restarts_total.load(.SeqCst));
+        try writeLine(w, "heaven_mailbox_depth", "Mailbox depth (last sampled)", "gauge", self.mailbox_depth.load(.SeqCst));
     }
 };
 

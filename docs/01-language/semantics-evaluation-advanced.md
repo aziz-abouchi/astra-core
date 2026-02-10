@@ -1,6 +1,6 @@
-# Sémantique avancée de l’évaluation dans Astra Core
+# Sémantique avancée de l’évaluation dans Heaven Core
 
-Astra Core combine plusieurs couches d’évaluation :
+Heaven Core combine plusieurs couches d’évaluation :
 
 - évaluation stricte,
 - évaluation contrôlée par effets,

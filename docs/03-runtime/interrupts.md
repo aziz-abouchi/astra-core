@@ -1,4 +1,4 @@
-# Interruptions dans Astra Core
+# Interruptions dans Heaven Core
 
 Le runtime gère les interruptions pour :
 
@@ -34,6 +34,6 @@ Les interruptions sont :
 
 ## Exemple
 
-```astra
+```heaven
 withTimeout 1s (compute x)
 

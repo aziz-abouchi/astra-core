@@ -1,6 +1,6 @@
-# Sémantique avancée des acteurs dans Astra Core
+# Sémantique avancée des acteurs dans Heaven Core
 
-Astra Core pousse le modèle d’acteurs plus loin grâce à :
+Heaven Core pousse le modèle d’acteurs plus loin grâce à :
 
 - des protocoles typés,
 - des capacités linéaires,
@@ -16,7 +16,7 @@ Chaque acteur possède :
 - une mailbox typée,
 - un protocole d’évolution.
 
-```astra
+```heaven
 actor Counter : State n where
   inc : Msg -> State (S n)
   get : Msg -> (State n, Nat)

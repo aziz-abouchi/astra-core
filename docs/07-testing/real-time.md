@@ -1,4 +1,4 @@
-# Tests temps réel dans Astra Core
+# Tests temps réel dans Heaven Core
 
 Les tests temps réel vérifient :
 
@@ -16,6 +16,6 @@ Les tests temps réel vérifient :
 
 ### 1. Deadlines
 
-```astra
+```heaven
 assertDeadline 5ms (compute x)
 

@@ -1,4 +1,4 @@
-# Benchmarks de sharding logique dans Astra Core
+# Benchmarks de sharding logique dans Heaven Core
 
 Ces benchmarks mesurent :
 

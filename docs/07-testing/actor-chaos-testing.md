@@ -1,4 +1,4 @@
-# Chaos Testing d’acteurs dans Astra Core
+# Chaos Testing d’acteurs dans Heaven Core
 
 Le chaos testing permet :
 
@@ -16,6 +16,6 @@ Le chaos testing permet :
 
 ## API
 
-```astra
+```heaven
 injectChaos : ActorId -> Chaos -> Eff s s ()
 

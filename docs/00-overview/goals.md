@@ -1,4 +1,4 @@
-# Objectifs d’Astra Core
+# Objectifs d’Heaven Core
 
 - Offrir un langage concurrent et distribué sans data races.
 - Intégrer un proof assistant minimal mais puissant.

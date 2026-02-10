@@ -1,4 +1,4 @@
-# Indexation de buts dans Astra Core
+# Indexation de buts dans Heaven Core
 
 L’indexation de buts permet :
 

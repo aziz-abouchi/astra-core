@@ -1,4 +1,4 @@
-# Gossip distribué dans Astra Core
+# Gossip distribué dans Heaven Core
 
 Le gossip distribué permet :
 

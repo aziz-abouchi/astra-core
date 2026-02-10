@@ -1,4 +1,4 @@
-# Sérialisation et transport dans Astra Core
+# Sérialisation et transport dans Heaven Core
 
 La sérialisation est :
 

@@ -1,6 +1,6 @@
-# Macros dans Astra Core
+# Macros dans Heaven Core
 
-Astra Core inclut un système de macros **hygiéniques**, **typiées** et **zéro‑coût**.
+Heaven Core inclut un système de macros **hygiéniques**, **typiées** et **zéro‑coût**.
 
 ## Objectifs
 
@@ -15,7 +15,7 @@ Astra Core inclut un système de macros **hygiéniques**, **typiées** et **zér
 
 Permettent d’introduire de nouveaux motifs syntaxiques :
 
-```astra
+```heaven
 macro unless cond body =
   if cond then () else body
 

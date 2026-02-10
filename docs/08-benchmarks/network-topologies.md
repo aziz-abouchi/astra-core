@@ -1,4 +1,4 @@
-# Benchmarks de topologies réseau dans Astra Core
+# Benchmarks de topologies réseau dans Heaven Core
 
 Ces benchmarks mesurent :
 

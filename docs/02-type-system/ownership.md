@@ -1,6 +1,6 @@
 # Ownership et aliasing contrôlé
 
-Astra Core adopte un modèle d’ownership inspiré de Rust, adapté :
+Heaven Core adopte un modèle d’ownership inspiré de Rust, adapté :
 
 - aux types linéaires,
 - à la distribution,
@@ -25,6 +25,6 @@ Les alias sont :
 
 Le mouvement est un transfert d’ownership :
 
-```astra
+```heaven
 useOnce : Resource ⊸ Result
 

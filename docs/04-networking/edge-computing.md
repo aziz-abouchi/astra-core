@@ -1,6 +1,6 @@
-# Edge Computing dans Astra Core
+# Edge Computing dans Heaven Core
 
-Astra Core peut s’exécuter :
+Heaven Core peut s’exécuter :
 
 - sur des clusters,
 - sur des nœuds edge,

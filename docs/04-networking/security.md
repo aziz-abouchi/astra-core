@@ -1,4 +1,4 @@
-# Sécurité réseau dans Astra Core
+# Sécurité réseau dans Heaven Core
 
 La sécurité est intégrée au modèle de capacités et aux protocoles typés.
 

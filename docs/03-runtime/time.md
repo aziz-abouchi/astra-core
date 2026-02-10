@@ -1,4 +1,4 @@
-# Gestion du temps dans Astra Core
+# Gestion du temps dans Heaven Core
 
 Le runtime fournit une gestion du temps :
 
@@ -16,7 +16,7 @@ Chaque nœud possède :
 
 ## Timers
 
-```astra
+```heaven
 setTimer : Duration -> Eff s s TimerId
 cancel   : TimerId -> Eff s s ()
 

@@ -1,6 +1,6 @@
-# Topologie réseau dans Astra Core
+# Topologie réseau dans Heaven Core
 
-Astra Core supporte plusieurs topologies réseau :
+Heaven Core supporte plusieurs topologies réseau :
 
 - anneau,
 - étoile,

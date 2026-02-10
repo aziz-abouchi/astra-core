@@ -1,4 +1,4 @@
-# Queues distribuées avancées dans Astra Core
+# Queues distribuées avancées dans Heaven Core
 
 Les queues distribuées avancées permettent :
 
@@ -14,7 +14,7 @@ Les queues distribuées avancées permettent :
 
 ## API
 
-```astra
+```heaven
 enqueue : DistQueueCap a -> a -> Eff s s ()
 dequeue : DistQueueCap a -> Eff s s (Maybe a)
 

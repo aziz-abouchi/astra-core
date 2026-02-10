@@ -1,6 +1,6 @@
-# Surcharge (Overloading) dans Astra Core
+# Surcharge (Overloading) dans Heaven Core
 
-Astra Core supporte une surcharge **statique**, **résolue au typage**, sans coût
+Heaven Core supporte une surcharge **statique**, **résolue au typage**, sans coût
 runtime.
 
 ## Objectifs
@@ -14,7 +14,7 @@ runtime.
 
 ### 1. Surcharge par type
 
-```astra
+```heaven
 class Eq a where
   (==) : a -> a -> Bool
 

@@ -1,4 +1,4 @@
-# Système de build cluster dans Astra Core
+# Système de build cluster dans Heaven Core
 
 Le build system distribué permet :
 

@@ -1,4 +1,4 @@
-# Canaux sécurisés dans Astra Core
+# Canaux sécurisés dans Heaven Core
 
 Les canaux sécurisés garantissent :
 
@@ -8,6 +8,6 @@ Les canaux sécurisés garantissent :
 
 ## Capacités sécurisées
 
-```astra
+```heaven
 data SecureCap : Key -> Type
 

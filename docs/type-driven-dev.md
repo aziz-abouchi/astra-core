@@ -5,7 +5,7 @@
 - Holes, complétion interactive, proof search.
 
 ## Holes
-```astra
+```heaven
 map : (a -> b) -> List a -> List b
 map f xs = ?impl
 

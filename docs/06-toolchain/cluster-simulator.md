@@ -1,4 +1,4 @@
-# Simulateur de cluster Astra Core
+# Simulateur de cluster Heaven Core
 
 Le simulateur permet :
 

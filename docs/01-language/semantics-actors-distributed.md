@@ -1,6 +1,6 @@
-# Sémantique des acteurs distribués dans Astra Core
+# Sémantique des acteurs distribués dans Heaven Core
 
-Les acteurs distribués sont un pilier d’Astra Core. Ils combinent :
+Les acteurs distribués sont un pilier d’Heaven Core. Ils combinent :
 
 - isolation stricte,
 - protocoles typés,

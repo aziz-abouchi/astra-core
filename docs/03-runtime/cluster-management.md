@@ -1,4 +1,4 @@
-# Gestion de cluster dans Astra Core
+# Gestion de cluster dans Heaven Core
 
 Le runtime distribué gère :
 

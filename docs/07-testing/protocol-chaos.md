@@ -1,4 +1,4 @@
-# Protocol Chaos Testing dans Astra Core
+# Protocol Chaos Testing dans Heaven Core
 
 Le chaos testing de protocoles permet :
 

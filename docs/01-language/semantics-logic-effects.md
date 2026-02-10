@@ -1,6 +1,6 @@
-# Sémantique des effets logiques dans Astra Core
+# Sémantique des effets logiques dans Heaven Core
 
-Astra Core unifie :
+Heaven Core unifie :
 
 - les effets algébriques,
 - la logique relationnelle (miniKanren),
@@ -15,7 +15,7 @@ Les effets logiques permettent :
 - la propagation de substitutions,
 - la résolution de contraintes.
 
-```astra
+```heaven
 fresh : Logic a
 choose : [a] -> Logic a
 

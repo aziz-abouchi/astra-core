@@ -1,4 +1,4 @@
-# Métriques distribuées dans Astra Core
+# Métriques distribuées dans Heaven Core
 
 Les métriques distribuées permettent :
 

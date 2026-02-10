@@ -1,6 +1,6 @@
-# Sémantique avancée des effets dans Astra Core
+# Sémantique avancée des effets dans Heaven Core
 
-Les effets avancés d’Astra Core combinent :
+Les effets avancés d’Heaven Core combinent :
 
 - effets indexés,
 - capacités,
@@ -12,7 +12,7 @@ Les effets avancés d’Astra Core combinent :
 
 Les effets peuvent être définis comme des opérations :
 
-```astra
+```heaven
 effect Console where
   print : String -> Eff s s ()
 

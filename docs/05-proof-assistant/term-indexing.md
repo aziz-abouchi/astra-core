@@ -1,4 +1,4 @@
-# Indexation des termes dans Astra Core
+# Indexation des termes dans Heaven Core
 
 L’indexation des termes permet :
 

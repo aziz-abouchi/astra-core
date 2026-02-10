@@ -1,4 +1,4 @@
-# Kinds de capacités dans Astra Core
+# Kinds de capacités dans Heaven Core
 
 Les capacités sont classées par kinds, ce qui permet :
 
@@ -30,6 +30,6 @@ Capacité représentant un état de protocole.
 
 ## Exemple
 
-```astra
+```heaven
 data FileCap : Mode -> Capability Linear
 

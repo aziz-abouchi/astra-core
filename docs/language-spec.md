@@ -1,4 +1,4 @@
-# Astra Language Specification (v0.1)
+# Heaven Language Specification (v0.1)
 
 ## Objectifs
 - Langage concurrent et distribué, inspiré d’Erlang, Pony, Idris2, Prolog, Carp, Goblins.
@@ -6,7 +6,7 @@
 - Protocoles sûrs grâce à MPST (Multiparty Session Types).
 - Capabilités comme mécanisme central de sécurité et de partage.
 - Abstractions zéro‑cost.
-- Auto‑hébergement : compilateur écrit en Astra lui‑même.
+- Auto‑hébergement : compilateur écrit en Heaven lui‑même.
 - Proof assistant intégré et type‑driven development.
 - Transpilation universelle (C, LLVM, WASM, BEAM, JVM, JS).
 - Frugalité : estimation et gestion des ressources.

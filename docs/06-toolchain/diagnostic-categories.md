@@ -1,4 +1,4 @@
-# Catégories de diagnostics dans Astra Core
+# Catégories de diagnostics dans Heaven Core
 
 Les diagnostics sont classés pour faciliter :
 

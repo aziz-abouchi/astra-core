@@ -1,4 +1,4 @@
-# Sémantique de la linéarisation dans Astra Core
+# Sémantique de la linéarisation dans Heaven Core
 
 La linéarisation garantit :
 

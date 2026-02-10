@@ -1,10 +1,10 @@
-# Principes d’induction dans Astra Core
+# Principes d’induction dans Heaven Core
 
 Chaque type inductif génère automatiquement un principe d’induction.
 
 ## Exemple : Nat
 
-```astra
+```heaven
 inductionNat :
   P Z ->
   (forall n. P n -> P (S n)) ->

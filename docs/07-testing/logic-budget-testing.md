@@ -1,4 +1,4 @@
-# Logic Budget Testing dans Astra Core
+# Logic Budget Testing dans Heaven Core
 
 Le logic budget testing permet :
 

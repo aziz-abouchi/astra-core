@@ -1,23 +1,23 @@
 const std = @import("std");
-const astra_ast = @import("astra_ast.zig");
-const astra_typecheck = @import("astra_typecheck.zig");
-const astra_env = @import("astra_env.zig");
-const astra_types = @import("astra_types.zig");
+const heaven_ast = @import("heaven_ast.zig");
+const heaven_typecheck = @import("heaven_typecheck.zig");
+const heaven_env = @import("heaven_env.zig");
+const heaven_types = @import("heaven_types.zig");
 
 // Fonction pour expectPanics
-fn makeLamWithZeroQTT(env: *astra_env.TypeEnv) void {
-    var lam_invalid = astra_ast.Expr{
+fn makeLamWithZeroQTT(env: *heaven_env.TypeEnv) void {
+    var lam_invalid = heaven_ast.Expr{
         .Lambda = .{
             .param = "x",
             .body = null,
             .qtt = 0,
         },
     };
-    const ty = try astra_typecheck.typeOf(&lam_invalid, &env);
+    const ty = try heaven_typecheck.typeOf(&lam_invalid, &env);
     std.testing.expect(ty == null); // ou équivalent pour vérifier l’erreur
 }
 
-fn expectPanics(fnToCall: fn(env: *astra_env.TypeEnv) void, env: *astra_env.TypeEnv) bool {
+fn expectPanics(fnToCall: fn(env: *heaven_env.TypeEnv) void, env: *heaven_env.TypeEnv) bool {
     const caught = false;
     _ = env;
     _ = fnToCall;
@@ -32,22 +32,22 @@ fn expectPanics(fnToCall: fn(env: *astra_env.TypeEnv) void, env: *astra_env.Type
 test "QTT respects quantity" {
     var gpa = std.heap.GeneralPurposeAllocator(.{}){};
     const alloc = gpa.allocator();
-    var env = astra_env.TypeEnv.init(alloc);
+    var env = heaven_env.TypeEnv.init(alloc);
 
-    var body = astra_ast.Expr{
+    var body = heaven_ast.Expr{
         .Var = "x",
     };
 
-    var lam = astra_ast.Expr{
+    var lam = heaven_ast.Expr{
         .Lambda = .{
             .param = "x",
             .body = &body,
             .qtt = 0,
         },
     };
-//    const ty = try astra_typecheck.typeOf(&lam, &env);
+//    const ty = try heaven_typecheck.typeOf(&lam, &env);
 //    std.testing.expect(ty == null); // ou équivalent pour vérifier l’erreur
-    _ = try astra_typecheck.typeOf(&lam, &env);
+    _ = try heaven_typecheck.typeOf(&lam, &env);
 //    expectPanics(makeLamWithZeroQTT, &env);
 }
 
@@ -56,20 +56,20 @@ test "LOT 4.2 – MPST recv then send" {
     defer arena.deinit();
     const alloc = arena.allocator();
 
-    var env = astra_typecheck.TypeEnv.init(alloc);
+    var env = heaven_typecheck.TypeEnv.init(alloc);
 
-    var int_ty = astra_types.Type{ .Int = {} };
-    var bool_ty = astra_types.Type{ .Bool = {} };
+    var int_ty = heaven_types.Type{ .Int = {} };
+    var bool_ty = heaven_types.Type{ .Bool = {} };
 
-    var send_session = astra_types.Session{
+    var send_session = heaven_types.Session{
         .Send = .{
             .to = "client",
             .msg = &bool_ty,
-            .next = &astra_types.Session{ .End = {} },
+            .next = &heaven_types.Session{ .End = {} },
         },
     };
 
-    const recv_session = astra_types.Session{
+    const recv_session = heaven_types.Session{
         .Recv = .{
             .from = "server",
             .msg = &int_ty,
@@ -77,30 +77,30 @@ test "LOT 4.2 – MPST recv then send" {
         },
     };
 
-    var from_ty = astra_types.Type{
+    var from_ty = heaven_types.Type{
         .Session = &recv_session,
     };
 
     env.put("chan", &from_ty);
 
-    var recv_expr = astra_ast.Expr{
+    var recv_expr = heaven_ast.Expr{
         .Recv = .{
             .from = "chan",
             .msg = "x",
         },
     };
 
-    _ = try astra_typecheck.typeOf(&recv_expr, &env);
+    _ = try heaven_typecheck.typeOf(&recv_expr, &env);
 
-    var true_expr = astra_ast.Expr{ .Bool = true };
+    var true_expr = heaven_ast.Expr{ .Bool = true };
 
-    var send_expr = astra_ast.Expr{
+    var send_expr = heaven_ast.Expr{
         .Send = .{
             .to = "chan",
             .msg = &true_expr,
         },
     };
 
-    _ = try astra_typecheck.typeOf(&send_expr, &env);
+    _ = try heaven_typecheck.typeOf(&send_expr, &env);
 }
 

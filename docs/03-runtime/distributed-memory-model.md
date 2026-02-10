@@ -1,4 +1,4 @@
-# Modèle mémoire distribué dans Astra Core
+# Modèle mémoire distribué dans Heaven Core
 
 Le modèle mémoire distribué garantit :
 

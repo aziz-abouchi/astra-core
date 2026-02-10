@@ -1,4 +1,4 @@
-# Connection Pooling dans Astra Core
+# Connection Pooling dans Heaven Core
 
 Le runtime gère un pool de connexions typées.
 
@@ -10,6 +10,6 @@ Le runtime gère un pool de connexions typées.
 
 ## Modèle
 
-```astra
+```heaven
 data ConnPool p = ...
 

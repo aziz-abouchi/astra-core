@@ -1,4 +1,4 @@
-# Benchmarks de latence distribuée dans Astra Core
+# Benchmarks de latence distribuée dans Heaven Core
 
 Ces benchmarks mesurent :
 

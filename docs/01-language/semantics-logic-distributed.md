@@ -1,4 +1,4 @@
-# Sémantique de la logique distribuée dans Astra Core
+# Sémantique de la logique distribuée dans Heaven Core
 
 La logique distribuée combine :
 

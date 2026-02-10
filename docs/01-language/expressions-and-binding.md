@@ -1,6 +1,6 @@
 # Expressions, portée et liaison
 
-Astra Core adopte un modèle lexical simple et prévisible.
+Heaven Core adopte un modèle lexical simple et prévisible.
 
 ## Liaison
 

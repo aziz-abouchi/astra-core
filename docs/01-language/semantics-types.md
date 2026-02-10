@@ -1,6 +1,6 @@
-# Sémantique des types dans Astra Core
+# Sémantique des types dans Heaven Core
 
-La sémantique des types d’Astra Core repose sur :
+La sémantique des types d’Heaven Core repose sur :
 
 - un noyau dépendant restreint,
 - des indices effaçables,
@@ -29,6 +29,6 @@ Exemples :
 
 Les indices sont effacés sauf si marqués :
 
-```astra
+```heaven
 @[runtime] n
 

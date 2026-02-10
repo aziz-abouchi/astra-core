@@ -7,7 +7,7 @@ pub fn main() !void {
     defer std.process.argsFree(gpa, args);
 
     if (args.len != 2) {
-        std.debug.print("Usage: astra-core <file>\n", .{});
+        std.debug.print("Usage: heaven-core <file>\n", .{});
         return;
     }
 

@@ -1,4 +1,4 @@
-# Benchmarks d’acteurs dans Astra Core
+# Benchmarks d’acteurs dans Heaven Core
 
 Ces benchmarks mesurent :
 

@@ -1,4 +1,4 @@
-# Tests temporels dans Astra Core
+# Tests temporels dans Heaven Core
 
 Les tests temporels vérifient :
 
@@ -16,6 +16,6 @@ Les tests temporels vérifient :
 
 ### 2. Timers typés
 
-```astra
+```heaven
 withTimeout : Duration -> Eff s s a -> Eff s s (Maybe a)
 

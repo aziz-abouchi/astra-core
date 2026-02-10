@@ -1,4 +1,4 @@
-# Monitoring réseau dans Astra Core
+# Monitoring réseau dans Heaven Core
 
 Le runtime distribué expose des métriques réseau typées.
 

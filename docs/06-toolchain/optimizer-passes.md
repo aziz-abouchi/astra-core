@@ -1,4 +1,4 @@
-# Passes d’optimisation dans Astra Core
+# Passes d’optimisation dans Heaven Core
 
 Le compilateur applique plusieurs passes :
 

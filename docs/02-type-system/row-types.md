@@ -1,4 +1,4 @@
-# Row Types dans Astra Core
+# Row Types dans Heaven Core
 
 Les row types permettent :
 
@@ -8,6 +8,6 @@ Les row types permettent :
 
 ## Syntaxe
 
-```astra
+```heaven
 record { name : String, age : Int | r }
 

@@ -1,6 +1,6 @@
-# Sémantique acteurs + capacités dans Astra Core
+# Sémantique acteurs + capacités dans Heaven Core
 
-Astra Core unifie le modèle d’acteurs et le système de capacités pour garantir :
+Heaven Core unifie le modèle d’acteurs et le système de capacités pour garantir :
 
 - sûreté,
 - frugalité,
@@ -17,6 +17,6 @@ Chaque acteur possède :
 
 ## Envoi de messages
 
-```astra
+```heaven
 send : ActorCap p -> Msg p -> Eff s s ()
 

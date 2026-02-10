@@ -1,6 +1,6 @@
-# Style de preuve dans Astra Core
+# Style de preuve dans Heaven Core
 
-Astra Core adopte un style de preuve **équationnel** inspiré de la tradition
+Heaven Core adopte un style de preuve **équationnel** inspiré de la tradition
 Curry–Howard : les preuves sont des programmes, et les programmes peuvent être
 raisonnés de manière calculatoire.
 
@@ -8,7 +8,7 @@ raisonnés de manière calculatoire.
 
 Le mot-clé `calc` introduit une preuve par réécriture séquentielle :
 
-```astra
+```heaven
 calc
   S k + right
     ={ Refl }=

@@ -1,10 +1,10 @@
-# Records et structures dans Astra Core
+# Records et structures dans Heaven Core
 
-Astra Core propose des records légers, immuables par défaut.
+Heaven Core propose des records légers, immuables par défaut.
 
 ## Syntaxe
 
-```astra
+```heaven
 record Person =
   { name : String
   , age  : Nat

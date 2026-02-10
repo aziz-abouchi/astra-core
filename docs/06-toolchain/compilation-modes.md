@@ -1,6 +1,6 @@
-# Modes de compilation dans Astra Core
+# Modes de compilation dans Heaven Core
 
-Astra Core propose plusieurs modes de compilation.
+Heaven Core propose plusieurs modes de compilation.
 
 ## Modes
 

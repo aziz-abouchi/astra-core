@@ -1,4 +1,4 @@
-# Benchmarks de stockage dans Astra Core
+# Benchmarks de stockage dans Heaven Core
 
 Ces benchmarks mesurent :
 

@@ -1,18 +1,18 @@
 # Transpilation
 
 ## Objectifs
-- Astra pivot de transpilation bidirectionnelle.
-- Source → Astra → C/LLVM/WASM/BEAM/JVM/JS.
-- C/LLVM/WASM/BEAM/JVM/JS → Astra.
+- Heaven pivot de transpilation bidirectionnelle.
+- Source → Heaven → C/LLVM/WASM/BEAM/JVM/JS.
+- C/LLVM/WASM/BEAM/JVM/JS → Heaven.
 
 ## Architecture
-- Frontend Astra : parser + typechecker.
-- IR interne Astra.
+- Frontend Heaven : parser + typechecker.
+- IR interne Heaven.
 - Backends multiples.
 - Importers FFI.
 
 ## Exemple
-```astra
+```heaven
 foreign c "math.h" {
   sin : Double -> Double
 }

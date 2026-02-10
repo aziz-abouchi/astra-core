@@ -1,4 +1,4 @@
-# Energy Chaos Testing dans Astra Core
+# Energy Chaos Testing dans Heaven Core
 
 Le energy chaos testing permet :
 
@@ -16,6 +16,6 @@ Le energy chaos testing permet :
 
 ## API
 
-```astra
+```heaven
 injectEnergyChaos : NodeId -> Chaos -> Eff s s ()
 

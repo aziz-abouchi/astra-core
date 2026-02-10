@@ -1,6 +1,6 @@
-# Modèles de cohérence distribuée dans Astra Core
+# Modèles de cohérence distribuée dans Heaven Core
 
-Astra Core supporte plusieurs modèles de cohérence :
+Heaven Core supporte plusieurs modèles de cohérence :
 
 - cohérence causale,
 - cohérence séquentielle,

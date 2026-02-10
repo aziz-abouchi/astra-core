@@ -1,4 +1,4 @@
-# Benchmarks de parallélisme logique dans Astra Core
+# Benchmarks de parallélisme logique dans Heaven Core
 
 Ces benchmarks mesurent :
 

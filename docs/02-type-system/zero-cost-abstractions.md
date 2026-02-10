@@ -1,6 +1,6 @@
-# Zero-Cost Abstractions dans Astra Core
+# Zero-Cost Abstractions dans Heaven Core
 
-Astra Core garantit que les abstractions de haut niveau :
+Heaven Core garantit que les abstractions de haut niveau :
 
 - types dépendants,
 - preuves,
@@ -27,6 +27,6 @@ sont **effacées** ou **optimisées** pour ne rien coûter au runtime.
 
 ### Vecteurs dimensionnés
 
-```astra
+```heaven
 head : Vect (S n) a -> a
 

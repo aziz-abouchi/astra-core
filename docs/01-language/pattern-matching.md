@@ -1,6 +1,6 @@
-# Pattern matching dans Astra Core
+# Pattern matching dans Heaven Core
 
-Le pattern matching est central dans Astra :
+Le pattern matching est central dans Heaven :
 
 - pour les données algébriques,
 - pour les preuves,
@@ -8,7 +8,7 @@ Le pattern matching est central dans Astra :
 
 ## Syntaxe de base
 
-```astra
+```heaven
 case xs of
   []      => ...
   x :: xs => ...

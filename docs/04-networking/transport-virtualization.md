@@ -1,4 +1,4 @@
-# Virtualisation de transport dans Astra Core
+# Virtualisation de transport dans Heaven Core
 
 La virtualisation permet :
 
@@ -15,6 +15,6 @@ La virtualisation permet :
 
 ## API
 
-```astra
+```heaven
 data VTransport p = ...
 

@@ -1,4 +1,4 @@
-# Régions sécurisées dans Astra Core
+# Régions sécurisées dans Heaven Core
 
 Les régions sécurisées permettent :
 
@@ -8,7 +8,7 @@ Les régions sécurisées permettent :
 
 ## Définition
 
-```astra
+```heaven
 data SecureRegion (lvl : SecurityLevel) : Region
 
 ## Propriétés

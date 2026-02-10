@@ -1,4 +1,4 @@
-# Induction automatisée dans Astra Core
+# Induction automatisée dans Heaven Core
 
 L’induction automatisée permet :
 

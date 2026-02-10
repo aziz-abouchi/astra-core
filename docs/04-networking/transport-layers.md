@@ -1,6 +1,6 @@
-# Couches de transport dans Astra Core
+# Couches de transport dans Heaven Core
 
-Astra Core supporte plusieurs couches de transport :
+Heaven Core supporte plusieurs couches de transport :
 
 - TCP,
 - UDP,
@@ -10,6 +10,6 @@ Astra Core supporte plusieurs couches de transport :
 
 ## Abstraction typée
 
-```astra
+```heaven
 data Transport (proto : Proto) = ...
 

@@ -2,7 +2,7 @@
 const std = @import("std");
 
 pub fn generateLLVMIRFactorialTail(w: anytype) !void {
-try w.writeAll("; ModuleID = 'astra'\n");
+try w.writeAll("; ModuleID = 'heaven'\n");
 try w.writeAll("define i64 @factorial_tail(i64 %n) {\n");
 try w.writeAll("entry:\n  %acc = alloca i64\n  store i64 1, i64* %acc\n  br label %loop\n\n");
 try w.writeAll("loop:\n  %n_phi = phi i64 [ %n, %entry ], [ %n_next, %loop ]\n  %acc_val = load i64, i64* %acc\n  %cond = icmp eq i64 %n_phi, 0\n  br i1 %cond, label %exit, label %body\n\n");

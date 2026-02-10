@@ -2,7 +2,7 @@
 **Date**: 2026-02-08 (Référentiel Terrestre)
 **Statut**: Livraison de Phase 2 - Alpha Réplicant
 
-## Résumé du Pivot : De Astra-Core à Heaven
+## Résumé du Pivot : De Heaven-Core à Heaven
 Le projet a été restructuré pour passer d'un simple langage de programmation à une plateforme de survie intégrale. L'identité **Heaven** reflète notre objectif de créer un environnement stable pour les essaims de sondes.
 
 ### 1. Renommage et Identité

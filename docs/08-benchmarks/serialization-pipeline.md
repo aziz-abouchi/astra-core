@@ -1,4 +1,4 @@
-# Benchmarks de pipeline de sérialisation dans Astra Core
+# Benchmarks de pipeline de sérialisation dans Heaven Core
 
 Ces benchmarks mesurent :
 

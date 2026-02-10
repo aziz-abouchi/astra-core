@@ -1,4 +1,4 @@
-# Transpiler Astra Core
+# Transpiler Heaven Core
 
 Le transpiler convertit le Core IR vers :
 

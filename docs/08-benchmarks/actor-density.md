@@ -1,4 +1,4 @@
-# Benchmarks de densité d’acteurs dans Astra Core
+# Benchmarks de densité d’acteurs dans Heaven Core
 
 Ces benchmarks mesurent :
 

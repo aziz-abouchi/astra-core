@@ -1,4 +1,4 @@
-# Model Checking d’état dans Astra Core
+# Model Checking d’état dans Heaven Core
 
 Le model checking vérifie :
 

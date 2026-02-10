@@ -25,7 +25,7 @@ pub fn main() !void {
     const a = gpa.allocator();
     var args = try std.process.argsAlloc(a); defer std.process.argsFree(a, args);
     const wasm_path = if (args.len > 1) args[1] else "out.wasm";
-    const sock_path = std.os.getenvZ("ASTRA_P2P_SOCK") orelse "/tmp/astra-p2p.sock";
+    const sock_path = std.os.getenvZ("HEAVEN_P2P_SOCK") orelse "/tmp/heaven-p2p.sock";
     try Host.setupRuntime(sock_path);
 
     var engine: *c.wasmtime_engine_t = c.wasmtime_engine_new(); defer c.wasmtime_engine_delete(engine);

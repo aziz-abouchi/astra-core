@@ -1,4 +1,4 @@
-# Quotas de transport dans Astra Core
+# Quotas de transport dans Heaven Core
 
 Les quotas permettent :
 
@@ -15,7 +15,7 @@ Les quotas permettent :
 
 ## API
 
-```astra
+```heaven
 withQuota : Quota -> Eff s s a -> Eff s s a
 
 ## Visualisation

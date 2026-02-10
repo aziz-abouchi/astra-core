@@ -10,7 +10,7 @@
 - Énergie.
 
 ## Exemple
-```astra
+```heaven
 runWithBudget task { cpu=50ms, mem=128MB, energy=10J }
 
 ## Intégration

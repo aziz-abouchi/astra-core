@@ -1,6 +1,6 @@
-# Sémantique des effets dans Astra Core
+# Sémantique des effets dans Heaven Core
 
-Les effets dans Astra Core sont :
+Les effets dans Heaven Core sont :
 
 - **explicites** (jamais implicites),
 - **contrôlés par les capacités**,
@@ -13,6 +13,6 @@ Les effets dans Astra Core sont :
 ### 1. Effets purs
 Aucun effet externe, aucune mutation.
 
-```astra
+```heaven
 pure : a -> Eff s s a
 

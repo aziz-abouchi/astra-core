@@ -1,4 +1,4 @@
-# Benchmarks de scalabilité de cluster dans Astra Core
+# Benchmarks de scalabilité de cluster dans Heaven Core
 
 Ces benchmarks mesurent :
 

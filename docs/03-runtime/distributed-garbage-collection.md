@@ -1,6 +1,6 @@
-# Garbage Collection distribué dans Astra Core
+# Garbage Collection distribué dans Heaven Core
 
-Astra Core minimise le GC, mais fournit un GC distribué pour :
+Heaven Core minimise le GC, mais fournit un GC distribué pour :
 
 - les ressources partagées,
 - les capacités distantes,

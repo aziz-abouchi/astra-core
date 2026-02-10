@@ -1,4 +1,4 @@
-# Strict Positivity dans Astra Core
+# Strict Positivity dans Heaven Core
 
 La strict positivité garantit :
 
@@ -15,6 +15,6 @@ Un type inductif ne peut référencer son propre type :
 
 ## Exemple valide
 
-```astra
+```heaven
 data List a = Nil | Cons a (List a)
 

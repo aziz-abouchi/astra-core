@@ -1,4 +1,4 @@
-# Contraintes de typage dans Astra Core
+# Contraintes de typage dans Heaven Core
 
 Les contraintes permettent d’exprimer des relations entre types, indices et
 valeurs.
@@ -21,6 +21,6 @@ Le typechecker :
 
 ## Contraintes dépendantes
 
-```astra
+```heaven
 head : Vect (S n) a -> a
 

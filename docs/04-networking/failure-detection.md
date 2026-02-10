@@ -1,4 +1,4 @@
-# Détection de pannes dans Astra Core
+# Détection de pannes dans Heaven Core
 
 La détection de pannes est essentielle pour :
 

@@ -1,6 +1,6 @@
-# Réseau mesh dans Astra Core
+# Réseau mesh dans Heaven Core
 
-Astra Core supporte une topologie mesh :
+Heaven Core supporte une topologie mesh :
 
 - dynamique,
 - résiliente,

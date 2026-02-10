@@ -11,9 +11,9 @@ pub fn build(b: *std.Build) void {
     root_mod.resolved_target = target;
     root_mod.optimize = optimize;
 
-    const exe = b.addExecutable(.{ .name = "astra", .root_module = root_mod });
+    const exe = b.addExecutable(.{ .name = "heaven", .root_module = root_mod });
     if (enable_eqsat) {
-        exe.root_module.addCMacro("ASTRA_EQSAT", "1");
+        exe.root_module.addCMacro("HEAVEN_EQSAT", "1");
     }
     b.installArtifact(exe);
 

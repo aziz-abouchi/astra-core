@@ -1,6 +1,6 @@
-# Sémantique d’évaluation dans Astra Core
+# Sémantique d’évaluation dans Heaven Core
 
-Astra Core adopte une sémantique :
+Heaven Core adopte une sémantique :
 
 - **stricte** par défaut,
 - **déterministe** en mode test,

@@ -1,6 +1,6 @@
-# FFI (Foreign Function Interface) dans Astra Core
+# FFI (Foreign Function Interface) dans Heaven Core
 
-Astra Core permet d’appeler du code externe de manière sûre et frugale.
+Heaven Core permet d’appeler du code externe de manière sûre et frugale.
 
 ## Objectifs
 
@@ -10,7 +10,7 @@ Astra Core permet d’appeler du code externe de manière sûre et frugale.
 
 ## Déclaration d’une fonction externe
 
-```astra
+```heaven
 foreign import ccall "math.h sin"
   sin : Float -> Float
 

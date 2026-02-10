@@ -1,4 +1,4 @@
-# Grammaire noyau d’Astra Core
+# Grammaire noyau d’Heaven Core
 
 Cette grammaire décrit le noyau du langage, en incluant :
 
