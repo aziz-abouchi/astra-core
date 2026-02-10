@@ -1,0 +1,26 @@
+-- test_lot3_4.heaven
+
+client = Role "Client"
+server = Role "Server"
+
+proto =
+  Send client server (Label "ping")
+    (Recv server client (Label "pong")
+      End)
+
+sessClient =
+  start client proto
+
+sessServer =
+  start server proto
+
+sessClient2 =
+  send sessClient (Label "ping")
+
+sessServer2 =
+  send sessServer (Label "pong")
+
+--  ordre invalide (théorique)
+badClient =
+  send sessClient (Label "pong")
+

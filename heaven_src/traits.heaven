@@ -1,0 +1,19 @@
+-- traits.heaven
+
+trait Trait[T] =
+  methods : List[String]
+
+implements :
+  trait : Trait[T]
+  type  : Type
+  -> Bool
+
+trait Eq[T] =
+  eq : T x T -> Bool
+
+trait Show[T] =
+  show : T -> String
+
+trait Ord[T] =
+  compare : T x T -> Order
+

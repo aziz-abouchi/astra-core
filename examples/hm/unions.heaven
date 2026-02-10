@@ -1,0 +1,3 @@
+data MyU = A I64 | B (Slice U8)
+use : MyU -> I64
+use u = case u of A x -> x; B bs -> (len bs) as I64

@@ -1,0 +1,36 @@
+{
+  "name": "heaven-syntax",
+  "displayName": "Heaven Syntax (HM)",
+  "version": "0.4.1",
+  "publisher": "heaven",
+  "engines": {
+    "vscode": ">=1.70.0"
+  },
+  "contributes": {
+    "languages": [
+      {
+        "id": "heaven",
+        "aliases": [
+          "Heaven"
+        ],
+        "extensions": [
+          ".heaven"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "heaven",
+        "scopeName": "source.heaven",
+        "path": "./syntaxes/heaven.tmLanguage.json"
+      }
+    ],
+    "snippets": [
+      {
+        "language": "heaven",
+        "path": "./snippets/heaven.json"
+      }
+    ]
+  }
+}

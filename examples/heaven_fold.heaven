@@ -1,0 +1,11 @@
+-- fold demo: blocks, data decl, case branches, records
+
+data Tree a = Leaf a | Node { left: (Tree a); right: (Tree a) }
+
+size : Tree I64 -> I64
+size t = case t of
+  Leaf _  -> 1
+  Node r  -> size r.left + size r.right
+
+mk : { x: I64; y: I64 } -> I64
+mk p = { let tmp = p.x in tmp + p.y }

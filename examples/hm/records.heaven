@@ -1,0 +1,4 @@
+Point : Type
+Point = { x: I64; y: I64 }
+sum : Point -> I64
+sum p = p.x + p.y

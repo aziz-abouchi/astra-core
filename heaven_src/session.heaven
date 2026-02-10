@@ -1,0 +1,39 @@
+-- session.heaven
+
+type Session[T] =
+  role   : Role
+  proto  : MPST
+  linear : QTT   -- Use1 obligatoire
+
+start :
+  role  : Role
+  proto : MPST
+  -> Session[T]
+
+send :
+  s     : Session[T]
+  label : Label
+  -> Session[T]
+
+send s label =
+  comptimeAssert
+    (s.linear == Use1)
+    "Session must be linear"
+
+  comptimeAssert
+    (canSend s.proto s.role label)
+    "Invalid send in protocol"
+
+  s { proto = nextState s.proto }
+
+sendWithBudget :
+  s      : Session[T]
+  label  : Label
+  budget : OptionBudget[Network]
+  cost   : Nat
+  -> Session[T]
+
+sendWithBudget s label budget cost =
+  consume cost budget CompileTime
+  send s label
+

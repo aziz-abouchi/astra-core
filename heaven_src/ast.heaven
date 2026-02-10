@@ -1,0 +1,21 @@
+-- ast.heaven
+type QTT = Use0 | Use1 | Useω
+
+type TypeKind = Nat | Bool | Func | Lazy | Session | Custom
+
+type Type =
+  kind : TypeKind
+  args : List[Type]
+  qtt  : QTT
+  eq   : Option[PathEq]
+
+type ExprKind = Var | Lit | App | Lambda | Lazy | Macro | Clause
+
+type Expr =
+  kind     : ExprKind
+  name     : Option[String]
+  args     : List[Expr]
+  body     : Option[Expr]
+  type_    : Option[Type]
+  lazy_qtt : Option[QTT]
+

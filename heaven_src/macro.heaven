@@ -1,0 +1,25 @@
+-- macro.heaven
+
+macro repeat :
+  n    : Nat
+  expr : Expr
+  -> Expr
+
+repeat 0 expr =
+  expr
+
+repeat n expr =
+  Expr.App expr (repeat (n - 1) expr)
+
+
+macro comptimeAssert :
+  cond : Bool
+  msg  : String
+  -> Unit
+
+comptimeAssert false msg =
+  reject compile msg
+
+comptimeAssert true _ =
+  ()
+

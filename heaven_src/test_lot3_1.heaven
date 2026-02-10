@@ -1,0 +1,19 @@
+-- test_lot3_1.heaven
+
+memBudget = Some (Budget 64)
+
+ptr =
+  allocate 32 memBudget
+
+lazyVal =
+  lazy
+    (\() -> allocate 8 memBudget)
+    Use1
+
+x = force lazyVal
+y = force lazyVal   -- memoization
+
+comptimeAssert (32 < 64) "should not fail"
+
+expr = repeat 3 (Expr "ping")
+

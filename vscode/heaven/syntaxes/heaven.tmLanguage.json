@@ -1,0 +1,13 @@
+{
+  "scopeName": "source.heaven",
+  "patterns": [
+    {
+      "name": "keyword.control.heaven",
+      "match": "\\b(data|case|of|let|in|if|then|else|try|catch|comptime|fun)\\b"
+    },
+    {
+      "name": "comment.line.double-dash.heaven",
+      "match": "--.*$"
+    }
+  ]
+}

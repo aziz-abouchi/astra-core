@@ -1,0 +1,33 @@
+-- budget.heaven
+
+type Res = CPU | Mem | Energy | Time | Network
+
+type Budget[Res] =
+  remaining : Nat
+
+type OptionBudget[Res] =
+  | None
+  | Some Budget[Res]
+
+type BudgetError =
+  | CompileReject msg : String
+  | RuntimeReject msg : String
+
+consume :
+  cost   : Nat
+  budget : OptionBudget[Res]
+  phase  : Phase
+  -> OptionBudget[Res]
+
+consume cost None _ =
+  None
+
+consume cost (Some b) CompileTime when b.remaining < cost =
+  reject compile ("Budget exceeded before execution: need " ++ show cost)
+
+consume cost (Some b) Runtime when b.remaining < cost =
+  reject runtime ("Budget exceeded at runtime: need " ++ show cost)
+
+consume cost (Some b) _ =
+  Some (Budget (b.remaining - cost))
+

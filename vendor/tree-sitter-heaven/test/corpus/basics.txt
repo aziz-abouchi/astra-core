@@ -1,0 +1,15 @@
+==================
+simple value def
+==================
+a = 1;
+
+---
+
+(source_file
+  (top_decl
+    (value_definition_top_stmt
+      name: (identifier)
+      (expression
+        (term
+          (literal
+            (number)))))))

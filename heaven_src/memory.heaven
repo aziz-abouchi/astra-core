@@ -1,0 +1,24 @@
+-- memory.heaven
+
+type MemPtr =
+  addr  : Nat
+  size  : Nat
+
+allocate :
+  size   : Nat
+  budget : OptionBudget[Mem]
+  -> MemPtr
+
+allocate size (Some (Budget b)) when b < size =
+  reject compile "Memory budget exceeded before allocation"
+
+allocate size (Some (Budget b)) =
+  MemPtr { addr = prim_alloc size, size = size }
+
+allocate size None =
+  MemPtr { addr = prim_alloc size, size = size }
+
+free : ptr : MemPtr -> Unit
+free ptr =
+  prim_free ptr.addr
+

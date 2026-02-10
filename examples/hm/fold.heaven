@@ -1,0 +1,1 @@
+data Tree a = Leaf a | Node { left: (Tree a); right: (Tree a) }

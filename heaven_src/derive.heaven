@@ -1,0 +1,28 @@
+-- derive.heaven
+
+derive :
+  trait : Trait[T]
+  type  : Type
+  -> Implementation[T]
+
+derive trait type =
+  comptime {
+    comptimeAssert
+      (type.isRecord or type.isSum)
+      "Derive only supported for record or sum types"
+
+    generateImplementation trait type
+  }
+
+generateImplementation trait type when trait == Eq =
+  impl {
+    eq x y =
+      allFields type (\f -> eq (getField f x) (getField f y))
+  }
+
+generateImplementation trait type when trait == Show =
+  impl {
+    show x =
+      concatFields type (\f -> show (getField f x))
+  }
+
