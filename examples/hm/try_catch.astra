@@ -1,2 +1,0 @@
-run : Error ! I64
-run = try risky catch 0

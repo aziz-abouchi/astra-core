@@ -1,8 +1,0 @@
-=== Nested let-in ===
-calc : I64 -> I64
-calc n = let a = (let b = 2 in b + n) in a * 3
-
----
-(source_file
-  (type_signature (identifier) (type (type_arrow (type_application (type_base (type_constructor))) (type_arrow (type_application (type_base (type_constructor)))))))
-  (value_definition (identifier) (pattern (identifier)) (expression (let_in (identifier) (expression (parenthesized (expression (let_in (identifier) (expression (literal (number))) (expression (infix_expr (app_expr (term (identifier))) (infix_op) (app_expr (term (identifier)))))))) ) (expression (infix_expr (app_expr (term (identifier))) (infix_op) (app_expr (term (literal (number)))))))))

@@ -1,3 +1,0 @@
-module std.examples.poly
-
-contains : forall a . [Eq a] => a -> List a -> Bool
