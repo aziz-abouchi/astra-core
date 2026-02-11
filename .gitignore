@@ -1,2 +1,21 @@
-zig-out/
+# --- Astra Core Artifacts ---
 .zig-cache/
+zig-out/
+bin/
+*.soul
+*.bin
+
+# --- Lean & Proofs ---
+.lake/
+lake-packages/
+lakefile.olean
+*.olean
+
+# --- Rust (Backup/Sidecar) ---
+target/
+**/*.rs.bk
+
+# --- System & IDE ---
+.DS_Store
+.vscode/
+.env
