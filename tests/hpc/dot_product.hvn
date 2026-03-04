@@ -1,0 +1,13 @@
+module Astra.HPC.Dot
+
+-- Dénotation : Définition de l'objet mathématique
+dot_product : forall (n : Nat), Vec f32 n -> Vec f32 n -> f32
+
+-- Équationnel : Réduction par unification
+dot_product [] []         := 0.0
+dot_product (x::xs) (y::ys) := (x * y) + dot_product xs ys
+
+-- Théorème : Assertion pour Coq/Lean
+-- La commutativité est une vérité du système
+comm_dot : forall (a b : Vec f32 n), 
+    dot_product a b |- dot_product b a

@@ -1,0 +1,2 @@
+on Fibo(0, a: Int = 0, b: Int = 1) -> return a
+on Fibo(n: Int, a: Int = 0, b: Int = 1) when n > 0 -> call Fibo(n-1, b, a+b)

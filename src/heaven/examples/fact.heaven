@@ -1,0 +1,2 @@
+on Fact(0, acc: Int = 1) -> return acc
+on Fact(n: Int, acc: Int = 1) when n > 0 -> call Fact(n-1, acc*n)

@@ -1,0 +1,8 @@
+on FizzBuzz(n: Int) when n <= 0 -> return []
+on FizzBuzz(n: Int) when n > 0 ->
+    let rest = call FizzBuzz(n-1)
+    let current = if n % 15 == 0 then "FizzBuzz"
+                  else if n % 3 == 0 then "Fizz"
+                  else if n % 5 == 0 then "Buzz"
+                  else n
+    return rest ++ [current]

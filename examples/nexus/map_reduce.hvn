@@ -1,0 +1,11 @@
+module Astra.Nexus.Analytics
+
+-- Un Map-Reduce générique avec types de sessions
+-- 1 s : Session linéaire (doit être fermée)
+-- ω f : Fonction réutilisable
+map_reduce : forall (a b : Type), 
+    [1 s : Session] -> [ω f : a -> b] -> [1 data : List a] -> List b
+
+-- Équation de réduction
+map_reduce s f []      := close(s) . []
+map_reduce s f (x::xs) := spawn(f x) . map_reduce s f xs

@@ -1,30 +1,42 @@
 const std = @import("std");
-const Parser = @import("parser.zig").Parser;
-const typechecker = @import("typechecker.zig");
-const pretty = @import("pretty.zig");
+const core = @import("core");
+const hub = @import("hub");
 
 pub fn main() !void {
-    const gpa = std.heap.page_allocator;
-    const args = try std.process.argsAlloc(gpa);
-    defer std.process.argsFree(gpa, args);
+    var gpa = std.heap.GeneralPurposeAllocator(.{}){};
+    const allocator = gpa.allocator();
+    defer _ = gpa.deinit();
 
-    if (args.len != 2) {
-        std.debug.print("Usage: heaven-core <file>\n", .{});
-        return;
-    }
+    // Fix du leak du chemin
+    const exe_path = try std.fs.selfExePathAlloc(allocator);
+    defer allocator.free(exe_path);
+    std.log.info("Exécution depuis : {s}", .{exe_path});
 
-    const contents = try std.fs.cwd().readFileAlloc(gpa, args[1], 1 << 20);
-    defer gpa.free(contents);
+    const source = 
+        \\n := 100
+        \\forall i from 1 to n step 2 : a[i] := i
+    ;
 
-    var parser = Parser.init(gpa, contents);
-    const expr = try parser.parseExpr();
+    // 1. Lexing
+    var my_lexer = core.Lexer.init(source);
+    const tokens = try my_lexer.tokenize(allocator);
+    defer allocator.free(tokens);
 
-    var env = typechecker.TypeEnv.init(gpa);
-    const ty = try typechecker.infer(&env, gpa, expr);
+    // 2. Parsing (Pratt)
+    var my_parser = core.Parser.init(allocator, tokens);
+    const root_node = try my_parser.parse();
+    defer root_node.deinit(allocator);
 
-    const scheme = typechecker.generalize(&env, ty, gpa);
-    const s = pretty.ppScheme(scheme, gpa);
+    // 3. Projection FORTH
+    var projector = hub.Projector.init(allocator);
+    const forth_code = try projector.toForth(root_node);
+    defer allocator.free(forth_code);
 
-    std.debug.print("Type: {s}\n", .{s});
+    // 4. Projection FORTRAN
+    const fortran_code = try projector.toFortran(root_node);
+    defer allocator.free(fortran_code);
+
+    std.log.info("Source Heaven  : {s}", .{source});
+    std.log.info("Code FORTH     : {s}", .{forth_code});
+    std.log.info("Code FORTRAN   : {s}", .{fortran_code});
 }
-
