@@ -1,42 +1,33 @@
 const std = @import("std");
-const core = @import("core");
-const hub = @import("hub");
+const core = @import("core/ast.zig");
+const Unifier = @import("core/unify.zig");
+const LatexFrontend = @import("core/frontends/latex.zig");
+const HeavenTarget = @import("hub/targets/heaven.zig");
+const ForthTarget = @import("hub/targets/forth.zig");
 
 pub fn main() !void {
     var gpa = std.heap.GeneralPurposeAllocator(.{}){};
     const allocator = gpa.allocator();
-    defer _ = gpa.deinit();
 
-    // Fix du leak du chemin
-    const exe_path = try std.fs.selfExePathAlloc(allocator);
-    defer allocator.free(exe_path);
-    std.log.info("Exécution depuis : {s}", .{exe_path});
+    // 1. INPUT : Lecture d'une source LaTeX
+    const source_tex = "\\forall x \\in \\mathbb{N}^* : x! \\geq 1";
+    var frontend = LatexFrontend.init(allocator);
+    const ast_root = try frontend.parse(source_tex);
 
-    const source = 
-        \\n := 100
-        \\forall i from 1 to n step 2 : a[i] := i
-    ;
+    // 2. BRAIN : Unification et Inférence de domaines
+    var unifier = Unifier.init(allocator);
+    try unifier.verifyConstraints(ast_root); 
+    // Ici, le système "comprend" que x est un entier positif.
 
-    // 1. Lexing
-    var my_lexer = core.Lexer.init(source);
-    const tokens = try my_lexer.tokenize(allocator);
-    defer allocator.free(tokens);
+    // 3. MULTI-TARGET : Projection vers les cibles
+    
+    // Vers HEAVEN (Documentation simplifiée)
+    var heaven_target = HeavenTarget.init(allocator);
+    const heaven_code = try heaven_target.project(ast_root);
+    std.debug.print("Heaven Output: {s}\n", .{heaven_code});
 
-    // 2. Parsing (Pratt)
-    var my_parser = core.Parser.init(allocator, tokens);
-    const root_node = try my_parser.parse();
-    defer root_node.deinit(allocator);
-
-    // 3. Projection FORTH
-    var projector = hub.Projector.init(allocator);
-    const forth_code = try projector.toForth(root_node);
-    defer allocator.free(forth_code);
-
-    // 4. Projection FORTRAN
-    const fortran_code = try projector.toFortran(root_node);
-    defer allocator.free(fortran_code);
-
-    std.log.info("Source Heaven  : {s}", .{source});
-    std.log.info("Code FORTH     : {s}", .{forth_code});
-    std.log.info("Code FORTRAN   : {s}", .{fortran_code});
+    // Vers FORTH (Calcul haute performance / Embarqué)
+    var forth_target = ForthTarget.init(allocator);
+    const forth_code = try forth_target.project(ast_root);
+    std.debug.print("Forth Output: {s}\n", .{forth_code});
 }
