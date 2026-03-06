@@ -51,37 +51,67 @@ pub const ForthTarget = struct {
         self.allocator.destroy(self);
     }
 
+    // Dans le cas .application ou .comparison
+    // Si un argument est Float et l'autre est Integer, on doit promouvoir l'Integer
+    fn emitWithPromotion(self: *ForthTarget, node: *ast.Node, target_is_float: bool) !void {
+        try self.emitNode(node, &self.buffer);
+
+        // Si le nœud est un entier mais qu'on est dans un contexte flottant :
+        if (target_is_float and node.resolved_type == .integer) {
+            try self.buffer.appendSlice(self.allocator, " s>f ");
+        } else {
+            try self.buffer.appendSlice(self.allocator, " ");
+        }
+    }
+
+
     fn emitNode(self: *ForthTarget, node: *ast.Node, out: *std.ArrayListUnmanaged(u8)) anyerror!void {
         const alloc = self.allocator;
         switch (node.kind) {
             .identifier => {
                 try out.appendSlice(alloc, node.data.string);
-                // On décide quel mot-clé utiliser pour récupérer la valeur
-                const fetch_op = switch (node.resolved_type) {
-                    .float => " f@ ",
-                    else => " @ ",
-                };
-                try out.appendSlice(alloc, fetch_op);
+                // On choisit l'opérateur de lecture selon le type résolu
+                const op = if (node.resolved_type == .float) " f@ " else " @ ";
+                try out.appendSlice(alloc, op);
             },
-            .program => {
-                for (node.data.list) |sub| {
-                    try self.emitNode(sub, out);
-                    try out.appendSlice(alloc, " ");
-                }
-            },
+
             .application => {
                 const func_name = node.data.apply.func.data.string;
-                // On génère les arguments d'abord
+                
+                // On émet les arguments (ils s'empileront sur la pile respective)
                 for (node.data.apply.args) |arg| {
                     try self.emitNode(arg, out);
                 }
 
-                // On adapte le nom de la fonction au type
+                // Dispatch pour max
                 if (std.mem.eql(u8, func_name, "max")) {
                     const op = if (node.resolved_type == .float) "fmax " else "max ";
                     try out.appendSlice(alloc, op);
                 } else {
                     try out.appendSlice(alloc, func_name);
+                    try out.appendSlice(alloc, " ");
+                }
+            },
+
+            .comparison => {
+                try self.emitNode(node.data.binary.left, out);
+                try self.emitNode(node.data.binary.right, out);
+
+                // Les comparaisons flottantes en Forth finissent souvent par 'f' (ex: f>=)
+                const is_float = (node.data.binary.left.resolved_type == .float or 
+                                 node.data.binary.right.resolved_type == .float);
+
+                const op = switch (node.data.binary.op) {
+                    .geq => if (is_float) "f>= " else ">= ",
+                    .leq => if (is_float) "f<= " else "<= ",
+                    .equal => if (is_float) "f= " else "= ",
+                    else => "== ",
+                };
+                try out.appendSlice(alloc, op);
+            },
+            .program => {
+                for (node.data.list) |sub| {
+                    try self.emitNode(sub, out);
                     try out.appendSlice(alloc, " ");
                 }
             },
@@ -111,18 +141,6 @@ pub const ForthTarget = struct {
             .factorial => {
                 try self.emitNode(node.data.unary, out);
                 try out.appendSlice(alloc, " FACT");
-            },
-            .comparison => {
-                try self.emitNode(node.data.binary.left, out);
-                try out.appendSlice(alloc, " ");
-                try self.emitNode(node.data.binary.right, out);
-                const op_sym = switch (node.data.binary.op) {
-                    .equal => " =",
-                    .geq => " >=",
-                    .leq => " <=",
-                    else => " ?",
-                };
-                try out.appendSlice(alloc, op_sym);
             },
             .constant => try out.appendSlice(alloc, node.data.string),
             .access => {

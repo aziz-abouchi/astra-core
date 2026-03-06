@@ -13,7 +13,8 @@ pub fn main() !void {
 //    const source = "∀ x ∈ {1, 5, 42} : x! ≥ 1";
 //    const source = "∀ x ∈ {-5, 2, -10} : |x| ≥ 0";
 //    const source = "∀ x ∈ {0, 3.14} : sin(x) = 0";
-    const source = "∀ x, y ∈ ℕ : max(x, y) ≥ x";
+//    const source = "∀ x, y ∈ ℕ : max(x, y) ≥ x";
+    const source = "∀ x ∈ ℕ : max(x, 3.14) ≥ x";
 
     // 1. Parsing
     const ast_root = Astra.parse(allocator, source) catch |err| {
