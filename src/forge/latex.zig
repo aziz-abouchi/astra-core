@@ -4,7 +4,7 @@ const Main = @import("../main.zig");
 pub fn emit(eg: *EGraph.EGraph, id: EGraph.EClassId, buf: *Main.FixedBuffer) void {
     const node = eg.nodes[id];
     switch (node) {
-        .Atomic => |h| buf.print("x_{{{x:0>2}}}", .{h[0]}),
+        .Atomic => |h| buf.print("x_{{ {x:0>2} }}", .{h[0]}),
         .Operation => |op| {
             if (op.op == .Mul) {
                 emit(eg, op.left, buf);

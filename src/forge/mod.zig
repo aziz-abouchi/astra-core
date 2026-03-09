@@ -42,6 +42,11 @@ pub fn emit(target: Target, egraph: *EGraph.EGraph, id: EGraph.EClassId, buf: *F
         .javascript => javascript.emitFull(egraph, best_id, buf),
         .python     => python.emitFull(egraph, best_id, buf),
         .rust       => rust.emitFull(egraph, best_id, buf),
+        .c          => c.emitFull(egraph, best_id, buf),
+        .zig        => zig.emitFull(egraph, best_id, buf),
+        .heaven     => heaven.emitFull(egraph, best_id, buf),
+        .math       => math.emit(egraph, best_id, buf),
+        .wat        => wat.emitFull(egraph, best_id, buf),
         else => {
             const node = egraph.nodes[best_id];
             switch (node) {
@@ -53,17 +58,15 @@ pub fn emit(target: Target, egraph: *EGraph.EGraph, id: EGraph.EClassId, buf: *F
                     buf.print("{d}", .{val});
                 },
                 .Vector => |v| {
-                    buf.print("vec3({d}, {d}, {d})", .{v.x, v.y, v.z});
+                    buf.print("vec{d}(", .{v.data.len});
+                    for (v.data, 0..) |val, i| buf.print("{d}{s}", .{ val, if (i < v.data.len - 1) ", " else "" });
+                    buf.print(")", .{});
                 },
                 .Operation => {
                     switch (target) {
-                        .math    => math.emit(egraph, best_id, buf),
                         .lean    => lean.emit(egraph, best_id, buf),
                         .latex   => latex.emit(egraph, best_id, buf),
-                        .heaven  => heaven.emit(egraph, best_id, buf),
                         .zig     => zig.emit(egraph, best_id, buf),
-                        .c       => c.emit(egraph, best_id, buf),
-                        .wat     => wat.emit(egraph, best_id, buf),
                         .qbe     => qbe.emit(egraph, best_id, buf),
                         .pony    => pony.emit(egraph, best_id, buf),
                         .idris   => idris.emit(egraph, best_id, buf),

@@ -3,11 +3,10 @@ const EGraph = @import("../saturation/egraph.zig");
 const FixedBuffer = @import("../main.zig").FixedBuffer;
 
 pub fn emitFull(eg: *EGraph.EGraph, id: EGraph.EClassId, buf: *FixedBuffer) void {
-    buf.print("// --- Astra JS Runtime ---\n", .{});
-    buf.print("const smul = (s, v) => v.map(x => s * x);\n", .{});
+    buf.print("import * as H from '../lib/heaven.js';\n", .{});
     buf.print("const result = ", .{});
     emit(eg, id, buf);
-    buf.print(";\nconsole.log(result);\n", .{});
+    buf.print(";\nconsole.log(JSON.stringify(result));\n", .{});
 }
 
 pub fn emit(eg: *EGraph.EGraph, id: EGraph.EClassId, buf: *FixedBuffer) void {
@@ -15,26 +14,29 @@ pub fn emit(eg: *EGraph.EGraph, id: EGraph.EClassId, buf: *FixedBuffer) void {
     const node = eg.nodes[best_id];
 
     switch (node) {
-        .Operation => { 
-            // On s'assure qu'on traite bien une opération
-            const op = node.Operation; 
-
+        .Operation => {
+            const op = node.Operation;
             const left_is_vec = eg.isVector(op.left);
             const right_is_vec = eg.isVector(op.right);
 
+            // CAS 1 : Multiplication Scalaire * Vecteur
             if (op.op == .Mul and !left_is_vec and right_is_vec) {
-                buf.print("smul(", .{});
+                buf.print("H.smul(", .{});
                 emit(eg, op.left, buf);
                 buf.print(", ", .{});
                 emit(eg, op.right, buf);
                 buf.print(")", .{});
-            } else if ((op.op == .Add or op.op == .Sub) and (left_is_vec or right_is_vec)) {
-                buf.print("vadd(", .{});
+            } 
+            // CAS 2 : Addition/Soustraction de Vecteurs
+            else if ((op.op == .Add or op.op == .Sub) and left_is_vec and right_is_vec) {
+                buf.print("H.vadd(", .{});
                 emit(eg, op.left, buf);
                 buf.print(", ", .{});
                 emit(eg, op.right, buf);
                 buf.print(")", .{});
-            } else {
+            } 
+            // CAS 3 : Opérations scalaires normales (ou erreurs de type)
+            else {
                 const sym = switch (op.op) {
                     .Add => "+",
                     .Sub => "-",
@@ -50,12 +52,18 @@ pub fn emit(eg: *EGraph.EGraph, id: EGraph.EClassId, buf: *FixedBuffer) void {
             }
         },
         .Constant => |val| buf.print("{d}", .{val}),
-        .Vector => |v| buf.print("[{d}, {d}, {d}]", .{v.x, v.y, v.z}),
+        .Vector => |v| {
+            buf.print("[", .{});
+            for (v.data, 0..) |val, i| buf.print("{d}{s}", .{ val, if (i < v.data.len - 1) ", " else "" });
+            buf.print("]", .{});
+        },
         .Atomic => |name| {
             const trimmed = std.mem.trim(u8, &name, " ");
-            // Si c'est un vec3 brut, on le transforme en tableau JS
             if (std.mem.startsWith(u8, trimmed, "vec3(")) {
-                buf.print("[{s}]", .{trimmed[5..trimmed.len-1]});
+                // On cherche le contenu entre les premières ( et dernières )
+                const start = std.mem.indexOf(u8, trimmed, "(") orelse return buf.print("[]", .{});
+                const end = std.mem.lastIndexOf(u8, trimmed, ")") orelse trimmed.len;
+                buf.print("[{s}]", .{trimmed[start + 1 .. end]});
             } else {
                 buf.print("{s}", .{trimmed});
             }

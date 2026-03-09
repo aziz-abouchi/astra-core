@@ -1,2 +1,4 @@
-// Code pour heaven bientôt disponible
+-- Astra Heaven Kernel --
+let output = 20
+inspect(output)
 

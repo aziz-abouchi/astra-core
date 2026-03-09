@@ -1,1 +1,8 @@
-((1 + (2) * vec3(1,0,0)))
+#include "../lib/heaven.h"
+
+int main() {
+    double result = 20;
+    printf("%f\n", result);
+    return 0;
+}
+

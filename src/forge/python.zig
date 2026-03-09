@@ -3,19 +3,7 @@ const EGraph = @import("../saturation/egraph.zig");
 const FixedBuffer = @import("../main.zig").FixedBuffer;
 
 pub fn emitFull(eg: *EGraph.EGraph, id: EGraph.EClassId, buf: *FixedBuffer) void {
-    buf.print("# --- Astra Python Runtime ---\n", .{});
-    // Définition de l'addition vectorielle
-    buf.print("def vadd(u, v): return [a + b for a, b in zip(u, v)]\n", .{});
-    // Définition du produit scalaire (dot)
-    buf.print("def fdot(u, v): return sum(a * b for a, b in zip(u, v))\n", .{});
-    // Définition du produit vectoriel (cross)
-    buf.print("def fcross(u, v):\n", .{});
-    buf.print("    return [\n", .{});
-    buf.print("        u[1]*v[2] - u[2]*v[1],\n", .{});
-    buf.print("        u[2]*v[0] - u[0]*v[2],\n", .{});
-    buf.print("        u[0]*v[1] - u[1]*v[0]\n", .{});
-    buf.print("    ]\n\n", .{});
-
+    buf.print("import lib.heaven as H\n", .{});
     buf.print("result = ", .{});
     emit(eg, id, buf);
     buf.print("\nprint(result)\n", .{});
@@ -23,11 +11,26 @@ pub fn emitFull(eg: *EGraph.EGraph, id: EGraph.EClassId, buf: *FixedBuffer) void
 
 pub fn emit(eg: *EGraph.EGraph, id: EGraph.EClassId, buf: *FixedBuffer) void {
     const node = eg.nodes[id];
+    
+    var left_is_vec = false;
+    var right_is_vec = false;
+    if (node == .Operation) {
+        left_is_vec = eg.isVector(node.Operation.left);
+        right_is_vec = eg.isVector(node.Operation.right);
+    }
+
     switch (node) {
         .Operation => |op| {
             const sym = getSymbol(op.op);
-            if (std.mem.eql(u8, sym, "vadd") or std.mem.eql(u8, sym, "fdot") or std.mem.eql(u8, sym, "fcross")) {
-                buf.print("{s}(", .{sym});
+
+            if (op.op == .Mul and !left_is_vec and right_is_vec) {
+                buf.print("H.smul(", .{});
+                emit(eg, op.left, buf);
+                buf.print(", ", .{});
+                emit(eg, op.right, buf);
+                buf.print(")", .{});
+            } else if (std.mem.eql(u8, sym, "vadd") and (left_is_vec or right_is_vec)) {
+                buf.print("H.vadd(", .{}); // Utilise la lib Heaven Python
                 emit(eg, op.left, buf);
                 buf.print(", ", .{});
                 emit(eg, op.right, buf);
@@ -43,13 +46,20 @@ pub fn emit(eg: *EGraph.EGraph, id: EGraph.EClassId, buf: *FixedBuffer) void {
         .Atomic => |name| {
             const trimmed = std.mem.trim(u8, &name, " ");
             if (std.mem.startsWith(u8, trimmed, "vec3(")) {
-                buf.print("[{s}]", .{trimmed[5..trimmed.len-1]});
+                const start = std.mem.indexOf(u8, trimmed, "(").?;
+                const end = std.mem.lastIndexOf(u8, trimmed, ")").?;
+                buf.print("[{s}]", .{trimmed[start + 1 .. end]});
             } else {
                 buf.print("{s}", .{trimmed});
             }
         },
         .Constant => |val| buf.print("{d}", .{val}),
-        .Vector => |v| buf.print("[{d}, {d}, {d}]", .{v.x, v.y, v.z}),
+        .Vector => |v| {
+            buf.print("[", .{});
+            for (v.data, 0..) |val, i| buf.print("{d}{s}", .{ val, if (i < v.data.len - 1) ", " else "" });
+            buf.print("]", .{});
+        },
+
     }
 }
 

@@ -22,7 +22,7 @@ pub fn emit(eg: *EGraph.EGraph, id: EGraph.EClassId, buf: *FixedBuffer) void {
                 buf.print(")", .{});
             }
         },
-        .Vector => |v| buf.print("new Vector3({d}, {d}, {d})", .{v.x, v.y, v.z}),
+        .Vector => |v| buf.print("new Vector3({d}, {d}, {d})", .{v.data[0], v.data[1], v.data[2]}),
     }
 }
 

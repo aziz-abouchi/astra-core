@@ -35,3 +35,16 @@ pub fn parseToRPN(input: []const u8, output: []lexer.Token) usize {
     }
     return out_pos;
 }
+
+// Pseudo-code du parser de vecteur
+fn parseVector(self: *Parser) !EClassId {
+    try self.eat(.LeftBracket);
+    var components = std.ArrayList(f64).init(self.allocator);
+    while (!self.check(.RightBracket)) {
+        const val = try self.parseNumber();
+        try components.append(val);
+        if (self.check(.Comma)) try self.eat(.Comma);
+    }
+    try self.eat(.RightBracket);
+    return self.egraph.addVector(components.items);
+}

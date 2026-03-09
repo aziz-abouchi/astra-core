@@ -1,5 +1,4 @@
-// --- Astra JS Runtime ---
-const smul = (s, v) => v.map(x => s * x);
-const result = ((1 + smul(2), [1,0,0]));
-console.log(result);
+import * as H from '../lib/heaven.js';
+const result = 20;
+console.log(JSON.stringify(result));
 

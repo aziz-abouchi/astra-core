@@ -31,22 +31,41 @@ pub fn main() !void {
     defer std.process.argsFree(allocator, args);
 
     if (args.len < 2) {
-        std.debug.print("Usage: astra <expression> [--fast | --deep]\n", .{});
+        std.debug.print("Usage: astra <source> [--fast | --deep]\n", .{});
         return;
     }
 
-    const input_expr = args[1]; // Ta formule mathématique
-    std.debug.print("[Astra-IO]: Signal reçu : \"{s}\"\n", .{input_expr});
+    var source: []u8 = undefined;
+    const arg = args[1];
+    std.debug.print("[Astra-IO]: Signal reçu : \"{s}\"\n", .{arg});
+
+    if (std.mem.endsWith(u8, arg, ".hvn")) {
+        const file = try std.fs.cwd().openFile(arg, .{});
+        defer file.close();
+
+        source = try file.readToEndAlloc(allocator, 1024 * 1024);
+    } else {
+        source = try allocator.dupe(u8, arg);
+    }
+    defer allocator.free(source);
     
     var egraph = EGraph.EGraph.init(allocator);
     defer egraph.deinit();
 
     // 2. On passe l'input choisi au Lens
-    const root_id = try Lens.math.parse(allocator, &egraph, input_expr);
+    //const root_id = try Lens.math.parse(allocator, &egraph, source);
+    const root_id = try Lens.heaven.parse(allocator, &egraph, source);
 
-    // 2. Méditation et Saturation de GUPI
+    // Méditation et Saturation de GUPI
     var gupi = GupiModule.GUPI{};
-    try gupi.meditate(&egraph);
+    
+    // On lance la méditation (qui peut contenir des règles générales)
+    try gupi.meditate(&egraph); 
+    
+    // On lance la saturation spécifique au nœud racine de Heaven
+    // Note : On utilise l'instance 'gupi' avec la méthode 'saturate' 
+    // (Assure-toi que 'saturate' est bien définie dans saturation/gupi.zig)
+    try gupi.saturate(&egraph, root_id);
 
     // 3. Traitement du projet (Génération physique des fichiers)
     try processProject(allocator, &egraph, root_id);

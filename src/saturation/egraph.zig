@@ -10,13 +10,35 @@ pub const OpType = enum { Add, Sub, Mul, Div, Dot, Cross };
 pub const Node = union(enum) {
     Atomic: [32]u8, // "x", "y", "a"
     Constant: f64,  // 2.0, 42.0
-    Vector: struct { x: f64, y: f64, z: f64 }, // Un vecteur spatial
+    Vector: struct {
+        data: []f64,
+    },
     Operation: struct {
         op: OpType,
         left: EClassId,
         right: EClassId,
+        dim: u32, // Le type dépendant : la dimension est stockée ici
     },
 };
+
+fn nodesAreEqual(a: Node, b: Node) bool {
+    // 1. Vérifie si les tags (Atomic, Constant, etc.) sont identiques
+    if (@as(std.meta.Tag(Node), a) != @as(std.meta.Tag(Node), b)) return false;
+
+    // 2. Vérifie le contenu selon le type
+    return switch (a) {
+        .Atomic => |v| std.mem.eql(u8, &v, &b.Atomic),
+        .Constant => |v| v == b.Constant,
+        .Vector => |v| std.mem.eql(f64, v.data, b.Vector.data), // Comparaison de CONTENU
+        .Operation => |v| {
+            const b_op = b.Operation;
+            return v.op == b_op.op and 
+                   v.left == b_op.left and 
+                   v.right == b_op.right and 
+                   v.dim == b_op.dim;
+        },
+    };
+}
 
 pub const EGraph = struct {
     allocator: std.mem.Allocator,
@@ -38,9 +60,12 @@ pub const EGraph = struct {
     }
 
     pub fn addNode(self: *EGraph, node: Node) !EClassId {
-        // GUPI vérifie si ce nœud existe déjà (Dédoublonnage)
+        // Dédoublonnage manuel avec comparaison profonde
         for (self.nodes[0..self.len], 0..) |existing, i| {
-            if (std.meta.eql(existing, node)) {
+            if (nodesAreEqual(existing, node)) {
+                // Si c'est un vecteur qu'on vient de nous passer et qu'on l'a déjà,
+                // on doit libérer la mémoire du "nouveau" car on ne l'utilisera pas.
+                // (Seulement si GUPI a alloué spécifiquement pour cet appel)
                 return @intCast(i);
             }
         }
@@ -89,12 +114,15 @@ pub const EGraph = struct {
         _ = self;
         return switch (node) {
             .Constant => 1.0,  // Très peu coûteux
-            .Atomic => 1.5,    // Variable
-            .Operation => 10.0, // Coûteux (nécessite un calcul)
-            else => 100.0,
+            .Vector => 1.2,    // On rend les vecteurs numériques très attractifs
+            .Atomic => 50.0,   // On rend les variables très "chères" pour forcer l'expansion
+            .Operation => |op| {
+                _ = op;
+                // Un calcul est plus cher qu'une valeur brute, mais moins qu'une variable inconnue
+                return 10.0; 
+            },
         };
     }
-
 
     pub fn find(self: *EGraph, id: EClassId) EClassId {
         if (self.parents[id] == id) return id;
@@ -109,24 +137,42 @@ pub const EGraph = struct {
             self.parents[root1] = root2;
         }
     }
- 
-    pub fn isVector(self: *EGraph, id: EClassId) bool { // Retire le 'const' ici
-        const best_id = self.getBestId(id);
-        const node = self.nodes[best_id];
 
+    pub fn isVector(self: *EGraph, id: EClassId) bool {
+        return self.getDim(self.getBestId(id)) > 0;
+    } 
+
+    pub fn addVector(self: *EGraph, values: []const f64) !EClassId {
+        // On alloue les données du vecteur de façon permanente dans l'allocateur de l'EGraph
+        const data = try self.allocator.dupe(f64, values);
+        return self.addNode(.{ .Vector = .{ .data = data } });
+    }
+
+    // La fonction de typage dépendant
+    pub fn getDim(self: *EGraph, id: EClassId) u32 {
+        const node = self.nodes[id];
         return switch (node) {
-            .Vector => true,
-            .Operation => |op| {
-                // Récursion sur l'enfant gauche pour propager le type
-                return self.isVector(op.left);
+            .Constant => 0,
+            .Vector => |v| @intCast(v.data.len),
+            .Operation => |op| op.dim,
+            .Atomic => |name| {
+                const n = std.mem.trim(u8, &name, " ");
+                if (std.mem.eql(u8, n, "x") or std.mem.eql(u8, n, "y")) return 0;
+                return 3; // Par défaut pour les atomes inconnus
             },
-            .Atomic => |name| std.mem.startsWith(u8, &name, "vec3"),
-            else => false,
         };
     }
 
     pub fn deinit(self: *EGraph) void {
+        // On utilise 'self.len' au lieu de 'node_count'
+        for (self.nodes[0..self.len]) |node| {
+            switch (node) {
+                .Vector => |v| self.allocator.free(v.data),
+                else => {},
+            }
+        }
         self.allocator.free(self.nodes);
         self.allocator.free(self.parents);
+        self.memo.deinit(); // N'oublie pas la HashMap !
     }
 };
