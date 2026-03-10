@@ -88,7 +88,7 @@ fn parseLeaf(input: []const u8, pos: *usize, eg: *EGraph.EGraph) ParseError!EGra
 
     // 3. Nombres constants
     if (std.fmt.parseFloat(f64, token)) |val| {
-        return eg.addNode(.{ .Constant = val }) catch return error.OutOfMemory;
+        return eg.addNode(.{ .Scalar = val }) catch return error.OutOfMemory;
     } else |_| {
         // 4. Atomes divers
         var buf = [_]u8{' '} ** 32;

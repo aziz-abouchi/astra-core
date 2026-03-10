@@ -8,12 +8,12 @@ pub fn emitFull(egraph: *EGraph, id: EClassId, buf: *FixedBuffer) void {
     buf.print("const H = @import(\"heaven.zig\");\nconst std = @import(\"std\");\n\npub fn main() void {s}\n", .{"{"});
 
     switch (node) {
-        .Constant => |val| {
-            buf.print("    const result = {d};\n", .{val});
+        .Scalar => |val| {
+            buf.print("    const result = {d};\n", .{val.toF64()});
             buf.print("    std.debug.print(\"{s}\\n\", .{{result}});\n", .{"{d}"});
         },
         .Vector => |v| {
-            buf.print("    const result = H.Vec3{s} .x = {d}, .y = {d}, .z = {d} {s};\n", .{ "{", v.data[0], v.data[1], v.data[2], "}" });
+            buf.print("    const result = H.Vec3{s} .x = {d}, .y = {d}, .z = {d} {s};\n", .{ "{", v.data[0].toF64(), v.data[1].toF64(), v.data[2].toF64(), "}" });
             buf.print("    H.printVec3(result);\n", .{});
         },
         else => {
@@ -61,9 +61,11 @@ pub fn emit(eg: *EGraph, id: EClassId, buf: *FixedBuffer) void {
                 buf.print("{s}", .{trimmed});
             }
         },
-        .Vector => |v| buf.print("H.Vec3{{ .x = {d}, .y = {d}, .z = {d} }}", .{ v.data[0], v.data[1], v.data[2] }),
-
-        .Constant => |val| buf.print("{d}", .{val}),
+        .Vector => |v| buf.print("H.Vec3{{ .x = {d}, .y = {d}, .z = {d} }}", .{ v.data[0].toF64(), v.data[1].toF64(), v.data[2].toF64() }),
+        .Hole => {
+            buf.print("???", .{}); // Ou une représentation visuelle d'un trou
+        },
+        .Scalar => |val| buf.print("{d}", .{val.toF64()}),
     }
 }
 

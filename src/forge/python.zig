@@ -29,8 +29,20 @@ pub fn emit(eg: *EGraph.EGraph, id: EGraph.EClassId, buf: *FixedBuffer) void {
                 buf.print(", ", .{});
                 emit(eg, op.right, buf);
                 buf.print(")", .{});
-            } else if (std.mem.eql(u8, sym, "vadd") and (left_is_vec or right_is_vec)) {
-                buf.print("H.vadd(", .{}); // Utilise la lib Heaven Python
+            } else if (op.op == .Dot) { // AJOUT ICI
+                buf.print("H.dot(", .{}); 
+                emit(eg, op.left, buf);
+                buf.print(", ", .{});
+                emit(eg, op.right, buf);
+                buf.print(")", .{});
+            } else if (op.op == .Cross) { // AJOUT ICI
+                buf.print("H.cross(", .{});
+                emit(eg, op.left, buf);
+                buf.print(", ", .{});
+                emit(eg, op.right, buf);
+                buf.print(")", .{});
+            } else if (op.op == .Add and (left_is_vec or right_is_vec)) { // Simplifié ici
+                buf.print("H.vadd(", .{});
                 emit(eg, op.left, buf);
                 buf.print(", ", .{});
                 emit(eg, op.right, buf);
@@ -53,11 +65,14 @@ pub fn emit(eg: *EGraph.EGraph, id: EGraph.EClassId, buf: *FixedBuffer) void {
                 buf.print("{s}", .{trimmed});
             }
         },
-        .Constant => |val| buf.print("{d}", .{val}),
+        .Scalar => |val| buf.print("{d}", .{val.toF64()}),
         .Vector => |v| {
             buf.print("[", .{});
-            for (v.data, 0..) |val, i| buf.print("{d}{s}", .{ val, if (i < v.data.len - 1) ", " else "" });
+            for (v.data, 0..) |val, i| buf.print("{d}{s}", .{ val.toF64(), if (i < v.data.len - 1) ", " else "" });
             buf.print("]", .{});
+        },
+        .Hole => {
+            buf.print("???", .{}); // Ou une représentation visuelle d'un trou
         },
 
     }

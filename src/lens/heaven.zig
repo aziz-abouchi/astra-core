@@ -140,7 +140,14 @@ fn lowerToEGraph(eg: *EGraph, items: []EClassId) !EClassId {
 
 fn liftAtom(eg: *EGraph, token: []const u8) ParseError!EClassId {
     if (std.fmt.parseFloat(f64, token)) |val| {
-        return eg.addNode(.{ .Constant = val });
+        // On encapsule le f64 dans une Quantity "neutre" (sans unité)
+        return eg.addNode(.{ .Scalar = .{
+            .value = val,
+            .mantissa = val,
+            .uncertainty = 0,
+            .exponent = 0,
+            .unit = .{ .m = 0, .l = 0, .t = 0, .i = 0 },
+        } });
     } else |_| {
         var buf = [_]u8{' '} ** 32;
         const len = @min(token.len, 32);

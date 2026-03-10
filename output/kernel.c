@@ -1,8 +1,7 @@
 #include "../lib/heaven.h"
 
 int main() {
-    double result = 20;
-    printf("%f\n", result);
+    // Calcul complexe optimisé par GUPI
     return 0;
 }
 

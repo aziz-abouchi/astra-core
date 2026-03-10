@@ -12,9 +12,12 @@ pub fn emit(eg: *EGraph.EGraph, id: EGraph.EClassId, buf: *FixedBuffer) void {
             emit(eg, op.right, buf);
             buf.print(")", .{});
         },
-        .Constant => |val| buf.print("{d}", .{val}),
-        .Vector => |v| buf.print("vec3({d}, {d}, {d})", .{v.data[0], v.data[1], v.data[2]}),
+        .Scalar => |val| buf.print("{d}", .{val.toF64()}),
+        .Vector => |v| buf.print("vec3({d}, {d}, {d})", .{v.data[0].toF64(), v.data[1].toF64(), v.data[2].toF64()}),
         .Atomic => |name| buf.print("{s}", .{name}),
+        .Hole => {
+            buf.print("???", .{}); // Ou une représentation visuelle d'un trou
+        },
     }
 }
 

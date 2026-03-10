@@ -4,13 +4,13 @@ const EGraph = @import("../saturation/egraph.zig");
 pub fn emitZig(egraph: *EGraph, id: EGraph.EClassId, writer: anytype) !void {
     const node = egraph.nodes[id];
     switch (node) {
-        .Constant => |val| {
-            try writer.print("{d}", .{val});
+        .Scalar => |val| {
+            try writer.print("{d}", .{val.toF64()});
         },
         .Vector => |vec| {
             try writer.print("[", .{});
             for (vec.data, 0..) |val, i| {
-                try writer.print("{d}", .{val});
+                try writer.print("{d}", .{val.toF64()});
                 if (i < vec.data.len - 1) try writer.print(", ", .{});
             }
             try writer.print("]", .{}); // Correction du crochet ici !

@@ -6,7 +6,7 @@ pub fn emit(eg: *EGraph.EGraph, id: EGraph.EClassId, buf: *FixedBuffer) void {
     const node = eg.nodes[id];
     switch (node) {
         .Atomic => |name| buf.print("{s}", .{std.mem.trim(u8, &name, " ")}),
-        .Constant => |val| buf.print("{d}", .{val}),
+        .Scalar => |val| buf.print("{d}", .{val.toF64()}),
         .Operation => |op| {
             buf.print("({s} ", .{getSymbol(op.op)});
             emit(eg, op.left, buf);
@@ -14,7 +14,10 @@ pub fn emit(eg: *EGraph.EGraph, id: EGraph.EClassId, buf: *FixedBuffer) void {
             emit(eg, op.right, buf);
             buf.print(")", .{});
         },
-        .Vector => |v| buf.print("(vector {d} {d} {d})", .{v.data[0], v.data[1], v.data[2]}),
+        .Vector => |v| buf.print("(vector {d} {d} {d})", .{v.data[0].toF64(), v.data[1].toF64(), v.data[2].toF64()}),
+        .Hole => {
+            buf.print("???", .{}); // Ou une représentation visuelle d'un trou
+        },
     }
 }
 

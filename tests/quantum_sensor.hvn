@@ -1,0 +1,14 @@
+# Variables physiques
+g = 9.81m.s-2
+m = 0.001kg
+target_force = m * g
+
+# Contrainte : L'angle de phase phi doit être proportionnel à la force
+# On laisse un Hole pour phi, Astra va le calculer
+phi = !! rad
+check phi == (target_force * 0.5)
+
+# Astra verify va :
+# 1. Calculer target_force (0.00981 N)
+# 2. Résoudre phi (0.004905 rad)
+# 3. Générer le circuit QASM avec cet angle précis.

@@ -1,4 +1,4 @@
 import * as H from '../lib/heaven.js';
-const result = 20;
+const result = Joules;
 console.log(JSON.stringify(result));
 

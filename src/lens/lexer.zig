@@ -8,6 +8,9 @@ pub const TokenTag = enum {
     l_paren, r_paren,
     number,
     eof,
+    AtRule,    // @rule
+    Transform, // =>
+    Placeholder, // les variables a, b dans les règles
 };
 
 pub const Token = struct {

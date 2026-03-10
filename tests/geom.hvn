@@ -1,3 +1,4 @@
-let a = [10, 0, 5]  // Astra déduit Vec(3)
-let b = [1, 0, 0]
-res = (2 * a) . b
+# Astra comprend maintenant les types dépendants physiques
+f = [10, 0, 0] kg.m.s-2  # Newton
+d = [2, 0, 0] m          # Mètre
+work = f . d             # Travail (Joules)

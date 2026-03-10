@@ -1,0 +1,15 @@
+# 1. Données du capteur (avec une incertitude de 0.5 cm)
+target_x = 10.0cm ± 0.5
+target_y = 5.0cm ± 0.2
+
+# 2. Paramètre du bras (longueur fixe)
+arm_length = 15.0cm
+
+# 3. Calcul de l'angle requis (Cinématique Inverse simplifiée)
+# theta = arcsin(y / arm_length)
+# Astra va propager l'incertitude de y jusqu'à l'angle final
+target_theta = !! rad
+check target_theta == arcsin(target_y / arm_length)
+
+# 4. Sécurité : Si l'incertitude sur l'angle dépasse 0.1 rad, 
+# Astra doit marquer le Hole comme "Instable"

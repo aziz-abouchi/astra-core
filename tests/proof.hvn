@@ -1,0 +1,12 @@
+# 1. Définition des constantes physiques
+gravity = 9.81m.s-2
+mass = 50kg
+height = 10m
+
+# 2. Énergie potentielle (m * g * h)
+# On laisse un trou pour la valeur, mais on définit l'unité attendue
+potential_energy = (mass * gravity * height)
+expected = !! kg.m2.s-2
+
+# 3. L'assistant va fusionner potential_energy et expected
+# car GUPI va calculer la valeur et valider les unités.

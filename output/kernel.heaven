@@ -1,4 +1,4 @@
 -- Astra Heaven Kernel --
-let output = 20
+let output = complex_node
 inspect(output)
 

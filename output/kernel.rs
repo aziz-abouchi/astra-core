@@ -1,5 +1,5 @@
 fn main() {
-    let result = 20_f64;
+    let result = Joules;
     println!("{:?}", result);
 }
 

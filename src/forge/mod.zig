@@ -54,13 +54,16 @@ pub fn emit(target: Target, egraph: *EGraph.EGraph, id: EGraph.EClassId, buf: *F
                     const trimmed = std.mem.trim(u8, &name, " ");
                     buf.print("{s}", .{trimmed});
                 },
-                .Constant => |val| {
-                    buf.print("{d}", .{val});
+                .Scalar => |val| {
+                    buf.print("{d}", .{val.toF64()});
                 },
                 .Vector => |v| {
                     buf.print("vec{d}(", .{v.data.len});
-                    for (v.data, 0..) |val, i| buf.print("{d}{s}", .{ val, if (i < v.data.len - 1) ", " else "" });
+                    for (v.data, 0..) |val, i| buf.print("{d}{s}", .{ val.toF64(), if (i < v.data.len - 1) ", " else "" });
                     buf.print(")", .{});
+                },
+                .Hole => {
+                    buf.print("???", .{}); // Ou une représentation visuelle d'un trou
                 },
                 .Operation => {
                     switch (target) {

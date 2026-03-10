@@ -10,15 +10,15 @@ pub fn emitFull(egraph: *EGraph, id: EClassId, buf: *FixedBuffer) void {
     buf.print("#include \"../lib/heaven.h\"\n\nint main() {s}\n", .{"{"});
 
     switch (node) {
-        .Constant => |val| {
-            buf.print("    double result = {d};\n", .{val});
+        .Scalar => |val| {
+            buf.print("    double result = {d};\n", .{val.toF64()});
             buf.print("    printf(\"%f\\n\", result);\n", .{});
         },
         .Vector => |v| {
             const dim = v.data.len;
             buf.print("    double result[{d}] = {s}", .{dim, "{"});
             for (v.data, 0..) |val, i| {
-                buf.print("{d}{s}", .{val, if (i < dim - 1) ", " else ""});
+                buf.print("{d}{s}", .{val.toF64(), if (i < dim - 1) ", " else ""});
             }
             buf.print("{s};\n", .{"}"});
             buf.print("    // Print logic for vecN here\n", .{});
@@ -67,8 +67,8 @@ pub fn emit(eg: *EGraph, id: EClassId, buf: *FixedBuffer) void {
                 buf.print("{s}", .{trimmed});
             }
         },
-        .Constant => |val| buf.print("{d}", .{val}),
-        .Vector => |v| buf.print("((vec3){s}{d}, {d}, {d}{s})", .{ "{", v.x, v.y, v.z, "}" }),
+        .Scalar => |val| buf.print("{d}", .{val.toF64()}),
+        .Vector => |v| buf.print("((vec3){s}{d}, {d}, {d}{s})", .{ "{", v.data[0].toF64(), v.data[1].toF64(), v.data[2].toF64(), "}" }),
     }
 }
 

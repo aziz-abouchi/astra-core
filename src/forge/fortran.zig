@@ -13,7 +13,7 @@ pub fn emit(eg: *EGraph.EGraph, id: EGraph.EClassId, buf: *FixedBuffer) void {
     const node = eg.nodes[id];
     switch (node) {
         .Atomic => |name| buf.print("{s}", .{std.mem.trim(u8, &name, " ")}),
-        .Constant => |val| buf.print("{d}_8", .{val}), // Précision double en Fortran
+        .Scalar => |val| buf.print("{d}_8", .{val.toF64()}), // Précision double en Fortran
         .Operation => |op| {
             switch (op.op) {
                 .Dot => {
@@ -40,9 +40,12 @@ pub fn emit(eg: *EGraph.EGraph, id: EGraph.EClassId, buf: *FixedBuffer) void {
                 },
             }
         },
+        .Hole => {
+            buf.print("???", .{}); // Ou une représentation visuelle d'un trou
+        },
         .Vector => |v| {
             buf.print("[", .{});
-            for (v.data, 0..) |val, i| buf.print("{d}_8{s}", .{ val, if (i < v.data.len - 1) ", " else "" });
+            for (v.data, 0..) |val, i| buf.print("{d}_8{s}", .{ val.toF64(), if (i < v.data.len - 1) ", " else "" });
             buf.print("]", .{});
         },
     }

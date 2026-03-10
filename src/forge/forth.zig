@@ -7,12 +7,12 @@ pub fn emitFull(egraph: *EGraph, id: EClassId, buf: *FixedBuffer) void {
     const node = egraph.nodes[id];
 
     switch (node) {
-        .Constant => |val| {
+        .Scalar => |val| {
             // Un simple '.' en Forth affiche le nombre au sommet de la pile
-            buf.print("{d} . cr\n", .{val}); 
+            buf.print("{d} . cr\n", .{val.toF64()}); 
         },
         .Vector => |v| {
-            for (v.data) |val| buf.print("{d} ", .{val});
+            for (v.data) |val| buf.print("{d} ", .{val.toF64()});
             buf.print("print-vec{d}\n", .{v.data.len}); // Optionnel: adapter le nom de la fonction
         },
         else => {
@@ -65,11 +65,11 @@ pub fn emit(eg: *EGraph, id: EClassId, buf: *FixedBuffer) void {
                 buf.print("{s}", .{trimmed});
             }
         },
-        .Constant => |val| {
-            buf.print("{d} .\n", .{val}); // '.' en Forth imprime le sommet de pile (scalaire)
+        .Scalar => |val| {
+            buf.print("{d} .\n", .{val.toF64()}); // '.' en Forth imprime le sommet de pile (scalaire)
         },
         .Vector => |v| {
-            buf.print("{d} {d} {d} print-vec3\n", .{ v.data[0], v.data[1], v.data[2] });
+            buf.print("{d} {d} {d} print-vec3\n", .{ v.data[0].toF64(), v.data[1].toF64(), v.data[2].toF64() });
         },
     }
 }

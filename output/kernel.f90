@@ -1,4 +1,4 @@
 program main
-  print *, 20_8
+  print *, Joules
 end program main
 

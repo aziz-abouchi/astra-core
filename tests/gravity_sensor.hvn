@@ -1,0 +1,15 @@
+# 1. Constantes de l'appareil
+k_sensibilité = 0.5rad.N-1
+masse_test = 0.01kg
+
+# 2. Entrée physique (simulée ou réelle)
+gravité_locale = 9.80665m.s-2
+
+# 3. Calcul du système
+poids = masse_test * gravité_locale
+phase_attendue = poids * k_sensibilité
+
+# 4. Hole pour le circuit quantique
+# Astra va injecter 'phase_attendue' dans le registre QASM
+gate_phi = !! rad
+check gate_phi == phase_attendue

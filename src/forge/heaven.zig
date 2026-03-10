@@ -8,8 +8,8 @@ pub fn emitFull(egraph: *EGraph, id: EClassId, buf: *FixedBuffer) void {
     buf.print("-- Astra Heaven Kernel --\n", .{});
     
     switch (node) {
-        .Constant => |val| buf.print("let output = {d}\n", .{val}),
-        .Vector => |v| buf.print("let output = vec3({d}, {d}, {d})\n", .{v.data[0], v.data[1], v.data[2]}),
+        .Scalar => |val| buf.print("let output = {d}\n", .{val.toF64()}),
+        .Vector => |v| buf.print("let output = vec3({d}, {d}, {d})\n", .{v.data[0].toF64(), v.data[1].toF64(), v.data[2].toF64()}),
         else => buf.print("let output = complex_node\n", .{}),
     }
     
@@ -25,8 +25,8 @@ pub fn emit(eg: *EGraph, id: EClassId, buf: *FixedBuffer) void {
             emit(eg, op.right, buf);
         },
         // CORRECTION ICI : Remplace [%g, %g, %g] par [{d}, {d}, {d}]
-        .Vector => |v| buf.print("[{d}, {d}, {d}]", .{v.data[0], v.data[1], v.data[2]}),
-        .Constant => |val| buf.print("{d}", .{val}),
+        .Vector => |v| buf.print("[{d}, {d}, {d}]", .{v.data[0].toF64(), v.data[1].toF64(), v.data[2].toF64()}),
+        .Scalar => |val| buf.print("{d}", .{val.toF64()}),
         .Atomic => |name| buf.print("{s}", .{name}),
     }
 }

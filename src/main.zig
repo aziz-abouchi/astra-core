@@ -1,6 +1,10 @@
 const std = @import("std");
-const fs = std.fs;
 const EGraph = @import("saturation/egraph.zig");
+const Mirror = @import("saturation/mirror.zig");
+const Brain = @import("neural/inference.zig").Brain;
+const WebServer = @import("forge/web_server.zig");
+
+const fs = std.fs;
 const Lens = @import("lens/mod.zig");
 const Forge = @import("forge/mod.zig");
 const GupiModule = @import("saturation/gupi.zig");
@@ -26,58 +30,79 @@ pub fn main() !void {
     const allocator = gpa.allocator();
     defer _ = gpa.deinit();
 
-    // 1. GUPI écoute les arguments du Bob (l'utilisateur)
     const args = try std.process.argsAlloc(allocator);
     defer std.process.argsFree(allocator, args);
 
     if (args.len < 2) {
-        std.debug.print("Usage: astra <source> [--fast | --deep]\n", .{});
+        std.debug.print("Usage: astra <source> [--serve]\n", .{});
         return;
     }
 
-    var source: []u8 = undefined;
-    const arg = args[1];
-    std.debug.print("[Astra-IO]: Signal reçu : \"{s}\"\n", .{arg});
-
-    if (std.mem.endsWith(u8, arg, ".hvn")) {
-        const file = try std.fs.cwd().openFile(arg, .{});
-        defer file.close();
-
-        source = try file.readToEndAlloc(allocator, 1024 * 1024);
-    } else {
-        source = try allocator.dupe(u8, arg);
+    // --- DETECTION DU MODE SERVEUR ---
+    var is_serving = false;
+    for (args) |arg| {
+        if (std.mem.eql(u8, arg, "--serve")) {
+            is_serving = true;
+            break;
+        }
     }
-    defer allocator.free(source);
-    
+
+    // --- PHASE 1 : INITIALISATION DES COMPOSANTS ---
     var egraph = EGraph.EGraph.init(allocator);
     defer egraph.deinit();
 
-    // 2. On passe l'input choisi au Lens
-    //const root_id = try Lens.math.parse(allocator, &egraph, source);
+    // Initialisation du Miroir
+    var mirror = try Mirror.MirrorEngine.init(allocator, "core.hvn");
+    
+    // Initialisation du Cerveau (IA)
+    const brain: ?Brain = Brain.init("weights/astra_brain.bin") catch null;
+
+    // --- PHASE 2 : LECTURE ET PARSING ---
+    const input_path = args[1];
+    var source: []u8 = undefined;
+    if (std.mem.endsWith(u8, input_path, ".hvn")) {
+        source = try std.fs.cwd().readFileAlloc(allocator, input_path, 1024 * 1024);
+    } else {
+        source = try allocator.dupe(u8, input_path);
+    }
+    defer allocator.free(source);
+
     const root_id = try Lens.heaven.parse(allocator, &egraph, source);
 
-    // Méditation et Saturation de GUPI
-    var gupi = GupiModule.GUPI{};
-    
-    // On lance la méditation (qui peut contenir des règles générales)
-    try gupi.meditate(&egraph); 
-    
-    // On lance la saturation spécifique au nœud racine de Heaven
-    // Note : On utilise l'instance 'gupi' avec la méthode 'saturate' 
-    // (Assure-toi que 'saturate' est bien définie dans saturation/gupi.zig)
-    try gupi.saturate(&egraph, root_id);
-
-    // 3. Traitement du projet (Génération physique des fichiers)
-    try processProject(allocator, &egraph, root_id);
-
-    // 4. Affichage de confirmation synchronisé (Optionnel, juste pour le style)
-    std.debug.print("[GUPI]: Lancement de la réplication massive...\n", .{});
-    const targets = std.enums.values(Forge.Target);
-    for (targets) |target| {
-        std.debug.print("[{s}]: Fichier prêt.\n", .{@tagName(target)});
+    // --- PHASE 3 : SATURATION ASSISTÉE ---
+    if (is_serving) {
+        const server_thread = try std.Thread.spawn(.{}, WebServer.startServer, .{&egraph});
+        server_thread.detach();
     }
 
-    std.debug.print("[GUPI]: Flotte synchronisée. Fichiers générés dans ./output/\n", .{});
+    var gupi = GupiModule.GUPI{};
+    
+    try mirror.applyRules(&egraph); 
+    
+    if (brain) |b| {
+        b.guideSaturation(&egraph);
+    }
+
+    try gupi.meditate(&egraph);
+    try gupi.saturate(&egraph, root_id);
+
+    // --- PHASE 4 : GÉNÉRATION DE LA FLOTTE ---
+    try processProject(allocator, &egraph, root_id);
+    
+    std.debug.print("[Astra]: Compilation et Preuves terminées.\n", .{});
+
+    // --- BLOCAGE FINAL POUR LE VISUALISEUR ---
+    if (is_serving) {
+        std.debug.print("\n--- VISUALISEUR ASTRA ACTIF ---\n", .{});
+        std.debug.print("URL: http://localhost:8080\n", .{});
+        std.debug.print("Appuyez sur 'Entrée' pour fermer Astra...\n", .{});
+        
+        // Utilisation de std.posix pour un blocage bas niveau sans std.io
+        var buf: [1]u8 = undefined;
+        _ = std.posix.read(std.posix.STDIN_FILENO, &buf) catch 0;
+        
+        std.debug.print("[Astra]: Fermeture du serveur...\n", .{});
+    }
 }
 
 pub fn processProject(allocator: std.mem.Allocator, eg: *EGraph.EGraph, root_id: EGraph.EClassId) !void {
@@ -87,8 +112,6 @@ pub fn processProject(allocator: std.mem.Allocator, eg: *EGraph.EGraph, root_id:
     for (targets) |target| {
         var fb = FixedBuffer.init();
         Forge.emit(target, eg, root_id, &fb);
-        
-        // On ajoute un retour à la ligne pour que 'cat' respire
         fb.print("\n", .{}); 
 
         const ext = getExtension(target);
@@ -103,7 +126,6 @@ pub fn processProject(allocator: std.mem.Allocator, eg: *EGraph.EGraph, root_id:
 
 fn getExtension(t: Forge.Target) []const u8 {
     return switch (t) {
-        // Cas particuliers (les exceptions à la règle)
         .zig => "zig",
         .rust => "rs",
         .fortran => "f90",
@@ -111,16 +133,6 @@ fn getExtension(t: Forge.Target) []const u8 {
         .python => "py",
         .javascript => "js",
         .racket => "rkt",
-        // Cas automatique : on transforme le nom de l'enum en string !
         else => @tagName(t), 
     };
-}
-
-fn runParallelForge(wg: *std.Thread.WaitGroup, target: Forge.Target, eg: *EGraph.EGraph, id: EGraph.EClassId) void {
-    defer wg.finish();
-    var fb = FixedBuffer.init();
-    Forge.emit(target, eg, id, &fb);
-    log_mutex.lock();
-    defer log_mutex.unlock();
-    std.debug.print("[{s}]: Fichier prêt.\n", .{@tagName(target)});
 }

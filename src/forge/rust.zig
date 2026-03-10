@@ -18,7 +18,14 @@ pub fn emit(eg: *EGraph.EGraph, id: EGraph.EClassId, buf: *FixedBuffer) void {
 
     switch (node) {
         .Operation => |op| {
-            if (op.op == .Mul and right_is_vec) {
+            if (op.op == .Dot) {
+                buf.print("dot_product(&", .{});
+                emit(eg, op.left, buf);
+                buf.print(", &", .{});
+                emit(eg, op.right, buf);
+                buf.print(")", .{});
+            }
+            else if (op.op == .Mul and right_is_vec) {
                 buf.print("{{ let s = ", .{});
                 emit(eg, op.left, buf);
                 buf.print("; let v = ", .{});
@@ -30,8 +37,8 @@ pub fn emit(eg: *EGraph.EGraph, id: EGraph.EClassId, buf: *FixedBuffer) void {
                 emit(eg, op.right, buf);
             }
         },
-        .Constant => |val| buf.print("{d}_f64", .{val}),
-        .Vector => |v| buf.print("[{d}_f64, {d}_f64, {d}_f64]", .{ v.data[0], v.data[1], v.data[2] }),
+        .Scalar => |val| buf.print("{d}_f64", .{val.toF64()}),
+        .Vector => |v| buf.print("[{d}_f64, {d}_f64, {d}_f64]", .{ v.data[0].toF64(), v.data[1].toF64(), v.data[2].toF64() }),
         .Atomic => |name| {
             const trimmed = std.mem.trim(u8, &name, " ");
             if (std.mem.startsWith(u8, trimmed, "vec3(")) {
@@ -50,6 +57,9 @@ pub fn emit(eg: *EGraph.EGraph, id: EGraph.EClassId, buf: *FixedBuffer) void {
             } else {
                 buf.print("{s}", .{trimmed});
             }
+        },
+        .Hole => {
+            buf.print("???", .{}); // Ou une représentation visuelle d'un trou
         },
     }
 }

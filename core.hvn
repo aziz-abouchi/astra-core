@@ -1,0 +1,26 @@
+# --- CORE.HVN : Les lois fondamentales du compilateur ---
+
+@rule simplify_mul_zero(x) {
+    (x * 0) => 0
+}
+
+@rule physics_gravity_constant(m) {
+    # Si on voit une masse multipliée par 'g', on sait que c'est un Poids
+    (m * 9.81) => weight(m)
+}
+
+@rule uncertainty_addition(a, b) {
+    # Loi de propagation des erreurs codée directement en Heaven
+    uncertainty(a + b) => sqrt(sq(sigma(a)) + sq(sigma(b)))
+}
+
+@ai_think {
+    context: "Optimisation de trajectoire robotique"
+    goal: "Minimiser la consommation d'énergie"
+    strategy: neural_search(depth: 5)
+}
+
+@rule ai_suggested_physics(m, v) {
+    # Cette règle a été "apprise" par l'IA en observant des milliers de simulations
+    (kinetic_energy(m, v)) => (0.5 * m * v^2)
+}
